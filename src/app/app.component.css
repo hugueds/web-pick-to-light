@@ -1,0 +1,17 @@
+
+.app-content{    
+    margin: 0 auto;
+}
+
+md-toolbar{
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+md-card{
+    position: relative;
+    float: left;
+    width: 100%;
+}
+

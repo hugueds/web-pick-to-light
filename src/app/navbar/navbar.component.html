@@ -1,0 +1,18 @@
+<md-toolbar color='primary'>    
+
+    <button md-icon-button>
+      <md-icon class="md-24">menu</md-icon>
+    </button>
+    
+    <span class=''> PICK TO LIGHT </span>   
+
+    <span class="spacer"></span>
+
+    <span class='ip' > {{ ip }} </span>
+    <div [class]='statusCircle'></div>
+
+    <span class="spacer"></span>
+
+    <span>{{ dateTime | date:'dd/MM/yyyy  HH:mm:ss' }}</span>
+
+</md-toolbar>

@@ -1,0 +1,24 @@
+md-card{
+    float: left;
+    width: 27.5%;
+    height: auto;    
+    margin-top: 1%;
+}
+
+md-card-title{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: -1%;    
+}
+
+.part-number{
+    font-size: 5em;    
+    color: #2780ba;
+    text-shadow: 1px 1px black;
+}
+
+img{
+    max-width: 90%;
+    width: auto;
+    margin: auto;
+}

@@ -1,0 +1,40 @@
+/*md-card {        
+    position: relative;
+    float: left;
+    width: 47%;    
+    height: auto;    
+    margin-top: 2%;
+    background: #dbeffc;
+}*/
+
+.wrapper{
+    width: 51%; 
+    position: relative;
+    float: left;
+    margin-left: 3%;
+    margin-top: 2%;    
+    border: 1px black solid;
+        align-content: center;
+}
+
+md-card{
+    margin: auto;
+    padding: 0px;
+    border: 1px red solid;
+    background-color:  #dbeffc;
+
+}
+
+
+.vertical{    
+    position: relative;
+    float: left;
+    width: 50%;       
+}
+
+.horizontal{    
+    position: relative;
+    float: left;
+    width: 100%;
+}
+

@@ -1,0 +1,25 @@
+.spacer{
+    flex: 1 1 auto;
+}
+
+.statusOnline{
+    float: left;
+    margin: 10px;
+    display: block;
+    background: black;
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;    
+    background: radial-gradient(circle at 10px 10px, #55DD44, #000);              
+}
+
+.statusOffline{
+    float: left;
+    margin: 10px;
+    display: block;
+    background: black;
+    border-radius: 50%;
+    height: 40%;
+    width: 2%;    
+    background: radial-gradient(circle at 10px 10px, #f44242, #000);          
+}
