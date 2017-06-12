@@ -1,12 +1,12 @@
 <div class="app-content">
 
-  <navbar></navbar> 
-
+  <navbar [device]='device'></navbar> 
 
   <div *ngIf='wagon.wagonId'>
     <part [items]='wagon.items' [currentItem]="currentItem"></part>
     <wagon [wagonId]="wagon.wagonId"></wagon>
     <wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem"></wagon-container>
+    <missing-part></missing-part>
   </div>
 
   <banner *ngIf='!wagon.wagonId'></banner>
@@ -20,9 +20,18 @@
 
   </md-card>
 
+  <footer [device]='device'></footer>
+  <!--<md-card>
+    {{ lastWagon }}
+  </md-card>-->
+
+  <!--<missing-part></missing-part>-->
+  
+  
+    
   
 
-  {{ lastWagon }}
+  
 
 
 </div>

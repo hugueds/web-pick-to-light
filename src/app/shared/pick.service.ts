@@ -11,32 +11,45 @@ import { Log } from 'app/models/log';
 
 @Injectable()
 
-export class WagonService {
+export class PickService {
 
-  private server: string;
-  private testServer: string = 'http://localhost:5050';
-  private wagon = new Wagon();  
+  private server: string; //To define
+  private testServer: string = 'http://10.33.22.56:5050'; 
+
+  private wagon:Wagon;
 
   constructor(private _http: Http) { }
 
-  getWagon(stationId) {        
+  getWagon( stationId ) {        
     let url = `${this.testServer}/getwagon/${stationId}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);    
   }
 
-  finishWagon(log){
+  getConfiguration( deviceName:string ){
+    let url = `${this.testServer}/getconfiguration/${deviceName}`;           
+    return this._http.get(url).map(this.extractData).catch(this.handleError);
+  }
+
+  getGroup( groupId ){
+    let url = `${this.testServer}/getgroupid/${groupId}`;           
+    return this._http.get(url).map(this.extractData).catch(this.handleError);
+  }
+
+  finishWagon( log:Log ){
     let url = `${this.testServer}/finishWagon`;           
     let headers = { 'Content-Type': 'application/json' };
     let options = { headers : headers };
     return this._http.post(url, log).map(this.extractData).catch(this.handleError);
-  }
+  } 
 
-  private extractData(res: Response) {
+
+
+  private extractData( res: Response ) {
     let body = res.json();        
     return body || {};
   }
 
-  private handleError(error: Response | any) {
+  private handleError( error: Response | any ) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';

@@ -2,17 +2,24 @@ md-card{
     float: left;
     width: 27.5%;
     height: auto;    
-    margin-top: 1%;
+    margin-top: 1%;    
 }
 
 md-card-title{
     text-align: center;
+    font-weight: bold;    
+}
+
+md-card-footer{
+    text-align: center;
     font-weight: bold;
-    margin-bottom: -1%;    
+    margin-top : 4%;    
+    font-size: 150%;
+    padding-bottom: 2%;
 }
 
 .part-number{
-    font-size: 5em;    
+    font-size: 7vw;    
     color: #2780ba;
     text-shadow: 1px 1px black;
 }

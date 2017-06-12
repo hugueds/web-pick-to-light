@@ -9,8 +9,8 @@ export class SockService implements OnInit{
   static newIpMessage = new EventEmitter<string>();  
 
   constructor(){
-    this.socket = io.connect(this.url);
-    this.onNewIp();
+    // this.socket = io.connect(this.url);
+    // this.onNewIp();
   }
 
   onNewIp(){

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ClockService } from "app/shared/clock.service";
 import { SockService } from "app/shared/sock.service";
 
@@ -9,6 +9,8 @@ import { SockService } from "app/shared/sock.service";
   providers : [ClockService]
 })
 export class NavbarComponent implements OnInit { 
+
+  @Input() device;
 
   dateTime: any;
   ip: string = 'Aguardando conexão...';

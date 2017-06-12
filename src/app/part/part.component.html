@@ -1,8 +1,11 @@
 <md-card>
     
-    <md-card-title> PEÇA</md-card-title> 
-    <md-card-title *ngIf="items" class='part-number' > {{ items[currentItem].obj }}</md-card-title> 
+    <md-card-title> PEÇA {{ currentItem + 1 }} / {{ items.length }} </md-card-title> 
+    <md-card-title  class='part-number' > {{ items[currentItem]?.obj }}</md-card-title> 
         
-    <img md-card-lg-image src="assets/images/no-image.png" src=""/>
+    <img md-card-lg-image [src]="partPicture" />
+
+    <md-card-footer> {{ items[currentItem]?.sname }}</md-card-footer> 
+    
 
 </md-card>
