@@ -1,16 +1,10 @@
 <div class="app-content">
 
-  <navbar [device]='device'></navbar> 
+  <navbar [device]='device'></navbar>  
 
-  <div *ngIf='wagon.wagonId'>
-    <part [items]='wagon.items' [currentItem]="currentItem"></part>
-    <wagon [wagonId]="wagon.wagonId"></wagon>
-    <wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem"></wagon-container>
-    <missing-part></missing-part>
-  </div>
-
-  <banner *ngIf='!wagon.wagonId'></banner>
-
+  <!--<router-outlet></router-outlet>  -->
+  <content> </content>
+<!--
   <md-card [style.margin-top]='"30px"' [style.width]='"500px"'>
 
     <button md-raised-button (click)='changeOrientation()'>MUDAR ORIENTAÇÃO</button>
@@ -18,20 +12,8 @@
     <button md-raised-button color='accent' (click)='reset()'>RESET</button>
     <button md-raised-button color='primary' (click)='finish()'>FINALIZADO</button>
 
-  </md-card>
-
-  <footer [device]='device'></footer>
-  <!--<md-card>
-    {{ lastWagon }}
   </md-card>-->
 
-  <!--<missing-part></missing-part>-->
-  
-  
-    
-  
-
-  
-
-
-</div>
+  <footer [device]='device'></footer>
+ 
+ </div>

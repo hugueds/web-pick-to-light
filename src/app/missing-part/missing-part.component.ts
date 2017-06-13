@@ -13,11 +13,16 @@ export class MissingPartComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDialog(){
+  openDialog() {
+
     let dialogRef = this._dialog.open(MissingPartDialogComponent, {
-      width: '30%'
+      disableClose: true,
+      hasBackdrop: true,
+      width: '30%',
+      data: { value: 123123123 }
     });
-    dialogRef.afterClosed().subscribe( result => {
+
+    dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
   }
@@ -25,13 +30,13 @@ export class MissingPartComponent implements OnInit {
 }
 
 @Component({
-  selector : 'missing-part-dialog',
-  templateUrl : './missing-part-dialog.component.html',
-  styleUrls: ['./missing-part-dialog.component.css']  
+  selector: 'missing-part-dialog',
+  templateUrl: './missing-part-dialog.component.html',
+  styleUrls: ['./missing-part-dialog.component.css']
 })
 
-export class MissingPartDialogComponent{
+export class MissingPartDialogComponent {
 
-  constructor(public dialogRef: MdDialogRef<MissingPartDialogComponent>){}
+  constructor(public dialogRef: MdDialogRef<MissingPartDialogComponent>) { }
 
 }

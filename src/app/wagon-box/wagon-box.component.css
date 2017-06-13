@@ -1,4 +1,4 @@
-md-card{
+md-card {
     border: green 2px solid;    
     height: 4vw;
     width: 4vw;
@@ -18,8 +18,12 @@ md-card{
 
 .box-finished{
     background-color: lightgreen;
+    font-size: 4.5vw;
+    
 }
 
 .box-unfinished{
     background-color: yellow;
+    font-size: 4.5vw;
+    
 }

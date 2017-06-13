@@ -10,11 +10,17 @@
 
 md-card{
     margin: auto;
-    padding: 10px;
-    border: 10px red solid;
+    padding: 10px;    
     background-color:  #dbeffc;
 }
 
+.wagon-unfinished{
+    border: 10px red solid;
+}
+
+.wagon-finished{
+    border: 10px greenyellow solid;
+}
 
 .vertical{    
     position: relative;

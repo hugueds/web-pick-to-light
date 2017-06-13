@@ -1,0 +1,11 @@
+ <div *ngIf='wagon.wagonId'>
+
+    <part [items]='wagon?.items' [currentItem]="currentItem"></part>     
+    <wagon [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></wagon>
+    <wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></wagon-container>
+
+    <missing-part></missing-part>
+    
+</div>
+
+<banner *ngIf='!wagon?.wagonId'></banner>

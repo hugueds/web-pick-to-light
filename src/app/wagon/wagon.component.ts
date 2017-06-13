@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class WagonComponent implements OnInit {
 
   @Input() wagonId : any;
+  @Input() stationName : string;
+  
 
   constructor() { }
 

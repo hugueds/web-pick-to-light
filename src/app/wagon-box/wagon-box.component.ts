@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'wagon-box',
   //templateUrl: './wagon-box.component.html',
-  template : `  
-    <md-card [class]='boxStyle'>
+  template: `  
+    <md-card  [class]='boxStyle' (click)='decreaseQuantity()' >
       <span class='box-quantity'> {{ box?.quantity}} </span>
     </md-card>      
   `,
@@ -13,21 +13,35 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 export class WagonBoxComponent implements OnInit, OnChanges {
 
   @Input() box: any;
+  @Output() boxChanged = new EventEmitter<string>();
+  
   boxStyle: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.checkQuantity();
+  }
+
+  ngOnChanges() {
     
   }
 
-  ngOnChanges(){
-    if (this.box.quantity == 0){
-      this.boxStyle = 'box-finished';
+  decreaseQuantity() {
+    if (this.box.quantity > 0) {
+      this.box.quantity = 0;
     }
-    else{
-      this.boxStyle = 'box-unfinished';
+    this.checkQuantity();    
+  }
+
+  checkQuantity() {
+    if (this.box.quantity == 0) {
+      this.boxStyle = 'mat-card box-finished';      
     }
+    else {
+      this.boxStyle = 'mat-card box-unfinished';
+    }
+    this.boxChanged.emit('isDone');
   }
 
 }

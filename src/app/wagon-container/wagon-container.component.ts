@@ -11,10 +11,7 @@ export class WagonContainerComponent implements OnInit, OnChanges {
   @Input() items : any[];
   @Input() orientation: string;
 
-  boxes : any[];
-
-  wagonSize: boolean = false;
-  
+  boxes : any[];  
 
   constructor() { 
     this.boxes = [];
@@ -29,8 +26,14 @@ export class WagonContainerComponent implements OnInit, OnChanges {
 
   ngOnChanges(){    
       this.items ? this.boxes = this.items[this.currentItem].boxes : null;
+      
   }
 
+  checkWagon(){
+    
+  }
+
+  
 
 
 }
