@@ -5,7 +5,7 @@ import { SockService } from 'app/shared/sock.service';
 
 import * as io from 'socket.io-client';
 
-import { Log } from "app/models/log";
+import { Log } from "app/models/Log";
 import { DeviceService } from "app/shared/device.service";
 import { Device } from "app/models/Device";
 

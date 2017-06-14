@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PickService } from "app/shared/pick.service";
-import { Log } from "app/models/log";
+import { Log } from "app/models/Log";
 import { DeviceService } from "app/shared/device.service";
 import { Device } from "app/models/Device";
 
@@ -31,7 +31,7 @@ export class ContentComponent implements OnInit {
       this.wagon = w;
       console.log(w)
     });
-    console.log(123)
+    
   }
 
 

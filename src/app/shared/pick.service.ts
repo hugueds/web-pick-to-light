@@ -5,9 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { Wagon } from 'app/models/wagon';
+import { Wagon } from 'app/models/Wagon';
 import { WAGON_EXAMPLE } from 'app/wagon.example';
-import { Log } from 'app/models/log';
+import { Log } from 'app/models/Log';
 
 @Injectable()
 

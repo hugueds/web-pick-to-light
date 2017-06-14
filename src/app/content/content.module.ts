@@ -1,3 +1,4 @@
+import { ContentComponent } from './content.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,9 +12,9 @@ import { PickService } from "app/shared/pick.service";
 import { BannerComponent } from "app/banner/banner.component";
 
 @NgModule({
-    imports: [CommonModule, MaterialModule],
-    // exports : [ContentModule],
+    imports: [CommonModule, MaterialModule],    
     declarations: [
+        ContentComponent,
         PartComponent, 
         WagonComponent, 
         MissingPartComponent, 
@@ -24,6 +25,4 @@ import { BannerComponent } from "app/banner/banner.component";
     entryComponents: [MissingPartDialogComponent]
 })
 
-export class ContentModule {
-
-}
+export class ContentModule { }

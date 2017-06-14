@@ -39,7 +39,7 @@ import { AppRoutingModule } from "app/app-routing.module";
     BoxColorDirective, WagonColorDirective
   ],
   imports: [
-    // AppRoutingModule,
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule,
