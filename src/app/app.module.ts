@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { MaterialModule } from "app/material/material.module";
-import { ContentModule } from "app/content/content.module";
+import { ContentaModule } from "app/content/content.module";
 
 
 import { DeviceService } from "app/shared/device.service";
@@ -13,7 +13,6 @@ import { SockService } from "app/shared/sock.service";
 import { PickService } from "app/shared/pick.service";
 
 
-import { ContentComponent } from './content/content.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 
@@ -24,9 +23,7 @@ import { AboutComponent } from './about/about.component';
 
 import { BoxColorDirective } from './box-color.directive';
 import { WagonColorDirective } from './wagon-color.directive';
-import { AppRoutingModule } from "app/app-routing.module";
-
-
+// import { AppRoutingModule } from "app/app-routing.module";
 
 
 @NgModule({
@@ -45,7 +42,7 @@ import { AppRoutingModule } from "app/app-routing.module";
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ContentModule
+    ContentaModule
   ],
   providers: [SockService, DeviceService, PickService],
   bootstrap: [AppComponent]

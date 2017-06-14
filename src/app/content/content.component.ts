@@ -5,7 +5,7 @@ import { DeviceService } from "app/shared/device.service";
 import { Device } from "app/models/Device";
 
 @Component({
-  selector: 'content',
+  selector: 'contenta',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
@@ -27,10 +27,10 @@ export class ContentComponent implements OnInit {
     }
 
   ngOnInit() {
-    this._pickService.getWagon(this.device.stations[this.currentStationId].idStation).subscribe( w => {
-      this.wagon = w;
-      console.log(w)
-    });
+    // this._pickService.getWagon(this.device.stations[this.currentStationId].idStation).subscribe( w => {
+    //   this.wagon = w;
+    //   console.log(w)
+    // });
     console.log(123)
   }
 
