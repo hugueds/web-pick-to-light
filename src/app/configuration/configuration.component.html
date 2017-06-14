@@ -1,0 +1,12 @@
+<md-select placeholder='DISPOSITIVO' floatPlaceholder="auto">
+    <md-option *ngFor='let tablet of tablets' [value]='selectedTablet'>
+        {{ tablet }}
+    </md-option>
+</md-select>
+
+
+<md-input-container>
+    <input mdInput type="text" placeholder='USUARIO' [value]='user' />
+</md-input-container>
+
+<button md-raised-button color='primary' (click)='saveChanges()'> SALVAR ALTERAÇÕES</button> {{ selectedTablet }}

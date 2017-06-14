@@ -1,19 +1,9 @@
 <div class="app-content">
 
-  <navbar [device]='device'></navbar>  
+  <navbar [device]='device'></navbar>
 
-  <!--<router-outlet></router-outlet>  -->
-  <content> </content>
-<!--
-  <md-card [style.margin-top]='"30px"' [style.width]='"500px"'>
-
-    <button md-raised-button (click)='changeOrientation()'>MUDAR ORIENTAÇÃO</button>
-    <button md-raised-button color='warn' (click)='addItem()'>PROXIMO</button>
-    <button md-raised-button color='accent' (click)='reset()'>RESET</button>
-    <button md-raised-button color='primary' (click)='finish()'>FINALIZADO</button>
-
-  </md-card>-->
+  <router-outlet></router-outlet>
 
   <footer [device]='device'></footer>
- 
- </div>
+
+</div>

@@ -5,10 +5,11 @@ import { ConfigurationComponent } from "app/configuration/configuration.componen
 import { AboutComponent } from "app/about/about.component";
 
 import { ContentComponent } from "app/content/content.component";
+import { DeviceGuard } from "app/guard/device.guard";
 
 
 const routes: Routes = [
-    { path: '', component: ContentComponent /* canActivate */ },
+    { path: '', component: ContentComponent, canActivate : [DeviceGuard]  },
     { path: 'configuration', component: ConfigurationComponent },
     { path: 'about', component: AboutComponent }    
 ]

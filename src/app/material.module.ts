@@ -10,7 +10,8 @@ import {
     MdSidenavModule,
     MdProgressBarModule,
     MdProgressSpinnerModule,    
-    MdInputModule 
+    MdInputModule,
+    MdSelectModule
 } from "@angular/material/";
 
 
@@ -26,7 +27,8 @@ import {
         MdSidenavModule,
         MdProgressBarModule,
         MdProgressSpinnerModule,
-        MdInputModule 
+        MdInputModule,
+        MdSelectModule
     ],
     exports: [
         MdDialogModule,
@@ -39,7 +41,8 @@ import {
         MdSidenavModule,
         MdProgressBarModule,
         MdProgressSpinnerModule,
-        MdInputModule 
+        MdInputModule,
+        MdSelectModule 
     ]
 })
 
