@@ -1,4 +1,4 @@
-import { Directive, HostListener, HostBinding } from '@angular/core';
+import { Directive, HostListener, HostBinding, Input } from '@angular/core';
 
 @Directive({
   selector: '[boxColor]'
@@ -10,16 +10,19 @@ export class BoxColorDirective {
   constructor() { }
 
 
-  @HostListener('isDone') onFinish(){
+  @HostListener('isDone') onFinish() {
     this.backgroundColor = 'green';
   }
 
-  @HostListener('inProcess') onStart(){
+  @HostListener('inProcess') onStart() {
     this.backgroundColor = 'yellow';
   }
 
-   @HostListener('click') enter(){
-    this.backgroundColor = 'green';
+  @HostListener('mouseenter') clicke() {
+    
+      console.log('123123')
+      this.backgroundColor = 'green'    
+
   }
 
 }

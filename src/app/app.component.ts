@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   constructor(private _deviceService: DeviceService){}
   
   ngOnInit(){
+    this.setDevMode(); //Coment on production
     this.registerDevice();
   }
 
@@ -32,4 +33,9 @@ export class AppComponent implements OnInit {
       this.device = this._deviceService.getDeviceInfo();          
     })    
   }
+
+  setDevMode(){
+    localStorage.setItem('development', 'true');
+  }
+
 }

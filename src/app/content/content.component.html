@@ -1,4 +1,4 @@
- <div *ngIf='wagon.wagonId'>
+ <div *ngIf='wagon?.wagonId'>
 
     <part [items]='wagon?.items' [currentItem]="currentItem"></part>     
     <wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></wagon-description>
@@ -7,7 +7,7 @@
     <missing-part></missing-part>
 
 
-  <md-card [style.margin-top]='"30px"' [style.width]='"500px"'>
+  <md-card [style.margin-top]='"300px"' [style.width]='"500px"'>
 
     <button md-raised-button (click)='changeOrientation()'>MUDAR ORIENTAÇÃO</button>
     <button md-raised-button color='warn' (click)='addItem()'>PROXIMO</button>
@@ -16,6 +16,12 @@
 
   </md-card>
     
+</div>
+
+
+
+<div *ngIf='errorMessage'>
+  {{ errorMessage }}
 </div>
 
 <banner *ngIf='!wagon?.wagonId'></banner>

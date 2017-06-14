@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Device } from "app/models/Device";
 import { PickService } from "app/shared/pick.service";
 
+import { DEVICE_EXAMPLE } from './../examples/device.example';
 
 @Injectable()
 
@@ -20,12 +21,20 @@ export class DeviceService{
         }
     }
 
-    getDeviceInfo(){
+    getDeviceInfo(): Device{
         return DeviceService.device;
     }  
     
 
     registerDevice( device ){
+        //For tests
+        if ( localStorage.getItem('development') == 'true'){
+            DeviceService.device = DEVICE_EXAMPLE;
+            DeviceService.device.isRegistered = true;
+            localStorage.setItem('device', JSON.stringify(DeviceService.device));
+            this.tabletUpdatedEvent.emit(true);
+            return;            
+        }
         DeviceService.device.name = device.name; 
         DeviceService.device.user = device.user;
         this._pickService.getConfiguration(device.name).subscribe( station => {            
