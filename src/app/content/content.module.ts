@@ -12,12 +12,8 @@ import { PickService } from "app/shared/pick.service";
 import { BannerComponent } from "app/content/banner/banner.component";
 
 @NgModule({
-<<<<<<< HEAD
     imports: [ MaterialModule],
     // exports : [ContentModule],
-=======
-    imports: [CommonModule, MaterialModule],    
->>>>>>> f0e1f9e121a5369aadeb04f2df0e1e4345552629
     declarations: [
         ContentComponent,
         PartComponent, 
@@ -30,10 +26,6 @@ import { BannerComponent } from "app/content/banner/banner.component";
     entryComponents: [MissingPartDialogComponent]
 })
 
-<<<<<<< HEAD
 export class ContentaModule {
 
 }
-=======
-export class ContentModule { }
->>>>>>> f0e1f9e121a5369aadeb04f2df0e1e4345552629
