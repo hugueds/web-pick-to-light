@@ -5,9 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { Wagon } from 'app/models/wagon';
-import { WAGON_EXAMPLE } from 'app/wagon.example';
-import { Log } from 'app/models/log';
+import { Wagon } from 'app/models/Wagon';
+import { WAGON_EXAMPLE } from 'app/examples/wagon.example';
+import { Log } from 'app/models/Log';
 
 @Injectable()
 
@@ -41,7 +41,6 @@ export class PickService {
     let options = { headers : headers };
     return this._http.post(url, log).map(this.extractData).catch(this.handleError);
   } 
-
 
 
   private extractData( res: Response ) {

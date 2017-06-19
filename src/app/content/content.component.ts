@@ -1,6 +1,7 @@
+import { WAGON_EXAMPLE } from './../examples/wagon.example';
 import { Component, OnInit } from '@angular/core';
 import { PickService } from "app/shared/pick.service";
-import { Log } from "app/models/log";
+import { Log } from "app/models/Log";
 import { DeviceService } from "app/shared/device.service";
 import { Device } from "app/models/Device";
 
@@ -12,7 +13,7 @@ import { Device } from "app/models/Device";
 export class ContentComponent implements OnInit {
 
   device: Device;
-  wagon: any = {};  
+  wagon: any;  
   currentItem: number = 0;    
   currentStationId = 0;
   errorMessage: any;
@@ -27,11 +28,21 @@ export class ContentComponent implements OnInit {
     }
 
   ngOnInit() {
+<<<<<<< HEAD
     // this._pickService.getWagon(this.device.stations[this.currentStationId].idStation).subscribe( w => {
     //   this.wagon = w;
     //   console.log(w)
     // });
     console.log(123)
+=======
+    if (localStorage.getItem('development') == 'true'){
+      return this.wagon = WAGON_EXAMPLE;
+    }
+    this._pickService.getWagon(this.device.stations[this.currentStationId].idStation).subscribe( w => {
+      this.wagon = w;
+    });
+    
+>>>>>>> f0e1f9e121a5369aadeb04f2df0e1e4345552629
   }
 
 

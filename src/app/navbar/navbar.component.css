@@ -26,8 +26,8 @@ md-toolbar{
     display: block;
     background: black;
     border-radius: 50%;
-    height: 45%;
-    width: 3%;    
+    height: 2rem;
+    width: 2rem;    
     background: radial-gradient(circle at 10px 10px, #f44242, #000);          
 }
 

@@ -5,7 +5,7 @@ import { SockService } from 'app/shared/sock.service';
 
 import * as io from 'socket.io-client';
 
-import { Log } from "app/models/log";
+import { Log } from "app/models/Log";
 import { DeviceService } from "app/shared/device.service";
 import { Device } from "app/models/Device";
 
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   constructor(private _deviceService: DeviceService){}
   
   ngOnInit(){
+    this.setDevMode(); //Coment on production
     this.registerDevice();
   }
 
@@ -32,4 +33,9 @@ export class AppComponent implements OnInit {
       this.device = this._deviceService.getDeviceInfo();          
     })    
   }
+
+  setDevMode(){
+    localStorage.setItem('development', 'true');
+  }
+
 }

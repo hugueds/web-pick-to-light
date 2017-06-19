@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfigurationComponent implements OnInit {
 
-  constructor() { }
+  tablets: string[];
+  selectedTablet : string;
+  user: string = '';
+
+  constructor() {
+    this.tablets = []
+    this.generateTabletList();
+  }
 
   ngOnInit() {
+  }
+
+  saveChanges() {
+    
+  }
+
+  generateTabletList() {
+    for (let i = 1; i <= 10; i++) {
+      if (i < 10) {
+        this.tablets.push('TABLET0' + i);
+      }
+      else {
+        this.tablets.push('TABLET' + i);        
+      }
+    }
   }
 
 }

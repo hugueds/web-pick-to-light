@@ -1,11 +1,36 @@
+<<<<<<< HEAD
  <!--<div *ngIf='wagon.wagonId'>
+=======
+ <div *ngIf='wagon?.wagonId'>
+>>>>>>> f0e1f9e121a5369aadeb04f2df0e1e4345552629
 
     <part [items]='wagon?.items' [currentItem]="currentItem"></part>     
-    <wagon [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></wagon>
+    <wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></wagon-description>
     <wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></wagon-container>
 
     <missing-part></missing-part>
+
+
+  <md-card [style.margin-top]='"300px"' [style.width]='"500px"'>
+
+    <button md-raised-button (click)='changeOrientation()'>MUDAR ORIENTAÇÃO</button>
+    <button md-raised-button color='warn' (click)='addItem()'>PROXIMO</button>
+    <button md-raised-button color='accent' (click)='reset()'>RESET</button>
+    <button md-raised-button color='primary' (click)='finish()'>FINALIZADO</button>
+
+  </md-card>
     
 </div>
 
+<<<<<<< HEAD
 <banner *ngIf='!wagon?.wagonId'></banner>-->
+=======
+
+
+<div *ngIf='errorMessage'>
+  {{ errorMessage }}
+</div>
+
+<banner *ngIf='!wagon?.wagonId'></banner>
+
+>>>>>>> f0e1f9e121a5369aadeb04f2df0e1e4345552629
