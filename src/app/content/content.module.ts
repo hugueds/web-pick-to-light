@@ -1,7 +1,7 @@
-import { ContentComponent } from './content.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ContentComponent } from './content.component';
 import { PartComponent } from "app/content/part/part.component";
 import { MaterialModule } from "app/material.module";
 import { WagonContainerComponent } from "app/content/wagon-container/wagon-container.component";
@@ -12,8 +12,7 @@ import { PickService } from "app/shared/pick.service";
 import { BannerComponent } from "app/content/banner/banner.component";
 
 @NgModule({
-    imports: [ MaterialModule],
-    // exports : [ContentModule],
+    imports: [ MaterialModule],    
     declarations: [
         ContentComponent,
         PartComponent, 
@@ -26,6 +25,6 @@ import { BannerComponent } from "app/content/banner/banner.component";
     entryComponents: [MissingPartDialogComponent]
 })
 
-export class ContentaModule {
+export class ContentModule {
 
 }

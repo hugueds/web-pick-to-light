@@ -13,8 +13,8 @@ import { Device } from "app/models/Device";
 export class ContentComponent implements OnInit {
 
   device: Device;
-  wagon: any;  
-  currentItem: number = 0;    
+  wagon: any;
+  currentItem: number = 0;
   currentStationId = 0;
   errorMessage: any;
   log: Log;
@@ -24,69 +24,61 @@ export class ContentComponent implements OnInit {
   constructor(
     private _pickService: PickService,
     private _deviceService: DeviceService) {
-      this.device = _deviceService.getDeviceInfo();
-    }
+    this.device = _deviceService.getDeviceInfo();
+  }
 
   ngOnInit() {
-<<<<<<< HEAD
-    // this._pickService.getWagon(this.device.stations[this.currentStationId].idStation).subscribe( w => {
-    //   this.wagon = w;
-    //   console.log(w)
-    // });
-    console.log(123)
-=======
-    if (localStorage.getItem('development') == 'true'){
+    if (localStorage.getItem('development') == 'true') {
       return this.wagon = WAGON_EXAMPLE;
     }
-    this._pickService.getWagon(this.device.stations[this.currentStationId].idStation).subscribe( w => {
+    this._pickService.getWagon(this.device.stations[this.currentStationId].idStation).subscribe(w => {
       this.wagon = w;
     });
-    
->>>>>>> f0e1f9e121a5369aadeb04f2df0e1e4345552629
+
   }
 
 
-  getWagons( stationId ) {    
-    this._pickService.getWagon(stationId).subscribe( wagon =>   this.wagon = wagon , error => this.errorMessage = <any>error);
+  getWagons(stationId) {
+    this._pickService.getWagon(stationId).subscribe(wagon => this.wagon = wagon, error => this.errorMessage = <any>error);
   }
 
   getItems() {
-    
-  }    
 
-  
+  }
 
-  addItem(){
-    if (this.currentItem < this.wagon.items.length - 1){
+
+
+  addItem() {
+    if (this.currentItem < this.wagon.items.length - 1) {
       this.currentItem++;
     }
   }
 
-  reset(){
-    this.currentItem = 0;    
+  reset() {
+    this.currentItem = 0;
   }
 
-  finish(){    
-    this.log = new Log(this.wagon.wagonId, this.device.user , 'ANGULAR TESTE');    
-    this._pickService.finishWagon(this.log).subscribe( data => {
+  finish() {
+    this.log = new Log(this.wagon.wagonId, this.device.user, 'ANGULAR TESTE');
+    this._pickService.finishWagon(this.log).subscribe(data => {
       this.lastWagon = data.wagon;
-      localStorage.setItem('lastWagon', this.lastWagon);      
+      localStorage.setItem('lastWagon', this.lastWagon);
       this.wagon = {}; //Guardar no localstorage
-      setTimeout( () => {
+      setTimeout(() => {
         this.getWagons(this.device.stations[this.currentStationId]);
         this.currentItem = 0;
-      }, 2000);      
+      }, 2000);
     });
-    this.currentItem = 0;    
+    this.currentItem = 0;
   }
 
-  changeOrientation(){            
-    return this.orientation = this.orientation ==  'horizontal' ? 'vertical' : 'horizontal';
+  changeOrientation() {
+    return this.orientation = this.orientation == 'horizontal' ? 'vertical' : 'horizontal';
   }
 
-  
+
   ngOnChange() {
-  
+
   }
 
 
