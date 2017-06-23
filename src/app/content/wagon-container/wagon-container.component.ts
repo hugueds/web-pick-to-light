@@ -1,28 +1,31 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { PickService } from "app/shared/pick.service";
 
 @Component({
   selector: 'wagon-container',
   templateUrl: './wagon-container.component.html',
-  styleUrls: ['./wagon-container.component.css']
+  styleUrls: ['./wagon-container.component.css']  
 })
 export class WagonContainerComponent implements OnInit, OnChanges {
 
   @Input() currentItem: number;
   @Input() items: any[];
   @Input() orientation: string;
-  border;
 
+  @Output() partFinished = new EventEmitter<any>();
+
+  border: string;
   boxes: any[];
 
-  constructor() {
+  constructor(private _pickService: PickService) {
     this.boxes = [];
+    this.orientation = 'horizontal';    
   }
 
   ngOnInit() {
-    this.orientation = 'horizontal';
     if (this.boxes.length > 0) {
       this.boxes = this.items[this.currentItem].boxes;
-    }
+    }    
   }
 
   ngOnChanges() {
@@ -37,16 +40,16 @@ export class WagonContainerComponent implements OnInit, OnChanges {
   boxChanged(evento) {
     let result = this.boxes.map(a => a.quantity).reduce((a, b) => a + b);
     if (result == 0) {
-      this.getNextPart();      
+      this.getNextPart();
     }
   }
 
-  getNextPart(){
-    this.border = '10px solid limegreen';
+  getNextPart() {    
+    this.border = '20px solid limegreen';
     setTimeout(() => {
-      this.border = '10px solid red';
-      
-    },2000)
+      this.border = '20px solid red';
+      this._pickService.updateItem(this.currentItem);
+    }, 1000)
   }
 
 

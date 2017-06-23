@@ -1,16 +1,31 @@
-<md-select placeholder='DISPOSITIVO' floatPlaceholder="auto">
-    <md-option *ngFor='let tablet of tablets' [value]='selectedTablet'>
-        {{ tablet }}
-    </md-option>
-</md-select>
+<h2>Cadastro do dispositivo</h2>
 
+<form #deviceForm='ngForm'>
 
-<md-input-container>
-    <input mdInput type="text" placeholder='USUARIO' [value]='user' />
-</md-input-container>
+    <select placeholder='DISPOSITIVO' floatPlaceholder="auto" [(ngModel)]='selectedDevice.name' name='deviceName' #deviceName='ngModel' required>
+        <option *ngFor='let device of devices' [value]='device'>
+            {{ device }}
+        <option>
+    </select>
 
-<button md-raised-button color='primary' (click)='saveChanges()'> SALVAR ALTERAÇÕES</button> {{ selectedTablet }}
+    <input type="text" placeholder='USUARIO' [value]='deviceUser' [(ngModel)]='selectedDevice.user' 
+    id='deviceUser' name='deviceUser' #deviceUser='ngModel' required />
 
-ORIENTAÇÃO DOS COMBOIOS
+    <button md-raised-button color='primary' (click)='saveChanges()'> SALVAR ALTERAÇÕES</button>     
+    <button md-raised-button color='warn' (click)='unregisterDevice()'> REMOVER DISPOSITIVO</button>     
 
-REENVIAR COMBOIO
+</form>
+
+<div [hidden]='deviceName.valid || deviceName.pristine' >
+    É NECESSÁRIO DISPONIBILIZAR UM DISPOSITIVO PARA O SISTEMA
+</div>
+
+<div [hidden]='deviceUser.valid || deviceUser.pristine' >
+    É NECESSÁRIO DISPONIBILIZAR UM USUÁRIO PARA O SISTEMA
+</div>
+
+<hr>
+ORIENTAÇÃO DOS COMBOIOS 
+<hr>
+
+REENVIAR

@@ -33,8 +33,7 @@ export class WagonBoxComponent implements OnInit, OnChanges {
 
   checkQuantity() {
     if (this.box.quantity == 0) {
-      this.boxStyle = 'mat-card box-finished'; 
-                
+      this.boxStyle = 'mat-card box-finished';                 
     }
     else {
       this.boxStyle = 'mat-card box-unfinished';

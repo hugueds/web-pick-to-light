@@ -10,7 +10,7 @@ import { DeviceGuard } from "app/guard/device.guard";
 
 const routes: Routes = [
     { path: '', component: ContentComponent, canActivate : [DeviceGuard]  },
-    { path: 'configuration', component: ConfigurationComponent },
+    { path: 'configuration', component: ConfigurationComponent, /* canDeactivate : [ConfigurationGuard] */ },
     { path: 'about', component: AboutComponent }    
 ]
 

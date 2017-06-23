@@ -8,8 +8,6 @@ export class Device {
     "groupId" : number;
     "groupName": string;
     "stations" : any[];
-    "isRegistered" : boolean;
-
-    constructor(){}
+    "isRegistered" : boolean;    
 
 }

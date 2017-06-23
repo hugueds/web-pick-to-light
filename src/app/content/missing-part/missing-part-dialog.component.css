@@ -14,3 +14,21 @@ h1{
 .spacer{
     flex: 1 1 auto;
 }
+
+md-input-container{
+    margin-left: 50px;
+    font-size: 2rem;
+}
+
+#partNumber{
+    width: 12rem;
+}
+
+#partBuffer{
+    width: 10rem;
+}
+
+#partModule{
+    width: 10rem;
+}
+

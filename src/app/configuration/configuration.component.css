@@ -1,0 +1,12 @@
+input{
+    flex: 1 1 auto;
+    font-size: 2rem;
+}
+
+select{
+    font-size: 2rem;
+}
+
+.ng-invalid:not(form){
+    border: red solid 1px;
+}

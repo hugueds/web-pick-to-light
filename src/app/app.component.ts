@@ -16,26 +16,30 @@ import { Device } from "app/models/Device";
   providers: []
 })
 
-export class AppComponent implements OnInit {  
+export class AppComponent implements OnInit {
 
-  device:Device;
+  device: Device;
 
-  constructor(private _deviceService: DeviceService){}
-  
-  ngOnInit(){
-    this.setDevMode(); //Coment on production
-    this.registerDevice();
+  constructor(private _deviceService: DeviceService) { }
+
+  ngOnInit() {
+    this.setDevMode(false); //Coment on production  
+    this.device = this._deviceService.getDeviceInfo();
   }
 
-  registerDevice(){
-    this._deviceService.registerDevice( { name : 'TABLET01', user: 'SSBHPE'} ); //testing
-    this._deviceService.tabletUpdatedEvent.subscribe( e => {
-      this.device = this._deviceService.getDeviceInfo();          
-    })    
+  registerDevice() {    
+    this._deviceService.tabletUpdatedEvent.subscribe(e => {
+      this.device = this._deviceService.getDeviceInfo();
+    })
   }
 
-  setDevMode(){
-    localStorage.setItem('development', 'true');
+  setDevMode(isDev) {
+    if (isDev) {
+      localStorage.setItem('development', 'true');      
+    }
+    else{
+      localStorage.removeItem('development');      
+    }
   }
 
 }

@@ -3,8 +3,7 @@
     position: relative;
     float: left;
     margin-left: 3%;
-    margin-top: 2%;    
-    
+    margin-top: 2%;       
     align-content: center;
 }
 
@@ -12,6 +11,7 @@ md-card{
     margin: auto;
     padding: 10px;    
     background-color:  #dbeffc;
+    border: 20px solid red;
 }
 
 .wagon-unfinished{

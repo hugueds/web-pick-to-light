@@ -5,6 +5,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
   templateUrl: './part.component.html',
   styleUrls: ['./part.component.css']
 })
+
 export class PartComponent implements OnInit, OnChanges {
 
   defaultImage:string = 'assets/images/no-image.png';

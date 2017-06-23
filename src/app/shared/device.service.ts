@@ -6,71 +6,82 @@ import { DEVICE_EXAMPLE } from './../examples/device.example';
 
 @Injectable()
 
-export class DeviceService{
+export class DeviceService {
 
-    public static device:Device;
+    private static device: Device;
 
     tabletUpdatedEvent = new EventEmitter<boolean>();
 
-    constructor( private _pickService:PickService ){        
-        if (JSON.parse(localStorage.getItem('device'))){
+    constructor(private _pickService: PickService) {
+
+        DeviceService.device = new Device();        
+        
+        if (JSON.parse(localStorage.getItem('device'))) {
             DeviceService.device = JSON.parse(localStorage.getItem('device'));            
         }
         else{
-            DeviceService.device = new Device();                
+            DeviceService.device.isRegistered = false;
         }
+        
     }
 
-    getDeviceInfo(): Device{
+    getDeviceInfo(): Device {        
         return DeviceService.device;
-    }  
-    
+        // return Promise.resolve(DeviceService.device); 
+    }
 
-    registerDevice( device ){
-        //For tests
-        if ( localStorage.getItem('development') == 'true'){
+    registerDevice(device, cb) {
+        this.unregisterDevice(device);
+        console.log('Registering the device');
+        if (localStorage.getItem('development') == 'true') {
             DeviceService.device = DEVICE_EXAMPLE;
             DeviceService.device.isRegistered = true;
             localStorage.setItem('device', JSON.stringify(DeviceService.device));
             this.tabletUpdatedEvent.emit(true);
-            return;            
+            return;
         }
-        DeviceService.device.name = device.name; 
+        DeviceService.device.name = device.name;
         DeviceService.device.user = device.user;
-        this._pickService.getConfiguration(device.name).subscribe( station => {            
-            let stationId = station.idGroupStationVp.toString();
-            this._pickService.getGroup(stationId).subscribe( group => {
-                DeviceService.device.deviceModel = navigator.userAgent.match(/\((\w.+);/)[1].replace(';', '-');
-                DeviceService.device.groupId = group.id;
-                DeviceService.device.groupName = group.name;
-                DeviceService.device.stations = group.stations.map( s => s.idStation);
-                DeviceService.device.isRegistered = true;
-                localStorage.setItem('device', JSON.stringify(DeviceService.device));
-                this.tabletUpdatedEvent.emit(true);
-            })            
+        this._pickService.getConfiguration(device.name)
+        .subscribe(station => {
+            if (station.idGroupStationVp) {
+                let stationId = station.idGroupStationVp.toString();
+                this._pickService.getGroup(stationId).subscribe(group => {
+                    DeviceService.device.deviceModel = navigator.userAgent.match(/\((\w.+);/)[1].replace(';', '-');
+                    DeviceService.device.groupId = group.id;
+                    DeviceService.device.groupName = group.name;
+                    DeviceService.device.stations = group.stations.map(s => s.idStation);
+                    DeviceService.device.isRegistered = true;
+                    localStorage.setItem('device', JSON.stringify(DeviceService.device));
+                    this.tabletUpdatedEvent.emit(true);
+                    cb();
+                })
+            }
+        }, error => {
+            console.error(error);
         })
     }
 
-    unregisterDevice() {
-        localStorage.removeItem('device');
+    unregisterDevice(device) {        
+        DeviceService.device.isRegistered = false;
     }
 
-    updateLastLogin(){
-
-    }
-
-    updateUser(){
+    updateLastLogin() {
 
     }
 
-    updateDeviceInfo(){
+    updateUser() {
+
+    }
+
+    updateDeviceInfo() {
 
     }
 
 
 
 
-    
+
 
 
 

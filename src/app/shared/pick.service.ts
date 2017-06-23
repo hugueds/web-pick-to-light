@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions  } from '@angular/http';
+import { Injectable, EventEmitter } from '@angular/core';
+import { Http, Response, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -14,41 +14,52 @@ import { Log } from 'app/models/Log';
 export class PickService {
 
   private server: string; //To define
-  private testServer: string = 'http://10.33.22.56:5050'; 
+  private testServer: string = 'http://10.33.22.56:5050';
 
-  private wagon:Wagon;
+  public static wagon: Wagon;
+  public static currentItem: number = 0;
+
+  public static  itemUpdated = new EventEmitter<any>();
 
   constructor(private _http: Http) { }
 
-  getWagon( stationId ) {        
+  getWagon(stationId) {
     let url = `${this.testServer}/getwagon/${stationId}`;
-    return this._http.get(url).map(this.extractData).catch(this.handleError);    
+    return this._http.get(url).map(this.extractData).catch(this.handleError);
+  }  
+  
+  updateItem( item ){
+    PickService.itemUpdated.emit(item);
   }
 
-  getConfiguration( deviceName:string ){
-    let url = `${this.testServer}/getconfiguration/${deviceName}`;           
+  getConfiguration(deviceName: string) {
+    let url = `${this.testServer}/getconfiguration/${deviceName}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
-  getGroup( groupId ){
-    let url = `${this.testServer}/getgroupid/${groupId}`;           
+  getGroup(groupId) {
+    let url = `${this.testServer}/getgroupid/${groupId}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
-  finishWagon( log:Log ){
-    let url = `${this.testServer}/finishWagon`;           
+  finishWagon(log: Log) {
+    let url = `${this.testServer}/finishWagon`;
     let headers = { 'Content-Type': 'application/json' };
-    let options = { headers : headers };
+    let options = { headers: headers };
     return this._http.post(url, log).map(this.extractData).catch(this.handleError);
-  } 
+  }
+
+  finishItems(){
+        
+  }
 
 
-  private extractData( res: Response ) {
-    let body = res.json();        
+  private extractData(res: Response) {
+    let body = res.json();    
     return body || {};
   }
 
-  private handleError( error: Response | any ) {
+  private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';

@@ -1,31 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef } from "@angular/material";
+import { Component, OnInit, Inject } from '@angular/core';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
 
 @Component({
   selector: 'missing-part',
   templateUrl: './missing-part.component.html',
   styleUrls: ['./missing-part.component.css']
 })
+
 export class MissingPartComponent implements OnInit {
 
-  constructor(private _dialog: MdDialog) { }
+  dialogRef;
 
+  constructor(private _dialog: MdDialog) { }
   ngOnInit() {
-  }
+  }  
 
   openDialog() {
 
-    let dialogRef = this._dialog.open(MissingPartDialogComponent, {
+    //Buscar qual é a peça atual
+    //Fazer a busca de qual modulo e buffer a peça esta sendo utilizada       
+
+    this.dialogRef = this._dialog.open(MissingPartDialogComponent, {
       disableClose: true,
       hasBackdrop: true,
-      width: '30%',
-      data: { value: 123123123 }
+      width: '60%',
+      data: { part: 123456789 }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+    this.dialogRef.afterClosed().subscribe(result => {
+      // console.log(result);
+    });    
+    
+
   }
+
+
 
 }
 
@@ -37,6 +46,15 @@ export class MissingPartComponent implements OnInit {
 
 export class MissingPartDialogComponent {
 
-  constructor(public dialogRef: MdDialogRef<MissingPartDialogComponent>) { }
+  
+
+  constructor(
+    @Inject(MD_DIALOG_DATA) public data:any,
+    public dialogRef: MdDialogRef<MissingPartDialogComponent>
+  ) { }
+
+  send(data){
+      this.dialogRef.close(data)      
+  }
 
 }
