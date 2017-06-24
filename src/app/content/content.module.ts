@@ -9,8 +9,10 @@ import { WagonContainerComponent } from "app/content/wagon-container/wagon-conta
 import { WagonBoxComponent } from "app/content/wagon-box/wagon-box.component";
 import { MissingPartComponent, MissingPartDialogComponent } from "app/content/missing-part/missing-part.component";
 import { WagonComponent } from "app/content/wagon-description/wagon-description.component";
-import { PickService } from "app/shared/pick.service";
 import { BannerComponent } from "app/content/banner/banner.component";
+
+import { PickService } from "app/shared/pick.service";
+import { MissingPartService } from "app/shared/missing-part.service";
 
 @NgModule({
     imports: [CommonModule, MaterialModule, FormsModule],    
@@ -24,7 +26,7 @@ import { BannerComponent } from "app/content/banner/banner.component";
         BannerComponent
     ],
     entryComponents: [MissingPartDialogComponent],
-    providers: [PickService]
+    providers: [PickService, MissingPartService]
 })
 
 export class ContentModule { }

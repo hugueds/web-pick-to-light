@@ -16,7 +16,7 @@ h1{
 }
 
 md-input-container{
-    margin-left: 50px;
+    margin-left: 30px;
     font-size: 2rem;
 }
 
@@ -25,10 +25,10 @@ md-input-container{
 }
 
 #partBuffer{
-    width: 10rem;
+    width: 9rem;
 }
 
 #partModule{
-    width: 10rem;
+    width: 9rem;
 }
 

@@ -4,6 +4,8 @@ import { PickService } from "app/shared/pick.service";
 import { Log } from "app/models/Log";
 import { DeviceService } from "app/shared/device.service";
 import { Device } from "app/models/Device";
+import { MissingPartService } from "app/shared/missing-part.service";
+import { Wagon } from "app/models/Wagon";
 
 @Component({
   selector: 'content',
@@ -14,7 +16,7 @@ import { Device } from "app/models/Device";
 export class ContentComponent implements OnInit {
 
   device: Device;
-  wagon: any;
+  wagon: Wagon;
   currentItem: number = 0;
   currentStationId: number = 0;
   currentStationSequence: number = 0;
@@ -23,16 +25,16 @@ export class ContentComponent implements OnInit {
   lastWagon: any = 'Nenhum';
   orientation: string = 'horizontal';
 
-  constructor(private _pickService: PickService, private _deviceService: DeviceService) {
+  constructor(private _pickService: PickService, private _deviceService: DeviceService, private _mpService: MissingPartService) {
     this.device = _deviceService.getDeviceInfo();
   }
 
   ngOnInit() {
 
-    this.wagon = {};
+    localStorage.setItem('currentItem', '0');
 
     if (localStorage.getItem('development') == 'true') {
-      return this.wagon = WAGON_EXAMPLE;
+      // return this.wagon = WAGON_EXAMPLE;
     }
 
     this.currentStationId = this.device.stations[this.currentStationSequence];
@@ -47,11 +49,12 @@ export class ContentComponent implements OnInit {
       console.log('Peças da sequência ' + (currentItem + 1) + ' finalizadas');
       if (this.currentItem < (this.wagon.items.length - 1)) {
         this.currentItem++;
+        localStorage.setItem('currentItem', this.currentItem.toString());
       }
       else {
         this.finishTest();
       }
-    })
+    })    
 
   }
 
@@ -67,6 +70,7 @@ export class ContentComponent implements OnInit {
   addItemTest() {
     if (this.currentItem < this.wagon.items.length - 1) {
       this.currentItem++;
+      localStorage.setItem('currentItem', this.currentItem.toString());      
     }
   }
 
@@ -79,8 +83,7 @@ export class ContentComponent implements OnInit {
     this.log = new Log(this.wagon.wagonId, this.device.user, 'ANGULAR TESTE');
     this._pickService.finishWagon(this.log).subscribe(data => {
       this.lastWagon = data.wagon;
-      localStorage.setItem('lastWagon', this.lastWagon);
-      this.wagon = {};
+      localStorage.setItem('lastWagon', this.lastWagon);      
       setTimeout(() => {
         this.getWagons(this.currentStationId);
         this.currentItem = 0;

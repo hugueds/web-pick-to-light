@@ -4,7 +4,7 @@
 
   <wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></wagon-description>
 
-  <missing-part></missing-part>
+  <missing-part [items]='wagon?.items' [currentItem]="currentItem"></missing-part>
 
   <wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></wagon-container>
 

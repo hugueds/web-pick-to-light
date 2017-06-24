@@ -1,13 +1,15 @@
 export class Device {
 
-    "id": number;    
-    "name" : string;
-    "deviceModel": string;    
-    "user": string;    
-    "lastLogin": Date;
-    "groupId" : number;
-    "groupName": string;
-    "stations" : any[];
-    "isRegistered" : boolean;    
+    id: number;    
+    name : string;
+    deviceModel: string;    
+    user: string;    
+    lastLogin: Date;
+    groupId : number;
+    groupName: string;
+    stations : any[];
+    isRegistered : boolean = false;  
+
+    constructor(){}
 
 }

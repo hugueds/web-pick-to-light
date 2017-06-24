@@ -10,11 +10,11 @@ import { Router } from "@angular/router";
 export class ConfigurationComponent implements OnInit {
 
   devices: string[] = [];
-  user: string = ''  
-  selectedDevice : any = {};
-  
+  user: string = ''
+  selectedDevice: any = {};
 
-  constructor(private _deviceService:DeviceService,  private _router: Router) {        
+
+  constructor(private _deviceService: DeviceService, private _router: Router) {
     this.generateTabletList();
   }
 
@@ -24,20 +24,20 @@ export class ConfigurationComponent implements OnInit {
 
   saveChanges() {
 
-    if (this.selectedDevice.name == ''){
+    if (this.selectedDevice.name == '') {
       console.log('DISPOSITIVO NÃO FOI SELECIONADO');
       return;
-    } 
+    }
 
-    if (this.selectedDevice.user == undefined){
+    if (this.selectedDevice.user == undefined) {
       console.log('USUÁRIO NÃO FOI SELECIONADO');
       return;
     }
 
     this._deviceService.registerDevice(this.selectedDevice, () => {
       this._router.navigate(['']);
-    });    
-    
+    });
+
 
   }
 
@@ -47,9 +47,14 @@ export class ConfigurationComponent implements OnInit {
         this.devices.push('TABLET0' + i);
       }
       else {
-        this.devices.push('TABLET' + i);        
+        this.devices.push('TABLET' + i);
       }
     }
   }
+
+  unregisterDevice(){
+    this._deviceService.unregisterDevice();
+  }
+
 
 }

@@ -1,5 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
+
+import { MissingPart } from "app/models/MissingPart";
+import { Item } from "app/models/Item";
+
+import { SockService } from "app/shared/sock.service";
+import { MissingPartService } from "app/shared/missing-part.service";
+import { PickService } from "app/shared/pick.service";
+import { Wagon } from "app/models/Wagon";
 
 @Component({
   selector: 'missing-part',
@@ -11,32 +19,38 @@ export class MissingPartComponent implements OnInit {
 
   dialogRef;
 
-  constructor(private _dialog: MdDialog) { }
-  ngOnInit() {
-  }  
+  @Input() items;
+  @Input() currentItem;
 
-  openDialog() {
-
-    //Buscar qual é a peça atual
-    //Fazer a busca de qual modulo e buffer a peça esta sendo utilizada       
-
-    this.dialogRef = this._dialog.open(MissingPartDialogComponent, {
-      disableClose: true,
-      hasBackdrop: true,
-      width: '60%',
-      data: { part: 123456789 }
-    });
-
-    this.dialogRef.afterClosed().subscribe(result => {
-      // console.log(result);
-    });    
-    
+  constructor(
+    private _dialog: MdDialog
+    , private _mpService: MissingPartService
+    , private _sockService: SockService
+    , private _pickService: PickService) {
 
   }
 
+  ngOnInit() {
+    
+  }
 
+  openDialog() {
+    //Buscar qual é a peça atual
+    //Fazer a busca de qual modulo e buffer a peça esta sendo utilizada         
+    this.dialogRef = this._dialog.open(MissingPartDialogComponent, {
+      disableClose: true,
+      hasBackdrop: true,
+      width: '65%',
+      data: { part : this.items[this.currentItem].obj }
+    });
 
+    this.dialogRef.afterClosed().subscribe(part => {
+      // this._mpService.sendMissingPart(result).subscribe(res => console.log(res))
+       this._sockService.sendMessage('dec-part', part)
+    });
+  }
 }
+
 
 @Component({
   selector: 'missing-part-dialog',
@@ -46,15 +60,17 @@ export class MissingPartComponent implements OnInit {
 
 export class MissingPartDialogComponent {
 
-  
+  partMissing: MissingPart = new MissingPart();
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data:any,
-    public dialogRef: MdDialogRef<MissingPartDialogComponent>
-  ) { }
+    @Inject(MD_DIALOG_DATA) public data: any,
+    public dialogRef: MdDialogRef<MissingPartDialogComponent>,
+  ) {    
+    this.partMissing.part = data.part;
+  }
 
-  send(data){
-      this.dialogRef.close(data)      
+  send() {        
+    this.dialogRef.close(this.partMissing);
   }
 
 }

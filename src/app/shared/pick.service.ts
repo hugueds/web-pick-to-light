@@ -8,27 +8,28 @@ import 'rxjs/add/operator/map';
 import { Wagon } from 'app/models/Wagon';
 import { WAGON_EXAMPLE } from 'app/examples/wagon.example';
 import { Log } from 'app/models/Log';
+import { Item } from "app/models/Item";
 
 @Injectable()
 
 export class PickService {
 
-  private server: string; //To define
-  private testServer: string = 'http://10.33.22.56:5050';
+  private readonly server: string; //To define
+  private readonly testServer: string = 'http://10.33.22.56:5050';
 
   public static wagon: Wagon;
   public static currentItem: number = 0;
 
-  public static  itemUpdated = new EventEmitter<any>();
+  public static itemUpdated = new EventEmitter<any>();
 
   constructor(private _http: Http) { }
 
-  getWagon(stationId) {
+  getWagon(stationId): Observable<Wagon> {
     let url = `${this.testServer}/getwagon/${stationId}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
-  }  
-  
-  updateItem( item ){
+  }
+
+  updateItem(item) {
     PickService.itemUpdated.emit(item);
   }
 
@@ -49,13 +50,13 @@ export class PickService {
     return this._http.post(url, log).map(this.extractData).catch(this.handleError);
   }
 
-  finishItems(){
-        
+  finishItems() {
+
   }
 
 
   private extractData(res: Response) {
-    let body = res.json();    
+    let body = res.json();
     return body || {};
   }
 

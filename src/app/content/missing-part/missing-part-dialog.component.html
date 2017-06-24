@@ -3,15 +3,15 @@
 <md-dialog-content>        
            
     <md-input-container > <!-- class='full-width' -->
-        <input mdInput color='warn' id='partNumber' type="number" placeholder="PEÇA Nº" min=0 [(ngModel)]='data.part' [value]="data.part"/>
+        <input mdInput id='partNumber' type="number" placeholder="PEÇA Nº" min=0 [(ngModel)]='partMissing.part' [value]="partMissing.part"/>
     </md-input-container>    
 
     <md-input-container > <!-- class='full-width' -->
-        <input mdInput id='partBuffer' type='number' placeholder="BUFFER" min=0 [(ngModel)]='data.buffer'/>
+        <input mdInput id='partBuffer' type='number' placeholder="BUFFER" min=0 [(ngModel)]='partMissing.buffer'/>
     </md-input-container>
 
     <md-input-container > <!-- class='full-width' -->
-        <input mdInput id='partModule' type='number' placeholder="MODULO" min=0 [(ngModel)]='data.module'/>
+        <input mdInput id='partModule' type='number' placeholder="MODULO" min=0 [(ngModel)]='partMissing.module'/>
     </md-input-container>
 
 </md-dialog-content>
@@ -19,7 +19,7 @@
 <md-dialog-actions>
 
     <span class='spacer'></span>
-    <button md-raised-button md-dialog-close color='primary' (click)='send(data)' > SOLICITAR </button>
+    <button md-raised-button md-dialog-close color='primary' (click)='send()' > SOLICITAR </button>
     <span class='spacer'></span>
     <button md-raised-button md-dialog-close color='warn'> CANCELAR </button>
     <span class='spacer'></span>    
