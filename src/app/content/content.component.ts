@@ -22,6 +22,7 @@ export class ContentComponent implements OnInit {
   currentStationSequence: number = 0;
   errorMessage: any;
   log: Log;
+  updateScreen: boolean = true;
   lastWagon: any = 'Nenhum';
   orientation: string = 'horizontal';
 
@@ -54,7 +55,7 @@ export class ContentComponent implements OnInit {
       else {
         this.finishTest();
       }
-    })    
+    })
 
   }
 
@@ -64,13 +65,14 @@ export class ContentComponent implements OnInit {
       console.log(`Carregando comboio ${wagon.wagonId}`);
       localStorage.setItem('currentWagon', JSON.stringify(wagon));
       this.wagon = wagon;
+      this.updateScreen = false;
     }, error => this.errorMessage = <any>error);
   }
 
   addItemTest() {
     if (this.currentItem < this.wagon.items.length - 1) {
       this.currentItem++;
-      localStorage.setItem('currentItem', this.currentItem.toString());      
+      localStorage.setItem('currentItem', this.currentItem.toString());
     }
   }
 
@@ -80,10 +82,11 @@ export class ContentComponent implements OnInit {
   }
 
   finishTest() {
+    this.updateScreen = true;
     this.log = new Log(this.wagon.wagonId, this.device.user, 'ANGULAR TESTE');
     this._pickService.finishWagon(this.log).subscribe(data => {
       this.lastWagon = data.wagon;
-      localStorage.setItem('lastWagon', this.lastWagon);      
+      localStorage.setItem('lastWagon', this.lastWagon);
       setTimeout(() => {
         this.getWagons(this.currentStationId);
         this.currentItem = 0;

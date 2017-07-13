@@ -13,6 +13,7 @@ import { BannerComponent } from "app/content/banner/banner.component";
 
 import { PickService } from "app/shared/pick.service";
 import { MissingPartService } from "app/shared/missing-part.service";
+import { PartAmountComponent } from './part-amount/part-amount.component';
 
 @NgModule({
     imports: [CommonModule, MaterialModule, FormsModule],    
@@ -23,7 +24,8 @@ import { MissingPartService } from "app/shared/missing-part.service";
         MissingPartComponent, 
         WagonBoxComponent, WagonContainerComponent, 
         MissingPartComponent, MissingPartDialogComponent,
-        BannerComponent
+        BannerComponent,
+        PartAmountComponent
     ],
     entryComponents: [MissingPartDialogComponent],
     providers: [PickService, MissingPartService]

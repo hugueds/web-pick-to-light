@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Item } from "app/models/Item";
 
 @Component({
   selector: 'part',
@@ -8,24 +9,29 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 export class PartComponent implements OnInit, OnChanges {
 
-  defaultImage:string = 'assets/images/no-image.png';
+  defaultImage: string = 'assets/images/no-image.png';
   partPicture: string;
 
-  @Input() items: any[];
+  @Input() items: Item[];
   @Input() currentItem: number;
 
-  constructor() { 
+  constructor() {
     this.currentItem = 0;
   }
 
   ngOnInit() {
-    if (this.partPicture == undefined){
+    this.changePicture();    
+  }
+
+  ngOnChanges() {
+  }
+
+  changePicture() {
+    if (this.partPicture == undefined) {
       this.partPicture = this.defaultImage;
-    }    
+    } else {
+      this.partPicture = this.items[this.currentItem].photo;
+    }
+    return;
   }
-
-  ngOnChanges(){
-    
-  }
-
 }

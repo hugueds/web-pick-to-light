@@ -1,0 +1,16 @@
+md-card{
+    position: relative;
+    float: left;
+    margin: auto;    
+    margin-top:2%;
+    width: 27.5%;
+    margin-right: 3%;
+}
+
+md-card-title{
+    text-align: center;
+}
+
+md-card-content{
+    text-align: center;
+}

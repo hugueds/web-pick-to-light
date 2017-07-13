@@ -1,4 +1,4 @@
-<div class='content-wrapper' *ngIf='wagon?.wagonId'>
+<div class='content-wrapper' *ngIf='!updateScreen'>
 
   <part [items]='wagon?.items' [currentItem]="currentItem"></part>
 
@@ -8,12 +8,12 @@
 
   <wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></wagon-container>
 
-
+  <part-amount [items]='wagon?.items' [currentItem]="currentItem" ></part-amount>
 
   <md-card>
 
-    <md-card-header>      
-      <md-card-title> BOTÕES PARA TESTE </md-card-title>      
+    <md-card-header>
+      <md-card-title> BOTÕES PARA TESTE </md-card-title>
     </md-card-header>
 
     <button md-raised-button (click)='changeOrientationTest()'> MUDAR ORIENTAÇÃO </button>
@@ -31,4 +31,4 @@
   {{ errorMessage }}
 </div>
 
-<banner *ngIf='!wagon?.wagonId'></banner>
+<banner *ngIf='updateScreen'></banner>
