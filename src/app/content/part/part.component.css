@@ -1,22 +1,31 @@
 md-card{
     position: relative;
     float: left;
-    width: 27.5%;
+    width: 35%;
     height: auto;    
     margin-top: 1%;    
+    padding: 10px 20px 20px 20px;
 }
 
 md-card-title{
     text-align: center;
-    font-weight: bold;    
+    font-weight: bold;        
+    margin-bottom: 1px;
 }
 
 md-card-footer{
     text-align: center;
-    font-weight: bold;
-    margin-top : 4%;    
-    font-size: 150%;
-    padding-bottom: 2%;
+    font-weight: bold;    
+    font-size: 150%;        
+    padding: 0px 0px 10px 0px;
+}
+
+img{
+    display: block;
+    max-width: 90%;    
+    border: solid grey 1px;
+    margin: auto;
+    margin-bottom: 2rem;    
 }
 
 .part-number{
@@ -25,11 +34,6 @@ md-card-footer{
     text-shadow: 1px 1px black;
 }
 
-img{
-    display: block;
-    max-width: 90%;    
-    border: solid grey 1px;
-    margin: auto;
-    margin-bottom: 3rem;
-    
+.photo{
+    height: 275px;
 }

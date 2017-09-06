@@ -1,6 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
 
+import { Config } from 'app/app.config';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -13,19 +15,16 @@ import { Item } from "app/models/Item";
 @Injectable()
 
 export class PickService {
-
-  private readonly server: string; //To define
-  private readonly testServer: string = 'http://10.8.66.81:8082'
-
+  
   public static wagon: Wagon;
   public static currentItem: number = 0;
 
   public static itemUpdated = new EventEmitter<any>();
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http, private _config: Config) { }
 
   getWagon(stationId): Observable<Wagon> {
-    let url = `${this.testServer}/getwagon/${stationId}`;
+    let url = `${this._config.server}/getwagon/${stationId}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
@@ -34,17 +33,17 @@ export class PickService {
   }
 
   getConfiguration(deviceName: string) {
-    let url = `${this.testServer}/getconfiguration/${deviceName}`;
+    let url = `${this._config.server}/getconfiguration/${deviceName}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
   getGroup(groupId) {
-    let url = `${this.testServer}/getgroupid/${groupId}`;
+    let url = `${this._config.server}/getgroupid/${groupId}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
   finishWagon(log: Log) {
-    let url = `${this.testServer}/finishWagon`;
+    let url = `${this._config.server}/finishWagon`;
     let headers = { 'Content-Type': 'application/json' };
     let options = { headers: headers };
     return this._http.post(url, log).map(this.extractData).catch(this.handleError);

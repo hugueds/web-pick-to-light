@@ -34,9 +34,7 @@ export class ContentComponent implements OnInit {
 
     localStorage.setItem('currentItem', '0');
 
-    if (localStorage.getItem('development') == 'true') {
-      // return this.wagon = WAGON_EXAMPLE;
-    }
+    if (localStorage.getItem('development') == 'true') { /* return this.wagon = WAGON_EXAMPLE;*/  }
 
     this.currentStationId = this.device.stations[this.currentStationSequence];
 
@@ -61,7 +59,7 @@ export class ContentComponent implements OnInit {
 
 
   getWagons(stationId) {
-    this._pickService.getWagon(stationId).subscribe(wagon => {
+    this._pickService.getWagon(stationId).subscribe( wagon => {
       console.log(`Carregando comboio ${wagon.wagonId}`);
       localStorage.setItem('currentWagon', JSON.stringify(wagon));
       this.wagon = wagon;
@@ -90,7 +88,7 @@ export class ContentComponent implements OnInit {
       setTimeout(() => {
         this.getWagons(this.currentStationId);
         this.currentItem = 0;
-      }, 2000);
+      }, 1000);
     });
     this.currentItem = 0;
   }

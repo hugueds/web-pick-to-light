@@ -1,6 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
 
+import { Config } from 'app/app.config';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -10,19 +12,16 @@ import { MissingPart } from "app/models/MissingPart";
 @Injectable()
 
 export class MissingPartService {
+       
 
-    private readonly server = 'http://10.8.66.81:8080';
-    private readonly testServer = ''
-
-    constructor(private _http: Http) { }
-
-    sendMissingPart(part: MissingPart) {
-        return this._http.post(`${this.server}/cel/1/parts`, part).map(body => body.json()).catch(this.handleError); //Hard Coded
-    }
+    constructor(private _http: Http, private _config: Config) {  }
 
     getMissingParts() {
-        return this._http.get(`${this.server}/cel/1/parts`).map(body => body.json()).catch(this.handleError); //Hard Coded
+        return this._http.get(`${this._config.server}/cel/1/parts`).map(body => body.json()).catch(this.handleError);
     }
+    sendMissingPart(part: MissingPart) {
+        return this._http.post(`${this._config.server}/cel/1/parts`, part).map(body => body.json()).catch(this.handleError);
+    }   
 
     private handleError(error: Response | any) {
         let errMsg: string;

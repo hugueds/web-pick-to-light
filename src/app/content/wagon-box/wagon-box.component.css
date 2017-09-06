@@ -4,10 +4,10 @@ md-card {
     width: 4vw;
     position: relative;
     float: left;
-    margin-left: 7%;    
-    margin-right: auto;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-left: 6%;    
+    margin-right: auto; 
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;     
     text-align: center;    
 }
 

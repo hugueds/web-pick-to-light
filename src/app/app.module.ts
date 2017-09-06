@@ -9,6 +9,7 @@ import { MaterialModule } from "app/material.module";
 import { ContentModule } from "app/content/content.module";
 import { AppRoutingModule } from "app/app-routing.module";
 
+import { Config } from 'app/app.config';
 import { DeviceService } from "app/services/device.service";
 import { SockService } from "app/services/sock.service";
 import { PickService } from "app/services/pick.service";
@@ -43,7 +44,7 @@ import { AppComponent } from './app.component';
     MaterialModule,
     ContentModule
   ],
-  providers: [SockService, DeviceService, PickService, DeviceGuard],
+  providers: [SockService, DeviceService, PickService, DeviceGuard, Config],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

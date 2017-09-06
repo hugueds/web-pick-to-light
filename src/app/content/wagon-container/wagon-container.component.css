@@ -5,23 +5,24 @@
     margin-left: 3%;
     margin-top: 2%;       
     align-content: center;
+    display: flex;    
+    
 }
 
-md-card{
-    /*margin: auto;*/
-    /*padding: 10px;    */
+md-card {    
+    padding: 0px 0px 0px 0px ;
     background-color:  #dbeffc;
-    border: 20px solid red;
-    float: left;
-    position: relative;
+    border: 20px solid red; 
+    margin-bottom: 50px;   
+    
 }
 
 .wagon-unfinished{
-    border: 10px red solid;
+    border: 7px red solid;
 }
 
 .wagon-finished{
-    border: 10px greenyellow solid;
+    border: 7px greenyellow solid;
 }
 
 .vertical{    
@@ -30,9 +31,7 @@ md-card{
     width: 50%;       
 }
 
-.horizontal{    
-    position: relative;
-    float: left;
+.horizontal{        
     width: 100%;
 }
 
