@@ -3,7 +3,7 @@ import { Router, RouterStateSnapshot } from '@angular/router';
 import { CanActivate, ActivatedRouteSnapshot, } from '@angular/router';
 
 import { Observable } from "rxjs/Observable";
-import { DeviceService } from 'app/shared/device.service';
+import { DeviceService } from 'app/services/device.service';
 
 
 @Injectable()

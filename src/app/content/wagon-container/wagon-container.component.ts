@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { PickService } from "app/shared/pick.service";
+import { PickService } from "app/services/pick.service";
 
 @Component({
   selector: 'wagon-container',

@@ -4,9 +4,9 @@ import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
 import { MissingPart } from "app/models/MissingPart";
 import { Item } from "app/models/Item";
 
-import { SockService } from "app/shared/sock.service";
-import { MissingPartService } from "app/shared/missing-part.service";
-import { PickService } from "app/shared/pick.service";
+import { SockService } from "app/services/sock.service";
+import { MissingPartService } from "app/services/missing-part.service";
+import { PickService } from "app/services/pick.service";
 import { Wagon } from "app/models/Wagon";
 
 @Component({

@@ -15,7 +15,7 @@ import { Item } from "app/models/Item";
 export class PickService {
 
   private readonly server: string; //To define
-  private readonly testServer: string = 'http://10.33.22.56:5050';
+  private readonly testServer: string = 'http://10.8.66.81:8082'
 
   public static wagon: Wagon;
   public static currentItem: number = 0;

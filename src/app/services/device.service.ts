@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Device } from "app/models/Device";
-import { PickService } from "app/shared/pick.service";
+import { PickService } from "app/services/pick.service";
 
 import { DEVICE_EXAMPLE } from './../examples/device.example';
 

@@ -11,8 +11,8 @@ import { MissingPartComponent, MissingPartDialogComponent } from "app/content/mi
 import { WagonComponent } from "app/content/wagon-description/wagon-description.component";
 import { BannerComponent } from "app/content/banner/banner.component";
 
-import { PickService } from "app/shared/pick.service";
-import { MissingPartService } from "app/shared/missing-part.service";
+import { PickService } from "app/services/pick.service";
+import { MissingPartService } from "app/services/missing-part.service";
 import { PartAmountComponent } from './part-amount/part-amount.component';
 
 @NgModule({

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { SockService } from 'app/shared/sock.service';
-
 import * as io from 'socket.io-client';
 
 import { Log } from "app/models/Log";
-import { DeviceService } from "app/shared/device.service";
+
+import { SockService } from 'app/services/sock.service';
+import { DeviceService } from "app/services/device.service";
 import { Device } from "app/models/Device";
 
 @Component({

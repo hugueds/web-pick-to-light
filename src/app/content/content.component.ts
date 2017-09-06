@@ -1,10 +1,10 @@
 import { WAGON_EXAMPLE } from './../examples/wagon.example';
 import { Component, OnInit } from '@angular/core';
-import { PickService } from "app/shared/pick.service";
+import { PickService } from "app/services/pick.service";
 import { Log } from "app/models/Log";
-import { DeviceService } from "app/shared/device.service";
+import { DeviceService } from "app/services/device.service";
 import { Device } from "app/models/Device";
-import { MissingPartService } from "app/shared/missing-part.service";
+import { MissingPartService } from "app/services/missing-part.service";
 import { Wagon } from "app/models/Wagon";
 
 @Component({

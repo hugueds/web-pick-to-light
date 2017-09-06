@@ -9,9 +9,9 @@ import { MaterialModule } from "app/material.module";
 import { ContentModule } from "app/content/content.module";
 import { AppRoutingModule } from "app/app-routing.module";
 
-import { DeviceService } from "app/shared/device.service";
-import { SockService } from "app/shared/sock.service";
-import { PickService } from "app/shared/pick.service";
+import { DeviceService } from "app/services/device.service";
+import { SockService } from "app/services/sock.service";
+import { PickService } from "app/services/pick.service";
 
 import { ContentComponent } from './content/content.component';
 import { NavbarComponent } from './navbar/navbar.component';

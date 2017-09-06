@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ClockService } from "app/shared/clock.service";
-import { SockService } from "app/shared/sock.service";
+import { ClockService } from "app/services/clock.service";
+import { SockService } from "app/services/sock.service";
 
 @Component({
   selector: 'navbar',
