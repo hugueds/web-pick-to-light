@@ -1,11 +1,11 @@
 md-card{
     position: relative;
     float: left;            
-    width: 27.5%;
+    width: 20%;
     margin-right: 3%;
-    padding: 7px 0px 7px 0px;
+    padding: 5px 0px 5px 0px;
     text-align: center;
-    margin-left: 6%;
+    margin-left: 10%;
 }
 
 .total {    
@@ -22,6 +22,6 @@ md-card-title{
 
 md-card-content{
     text-align: center;
-    font-size: 8.5vw;
+    font-size: 8vw;
     font-weight: bold;
 }

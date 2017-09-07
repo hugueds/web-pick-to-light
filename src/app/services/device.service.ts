@@ -19,24 +19,22 @@ export class DeviceService {
     }
 
     getDeviceInfo(): Device {
-        return DeviceService.device;
-        // return Promise.resolve(DeviceService.device); 
+        return DeviceService.device;        
     }
 
     registerDevice(device, cb) {
         this.unregisterDevice();
         console.log('Registering the device');
-        if (localStorage.getItem('development') == 'true') {
-            DeviceService.device = DEVICE_EXAMPLE;
-            DeviceService.device.isRegistered = true;
-            localStorage.setItem('device', JSON.stringify(DeviceService.device));
-            this.tabletUpdatedEvent.emit(true);
-            return;
-        }
+        // if (localStorage.getItem('development') == 'true') {
+        //     DeviceService.device = DEVICE_EXAMPLE;
+        //     DeviceService.device.isRegistered = true;
+        //     localStorage.setItem('device', JSON.stringify(DeviceService.device));
+        //     this.tabletUpdatedEvent.emit(true);
+        //     return;
+        // }
         DeviceService.device.name = device.name;
         DeviceService.device.user = device.user;
-        this._pickService.getConfiguration(device.name)
-            .subscribe(station => {
+        this._pickService.getConfiguration(device.name).subscribe(station => {
                 if (station.idGroupStationVp) {
                     let stationId = station.idGroupStationVp.toString();
                     this._pickService.getGroup(stationId).subscribe(group => {
@@ -44,6 +42,7 @@ export class DeviceService {
                         DeviceService.device.groupId = group.id;
                         DeviceService.device.groupName = group.name;
                         DeviceService.device.stations = group.stations.map(s => s.idStation);
+                        DeviceService.device.currentStation = 0;
                         DeviceService.device.isRegistered = true;
                         localStorage.setItem('device', JSON.stringify(DeviceService.device));
                         this.tabletUpdatedEvent.emit(true);

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { MaterialModule } from "app/material.module";
+import { MaterialModule } from "app/material/material.module";
 import { ContentModule } from "app/content/content.module";
 import { AppRoutingModule } from "app/app-routing.module";
 
@@ -25,6 +25,7 @@ import { BoxColorDirective } from './shared/box-color.directive';
 import { WagonColorDirective } from './shared/wagon-color.directive';
 
 import { AppComponent } from './app.component';
+import { ShelfConfigComponent } from './shelf-config/shelf-config.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { AppComponent } from './app.component';
     FooterComponent,
     ConfigurationComponent, 
     AboutComponent,     
-    BoxColorDirective, WagonColorDirective
+    BoxColorDirective, WagonColorDirective, ShelfConfigComponent
   ],
   imports: [
     AppRoutingModule,

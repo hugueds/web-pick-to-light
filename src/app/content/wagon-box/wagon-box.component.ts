@@ -23,21 +23,20 @@ export class WagonBoxComponent implements OnInit, OnChanges {
     
   }
 
-  decreaseQuantity() {
-    if (this.box.quantity > 0) {
-      this.box.quantity = 0;      
+  confirm() {
+    if (this.box.quantity > 0) {      
       this.boxChanged.emit(this.box); 
     }
     this.checkQuantity();    
   }
 
   checkQuantity() {
-    if (this.box.quantity == 0) {
-      this.boxStyle = 'mat-card box-finished';                 
-    }
-    else {
-      this.boxStyle = 'mat-card box-unfinished';
-    }
+    // if (this.box.quantity == 0) {
+    //   this.boxStyle = 'mat-card box-finished';                 
+    // }
+    // else {
+    //   this.boxStyle = 'mat-card box-unfinished';
+    // }
   }
 
 }

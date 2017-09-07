@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 
 import { PartComponent } from "app/content/part/part.component";
-import { MaterialModule } from "app/material.module";
+import { MaterialModule } from "app/material/material.module";
 import { WagonContainerComponent } from "app/content/wagon-container/wagon-container.component";
 import { WagonBoxComponent } from "app/content/wagon-box/wagon-box.component";
 import { MissingPartComponent, MissingPartDialogComponent } from "app/content/missing-part/missing-part.component";

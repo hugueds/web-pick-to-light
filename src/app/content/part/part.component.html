@@ -1,6 +1,6 @@
 <md-card>    
     
-    <md-card-title> PEÇA {{ currentItem + 1 }} / {{ items.length }} </md-card-title> 
+    <md-card-title> PEÇA {{ currentItem + 1 }} / {{ items?.length }} </md-card-title> 
     <md-card-title  class='part-number' > {{ items[currentItem]?.obj }}</md-card-title> 
         
     <img md-card-lg-image [src]="partPicture" [class.photo]='hasImage' />

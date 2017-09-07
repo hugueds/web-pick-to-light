@@ -9,6 +9,7 @@ export class Device {
     groupName: string;
     stations : any[];
     isRegistered : boolean = false;  
+    currentStation: number = 0;
 
     constructor(){}
 

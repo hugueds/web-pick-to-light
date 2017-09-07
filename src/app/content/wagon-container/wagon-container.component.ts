@@ -16,30 +16,32 @@ export class WagonContainerComponent implements OnInit, OnChanges {
 
   border: string;
   boxes: any[];
+  remainingParts: number;
 
   constructor(private _pickService: PickService) {
-    this.boxes = [];
+    this.boxes = [];    
     this.orientation = 'horizontal';    
   }
 
   ngOnInit() {
     if (this.boxes.length > 0) {
-      this.boxes = this.items[this.currentItem].boxes;
+      this.boxes = this.items[this.currentItem].boxes;  
+      this.remainingParts = this.boxes.map( box => box.quantity).reduce( (a,b) => a + b);      
     }    
   }
 
   ngOnChanges() {
     this.items ? this.boxes = this.items[this.currentItem].boxes : null;
-
+    this.remainingParts = this.boxes.map( box => box.quantity).reduce( (a,b) => a + b);    
   }
 
   checkWagon() {
 
   }
 
-  boxChanged(evento) {
-    let result = this.boxes.map(a => a.quantity).reduce((a, b) => a + b);
-    if (result == 0) {
+  boxChanged($event) {
+    this.remainingParts -= 0; //Enviar quantidade para subtrair
+    if (this.remainingParts == 0){
       this.getNextPart();
     }
   }
@@ -49,7 +51,7 @@ export class WagonContainerComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.border = '20px solid red';
       this._pickService.updateItem(this.currentItem);
-    }, 1000)
+    }, 500)
   }
 
 
