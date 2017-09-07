@@ -1,46 +1,62 @@
-import { EventEmitter, Output, OnInit } from '@angular/core';
+import { EventEmitter, Output, OnInit, Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject';
+
+import { Config } from 'app/app.config';
 import * as io from 'socket.io-client';
 
-export class SockService implements OnInit {
+//import * as s7 from 'node-snap7'
 
-  private url: string = 'http://localhost:3000';
-  private readonly missingPartTestServer: string = 'http://10.8.66.81:8080';
+@Injectable()
 
-  private socket;
+export class SockService {
 
-  public static newIpMessage = new EventEmitter<string>();
+  private partMissingSocket;
+  private pickToLightSocket;
+
   public static newPartMissing = new EventEmitter<string>();
 
-  constructor() {
-    // this.socket = io.connect(this.url);
-    this.socket = io.connect(this.missingPartTestServer);    
-    // this.onNewIp();
+  constructor(private _config: Config) {
+    this.partMissingSocket = io.connect(this._config.missingPartServer);
+    this.pickToLightSocket = io.connect(this._config.server);
+
+    // let plc = new s7.S7Client();
+
+    // plc.ConnectTo('10.8.66.82', 0, 2, (err) => console.log(err))
+
   }
 
-  onNewIp() {
-    this.socket.on('ip', data => SockService.newIpMessage.emit(data));
+  checkConnection() {
+    let observable = new Observable(observer => {
+      setInterval(() => {
+        if (this.pickToLightSocket.connected) {
+          observer.next(true)
+        } else {
+          observer.next(false)
+        }
+      }, 5000)
+    })
+    return observable;
   }
 
-  missingPart(part){
-    // this.socket.emit('dec-part', data => SockService.newPartMissing.emit(data))
+  getMessageFromPick(message) {
+    let observable = new Observable(observer => {
+      this.pickToLightSocket.on(message, data => {
+        observer.next(data);
+      })
+    })
+    return observable;
+  }  
+
+  getMessageFromMissing(message) {
+
   }
 
 
-  sendMessage(topic, message) {
+  sendMissingPartMessage(topic, message) {
     console.log('Emitindo para o topico: ' + topic + ' Valores: ' + JSON.stringify(message));
-    this.socket.emit(topic, message);
+    this.partMissingSocket.emit(topic, message);
   }
 
-  getMessage(newEvent) {
-
-  }
-
-  test() {
-
-  }
-
-  ngOnInit() {
-
-  }
-
+  
 }

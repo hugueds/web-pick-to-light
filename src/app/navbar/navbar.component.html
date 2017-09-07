@@ -28,7 +28,7 @@
   <span class="spacer"></span>
 
   <span class='ip'> {{ ip }} </span>
-  <div [class]='statusCircle'></div>
+  <div class='status' [ngClass]='isOnline ? "online" : "offline" '></div>
 
   <span class="spacer"></span>
 

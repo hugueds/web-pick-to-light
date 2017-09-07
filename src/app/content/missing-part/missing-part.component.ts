@@ -46,7 +46,7 @@ export class MissingPartComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(part => {
       // this._mpService.sendMissingPart(result).subscribe(res => console.log(res))
-       this._sockService.sendMessage('dec-part', part)
+       this._sockService.sendMissingPartMessage('dec-part', part)
     });
   }
 }

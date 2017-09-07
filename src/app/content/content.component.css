@@ -1,6 +1,5 @@
 *{
-    background: white;
-    
+    background: white;    
 }
 
 md-card{
@@ -12,8 +11,7 @@ md-card{
 }
 
 .content-wrapper{
-    background-color: white;    
-    
+    background-color: white;
 }
 
 /* button {

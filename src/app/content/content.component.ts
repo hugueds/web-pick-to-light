@@ -32,10 +32,9 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
 
+    if (localStorage.getItem('development') == 'true') { /* return this.wagon = WAGON_EXAMPLE;*/ }   
+
     localStorage.setItem('currentItem', '0');
-
-    if (localStorage.getItem('development') == 'true') { /* return this.wagon = WAGON_EXAMPLE;*/  }
-
     this.currentStationId = this.device.stations[this.currentStationSequence];
 
     if (this.currentStationId) {
@@ -51,7 +50,7 @@ export class ContentComponent implements OnInit {
         localStorage.setItem('currentItem', this.currentItem.toString());
       }
       else {
-        this.finishTest();
+        this.finishWagon();
       }
     })
 
@@ -59,7 +58,7 @@ export class ContentComponent implements OnInit {
 
 
   getWagons(stationId) {
-    this._pickService.getWagon(stationId).subscribe( wagon => {
+    this._pickService.getWagon(stationId).subscribe(wagon => {
       console.log(`Carregando comboio ${wagon.wagonId}`);
       localStorage.setItem('currentWagon', JSON.stringify(wagon));
       this.wagon = wagon;
@@ -67,28 +66,31 @@ export class ContentComponent implements OnInit {
     }, error => this.errorMessage = <any>error);
   }
 
-  addItemTest() {
+  addItem() {
+    
+    if (this.currentItem == this.wagon.items.length - 1){
+      this.finishWagon();
+    }
     if (this.currentItem < this.wagon.items.length - 1) {
       this.currentItem++;
       localStorage.setItem('currentItem', this.currentItem.toString());
     }
+    
   }
 
-  resetTest() {
+  resetWagon() {
     this.currentItem = 0;
     this.getWagons(this.currentStationId);
   }
 
-  finishTest() {
+  finishWagon(message?: string) {
     this.updateScreen = true;
-    this.log = new Log(this.wagon.wagonId, this.device.user, 'ANGULAR TESTE');
+    this.log = new Log(this.wagon.wagonId, this.device.user, message);
     this._pickService.finishWagon(this.log).subscribe(data => {
       this.lastWagon = data.wagon;
       localStorage.setItem('lastWagon', this.lastWagon);
-      setTimeout(() => {
-        this.getWagons(this.currentStationId);
-        this.currentItem = 0;
-      }, 1000);
+      this.getWagons(this.currentStationId);
+      this.currentItem = 0;
     });
     this.currentItem = 0;
   }

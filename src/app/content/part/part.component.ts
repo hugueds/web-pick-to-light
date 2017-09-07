@@ -18,26 +18,24 @@ export class PartComponent implements OnInit, OnChanges {
   @Input() items: Item[];
   @Input() currentItem: number;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    this.changePicture()       
-  }
-
-  ngOnChanges(changes) {
-    console.log(this.items);
     this.changePicture()
   }
 
-  changePicture() {
-    // if (this.partPicture == undefined || this.partPicture == '') {
-      if (!this.items[this.currentItem].photo){
+  ngOnChanges(changes) {   
+    this.changePicture()
+  }
+
+  changePicture() {   
+    if (!this.items[this.currentItem].photo) {
       this.hasImage = false;
-      this.partPicture = this.defaultImage;  
+      this.partPicture = this.defaultImage;
     } else {
       this.hasImage = true;
       this.partPicture = 'data:image/png;base64,' + this.items[this.currentItem].photo;
     }
-    return;
   }
+
 }
