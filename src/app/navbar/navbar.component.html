@@ -1,0 +1,63 @@
+<md-toolbar>
+
+  <md-menu #appMenu='mdMenu'>
+
+    <button routerLink='/' md-menu-item>
+        <md-icon>shopping_cart</md-icon>
+         Comboio
+      </button>
+
+    <button routerLink='/shelf-config' md-menu-item>
+        <md-icon>lightbulb_outline</md-icon>
+         Cadastro de Lâmpadas
+      </button>
+
+    <button routerLink='/opk' md-menu-item>
+        <md-icon>styles</md-icon>
+         Cadastro de OPKs
+      </button>
+
+    <button routerLink='/configuration' md-menu-item>
+        <md-icon>settings</md-icon>
+         Configurações 
+      </button>
+
+    <button routerLink='/tests' md-menu-item>
+        <md-icon>keyboard</md-icon>        
+         Testes
+       </button>
+
+    <button routerLink='/about' md-menu-item>
+        <md-icon>info</md-icon>        
+         Sobre
+       </button>
+
+       <button md-menu-item>
+        <md-icon>autorenew</md-icon>        
+         Sobre
+       </button>
+
+  </md-menu>
+
+
+
+  <button md-icon-button [mdMenuTriggerFor]='appMenu'>
+      <md-icon class="md-24">menu</md-icon>
+    </button>
+
+  <span class=''> PICK TO LIGHT </span>
+
+  <span class="spacer"></span>
+
+  <span> {{ device?.deviceModel }} </span>
+
+  <span class="spacer"></span>
+
+  <span class='ip'> {{ ip }} </span>
+  <div class='status' [ngClass]='isOnline ? "online" : "offline" '></div>
+
+  <span class="spacer"></span>
+
+  <span>{{ dateTime | date:'dd/MM/yyyy  HH:mm:ss' }}</span>
+
+</md-toolbar>

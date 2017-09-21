@@ -1,0 +1,19 @@
+<form #f='ngForm'>
+
+    <div class='field' style='float: left;'>
+        <label for="part-number">PEÇA</label>
+        <input [(ngModel)]='formOpk.partNumber' name='part-number' class='input-field' id='part-number' type="text" required>
+    </div>
+
+    <div class='field' style='float: left;'>
+        <label for="station-id">ID DO POSTO</label>
+        <input [(ngModel)]='formOpk.stationId' name='station-id' class='input-field' id='station-id' type="number" required>
+    </div>
+    
+    <br>
+    <div class="button-wrapper">
+        <a md-raised-button routerLink='/opk'> VOLTAR </a>
+        <button md-raised-button type='submit' id='save-button' (click)='save(formOpk, f)'>SALVAR</button>
+    </div>
+
+</form>

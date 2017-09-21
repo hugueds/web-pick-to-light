@@ -1,0 +1,31 @@
+<h2>Cadastro do dispositivo</h2>
+
+<form #deviceForm='ngForm'>
+
+    <select placeholder='DISPOSITIVO' floatPlaceholder="auto" [(ngModel)]='selectedDevice.name' name='deviceName' #deviceName='ngModel' required>
+        <option *ngFor='let device of devices' [value]='device'>
+            {{ device }}
+        <option>
+    </select>
+
+    <input type="text" placeholder='USUARIO' [value]='deviceUser' [(ngModel)]='selectedDevice.user' 
+    id='deviceUser' name='deviceUser' #deviceUser='ngModel' required />
+
+    <button md-raised-button color='primary' (click)='saveChanges()'> SALVAR ALTERAÇÕES</button>     
+    <button md-raised-button color='warn' (click)='unregisterDevice()'> REMOVER DISPOSITIVO</button>     
+
+</form>
+
+<div [hidden]='deviceName.valid || deviceName.pristine' >
+    É NECESSÁRIO DISPONIBILIZAR UM DISPOSITIVO PARA O SISTEMA
+</div>
+
+<div [hidden]='deviceUser.valid || deviceUser.pristine' >
+    É NECESSÁRIO DISPONIBILIZAR UM USUÁRIO PARA O SISTEMA
+</div>
+
+<hr>
+ORIENTAÇÃO DOS COMBOIOS 
+<hr>
+
+REENVIAR

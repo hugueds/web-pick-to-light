@@ -1,0 +1,48 @@
+<div>
+
+  <h1>CADASTRO DE OPKs</h1>
+
+  <div class='button-wrapper'>
+    <a routerLink='./create' id='btn-new' md-raised-button color='primary'>
+      <md-icon> add </md-icon> CADASTRAR
+    </a>
+    <button id='btn-refresh' md-raised-button color='accent' (click)='refresh()'>
+          <md-icon>refresh</md-icon> ATUALIZAR
+        </button>
+  </div>
+
+  <hr>
+
+  <div class='container' #container>
+
+    <table id='opk-table'>
+
+      <th *ngFor='let header of headers; let i = index' class='header-{{header}}'>
+        {{ header }}
+      </th>
+
+      <tr></tr>
+
+      <tr *ngFor='let opk of opks'>
+        <td> {{ opk?.partNumber }}</td>
+        <td> {{ opk?.stationId }}</td>
+        <td>
+          <a md-raised-button color='accent' [routerLink]="['edit', opk.partNumber]">
+            <md-icon>edit</md-icon>
+          </a>
+        </td>
+        <td>
+          <button md-raised-button color='warn' (click)='delete(opk)'> 
+          <md-icon class='delete-icon'>delete</md-icon>
+        </button>
+        </td>
+
+      </tr>
+
+    </table>
+
+  </div>
+
+  <hr>
+
+</div>

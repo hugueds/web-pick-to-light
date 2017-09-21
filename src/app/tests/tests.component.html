@@ -1,0 +1,39 @@
+<br>
+
+<input [(ngModel)]='stationId' type="text">
+<input [(ngModel)]='partNumber' type="text">
+<button (click)='turnOn()'>ENVIAR</button>
+
+<hr>
+<div>
+    <h5>Controladora</h5>
+    <md-radio-group style='display: inline;' [(ngModel)]='selected.controller'>
+        <md-radio-button  value='-1' name='controller'> TODOS </md-radio-button>
+        <md-radio-button *ngFor="let controller of controllers" [value]='controller' name="controller"> {{ controller }} </md-radio-button>
+    </md-radio-group>
+
+    <h5>Nó</h5>
+    <select [(ngModel)]='selected.node'>
+        <option value="-1">TODOS</option>
+        <option *ngFor='let node of nodes' [ngValue]="node" > {{ node }} </option>
+    </select>
+
+    <h5>Cor</h5>
+    <md-radio-group style='display: inline;' [(ngModel)]='selected.color'>
+        <md-radio-button *ngFor="let color of colors" [value]='color.index' name="color"> {{ color.name }}</md-radio-button>
+    </md-radio-group>
+
+    <br>
+    <br>
+
+    <button md-raised-button (click)='forceOn()'>ENVIAR</button>
+
+</div>
+
+<hr>
+
+<input [(ngModel)]='selected.controller' type="text">
+<input [(ngModel)]='selected.node' type="text">
+<input [(ngModel)]='selected.color' type="text">
+
+<br><br>

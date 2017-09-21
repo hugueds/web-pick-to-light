@@ -1,0 +1,39 @@
+<form #f='ngForm'>
+  <md-form-field class='field' style='float: left;'>
+    <input mdInput placeholder="ID UNICO" [(ngModel)]='formButton.buttonId' name='button-id' class='input-field' id='button-id'
+      type="number" required />
+  </md-form-field>
+
+  <md-form-field class='field' style='float: left;'>
+    <input mdInput placeholder="CONTROLADORA" [(ngModel)]='formButton.controllerId' name='controller-id' class='input-field'
+      id='controller-id' type="number" required>
+  </md-form-field>
+
+  <md-form-field class='field' style='float: left;'>
+    <input mdInput placeholder='NUMERO' [(ngModel)]='formButton.buttonNode' name='button-node' class='input-field' id='button-num'
+      type="number" required>
+  </md-form-field>
+
+  <md-form-field class='field' style='float: left;'>
+    <input mdInput placeholder='PEÇA' [(ngModel)]='formButton.partNumber' name='part-number' class='input-field' id='part-number'
+      type="text" required/>
+  </md-form-field>
+
+  <md-form-field class='field' style='float: left;'>
+    <input mdInput placeholder='ID DO POSTO' [(ngModel)]='formButton.stationId' name='station-id' class='input-field' id='station-id'
+      type="number" required>
+  </md-form-field>
+
+  <md-form-field class='field' style='float: left;'>
+    <input mdInput placeholder='COR' [(ngModel)]='formButton.color' name='color-id' class='input-field' id='color' type="number"
+      required>
+  </md-form-field>
+
+  <br>
+  
+</form>
+
+<div class="button-wrapper">
+    <a md-raised-button routerLink='/shelf-config'> VOLTAR </a>
+    <button md-raised-button id='save-button' (click)='save(formButton, f)'>SALVAR</button>
+  </div>

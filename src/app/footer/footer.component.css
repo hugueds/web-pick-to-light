@@ -1,0 +1,14 @@
+md-toolbar {
+  width: 98.5%;  
+  position: absolute;
+  background-color : black;
+  text-align: center;
+  color: White;    
+  clear: both;  
+  z-index: -1;  
+  overflow: hidden;  
+}
+
+.spacer{
+    flex: 1 1 auto;
+}

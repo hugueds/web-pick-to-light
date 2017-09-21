@@ -1,0 +1,23 @@
+md-card{
+    position: relative;
+    float: left;            
+    width: 25%;    
+    padding: 2px 0px 0px 0px;
+    text-align: center;
+    margin-left: 10%;
+    margin-bottom: 0.2%;
+}
+
+.total {    
+    font-size : 22px;
+}
+
+md-card-header{
+    text-align: center;
+}
+
+md-card-content{
+    text-align: center;
+    font-size: 7rem;
+    font-weight: bold;
+}

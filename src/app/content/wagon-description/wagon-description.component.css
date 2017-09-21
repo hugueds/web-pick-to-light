@@ -1,0 +1,19 @@
+md-card{
+    float: left;
+    width: 40%;
+    margin-left: 3%;    
+    margin-top: 1%;
+    padding: 0.5%;
+}
+
+md-card-title{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 2%;        
+}
+
+.wagon-number{
+    font-size: 2.7em;    
+    color: #2780ba;
+    text-shadow: 1px 1px black;     
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Pick To Light",
+  "short_name": "PICK2LIGHT",
+  "icons": [
+    {
+      "src": "assets/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "display": "fullscreen",
+  "orientation": "landscape-primary",
+  "start_url": "./"
+}

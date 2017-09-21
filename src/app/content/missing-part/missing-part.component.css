@@ -1,0 +1,18 @@
+*{
+    position: relative;
+    float: left;
+}
+
+button{
+ width: 6rem;
+ height: 6rem;
+ margin-left: 4%;
+ margin-top: 1.5%;
+ background-color: #E35205;
+ /*background: url('assets/images/forklift.png');*/
+}
+
+img{
+    width: 80%;
+    margin-left: 10%;
+}

@@ -1,0 +1,38 @@
+md-card{
+    position: relative;
+    float: left;
+    width: 35%;
+    height: auto;    
+    margin-top: 1%;    
+    padding: 10px 20px 15px 20px;
+}
+
+md-card-title{
+    text-align: center;
+    font-weight: bold;        
+    margin-bottom: 1px;
+}
+
+md-card-footer{
+    text-align: center;
+    font-weight: bold;    
+    font-size: 150%;        
+    padding: 0px 0px 10px 0px;
+}
+
+img{
+    display: block;
+    width: 18rem;
+    margin: 0 auto;
+    }
+
+.part-number{
+    font-size: 7vw;    
+    color: #2780ba;
+    text-shadow: 1px 1px black;
+}
+
+.photo{
+    height: 275px;
+    margin-bottom: 0px;
+}

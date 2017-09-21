@@ -1,0 +1,36 @@
+<div class='content-wrapper' *ngIf='!updateScreen'>
+
+  <part [items]='wagon?.items' [currentItem]="currentItem"></part>
+
+  <wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></wagon-description>
+
+  <missing-part [items]='wagon?.items' [currentItem]="currentItem"></missing-part>
+
+  <wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></wagon-container>
+
+  <part-amount [items]='wagon?.items' [currentItem]="currentItem" ></part-amount>
+
+  <button md-raised-button class='part-control return-part' (click)='returnItem()' [disabled]='!buttonControl'>VOLTAR</button>  
+  <button md-raised-button class='part-control confirm-part' (click)='confirm();addItem()' [disabled]='!buttonControl'>CONFIRMAR</button>
+  
+  <!-- <md-card style='display: block'> -->
+
+    <!-- <md-card-header>
+      <md-card-title> BOTÕES PARA TESTE </md-card-title>
+    </md-card-header> -->
+
+    <!-- <button md-raised-button (click)='changeOrientationTest()'> MUDAR ORIENTAÇÃO </button> -->    
+<!-- 
+    <button md-raised-button color='warn' (click)='addItem()'> PROXIMO </button>
+    <button md-raised-button color='accent' (click)='resetWagon()'> RESET </button>
+    <button md-raised-button color='primary' (click)='finishWagon()'> FINALIZADO </button> -->
+
+  <!-- </md-card> -->
+
+</div>
+
+<div *ngIf='errorMessage'>
+  {{ errorMessage }}
+</div>
+
+<banner *ngIf='updateScreen'></banner>

@@ -1,0 +1,28 @@
+md-toolbar{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.status {
+    float: left;
+    display: block;    
+    margin: 10px;
+    border-radius: 50%;
+    background: black;
+    height: 2rem;
+    width: 2rem;    
+}
+
+.online {             
+    background: radial-gradient(circle at 10px 10px, #55DD44, #000);              
+}
+
+.offline {                   
+    background: radial-gradient(circle at 10px 10px, #f44242, #000);          
+}
+
