@@ -121,5 +121,7 @@ h1 {
   }
 
   #search-button{
-    background-color: blue;
+    background-color: dodgerblue;
+    color: white;
+    font-weight: bold;
   }

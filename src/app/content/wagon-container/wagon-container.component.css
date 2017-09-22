@@ -1,18 +1,32 @@
 .wrapper{
-    width: 56%; 
+    width: 56%;
     position: relative;
     float: left;
     margin-left: 3%;
-    margin-top: 2%;           
-    display: flex;        
-    margin-bottom: 5.5%;   
+    margin-top: 2%;
+    display: flex;
+    margin-bottom: 1%;
+    height: 18rem;
 }
 
-md-card {    
+.wrapper::after{
+    clear: right;
+}
+
+.box-wrapper{
+  width: 20%;
+  height: 5rem;
+  float: left;
+  margin-left: 4%;
+  margin-bottom: 5%;
+  margin-top: 3%;
+  background-color: white;
+}
+
+md-card {
     padding: 0px 0px 0px 0px ;
     background-color:  #dbeffc;
-    border: 20px solid red;
-    
+    border: 12px solid red;
 }
 
 .wagon-unfinished{
@@ -23,13 +37,13 @@ md-card {
     border: 7px greenyellow solid;
 }
 
-.vertical{    
+.vertical{
     position: relative;
     float: left;
-    width: 50%;       
+    width: 50%;
 }
 
-.horizontal{        
+.horizontal{
     width: 100%;
 }
 
@@ -38,4 +52,3 @@ md-card {
     text-align: center;
     width: 10%;
 }
-

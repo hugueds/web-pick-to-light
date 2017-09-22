@@ -9,7 +9,7 @@ export class WagonBoxComponent implements OnInit, OnChanges {
 
   @Input() box: any;
   @Output() boxChanged = new EventEmitter<any>();
-  
+
   isDone: boolean;
   boxStyle: string;
 
@@ -20,23 +20,24 @@ export class WagonBoxComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    
+
   }
 
   confirm() {
-    if (this.box.quantity > 0) {      
-      this.boxChanged.emit(this.box); 
+    if (this.box.quantity > 0) {
+      this.boxChanged.emit(this.box);
     }
-    this.checkQuantity();    
+    this.checkQuantity();
   }
 
   checkQuantity() {
-    // if (this.box.quantity == 0) {
-    //   this.boxStyle = 'mat-card box-finished';                 
-    // }
-    // else {
-    //   this.boxStyle = 'mat-card box-unfinished';
-    // }
+    if (!this.box){
+      this.boxStyle = 'box-finished';      
+      return;
+    }
+    if (this.box.quantity == 0) {
+      this.boxStyle = 'box-finished';
+    }
   }
 
 }

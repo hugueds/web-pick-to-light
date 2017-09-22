@@ -3,12 +3,12 @@
   <h1>CADASTRO DE BOTÕES</h1>
 
   <div class='search-row'>
-    <input class='search-field' id='search-id' type="text" placeholder="ID UNICO">
-    <input class='search-field' type="text" placeholder="CONTROLADORA">
+    <input class='search-field' [(ngModel)]='searchTerm' type="text" placeholder="ID UNICO">
+    <input class='search-field'  type="text" placeholder="CONTROLADORA">
     <input class='search-field' type="text" placeholder="NUMERO">
     <input class='search-field' type="text" placeholder="PEÇA">
     <input class='search-field' type="text" placeholder="ID DO POSTO">
-    <button md-raised-button id='search-button' > PESQUISAR</button>
+    <button md-raised-button id='search-button' (click)='find()' > PESQUISAR</button>
   </div>
 
   <div class='button-wrapper'>
@@ -34,7 +34,7 @@
 
       
 
-      <tr *ngFor='let button of buttons'>
+      <tr *ngFor='let button of buttons | search: "buttonId": searchTerm; let i = index '>
         <td> {{ button.buttonId }}</td>
         <td class='controller-collumn'> {{ button.controllerId }} </td>
         <td> {{ button.buttonNode }} </td>

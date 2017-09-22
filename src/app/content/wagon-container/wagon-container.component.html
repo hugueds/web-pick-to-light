@@ -1,6 +1,6 @@
 <div class='wrapper' >
-  <md-card [class]='orientation' [style.border]='border'>    
-    <div *ngFor="let box of boxes; let index">      
+  <md-card [class]='orientation' [style.border]='border'>
+    <div class='box-wrapper' *ngFor="let box of boxes; let index">
       <wagon-box [box]="box" (boxChanged)='boxChanged($event)'></wagon-box>
     </div>
   </md-card>

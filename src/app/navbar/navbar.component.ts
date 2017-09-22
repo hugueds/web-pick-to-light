@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
-import { ClockService } from "app/services/clock.service";
-import { SockService } from "app/services/sock.service";
+
+import { ClockService } from "../services/clock.service";
+import { SockService } from "../services/sock.service";
+import { Device } from '../models/Device';
+import { DeviceService } from '../services/device.service';
 
 @Component({
   selector: 'navbar',
@@ -9,20 +12,21 @@ import { SockService } from "app/services/sock.service";
   providers : [ClockService]
 })
 
-export class NavbarComponent implements OnInit, OnChanges, OnDestroy { 
+export class NavbarComponent implements OnInit, OnChanges, OnDestroy {   
 
-  @Input() device;
-
+  device: Device;
   connection;
   checkConnection;
   dateTime: any;
-  ip = 'Aguardando conexão...';
+  ip = 'Aguardando Conexão...';
   isOnline: boolean = false;
 
-  constructor(private _clockService: ClockService, private _sock: SockService) { }
+  constructor(private _clockService: ClockService
+    , private _sock: SockService
+    , private _deviceService: DeviceService) { }
 
   ngOnInit() {
-
+        this.device = this._deviceService.getDeviceInfo();
         this.getTime();        
         this.connection = this._sock.getMessageFromPick('ip').subscribe( ip => {
           this.ip = <string> ip;    
@@ -39,7 +43,7 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes){
-    console.log(changes)
+    
   }
 
   ngOnDestroy(){

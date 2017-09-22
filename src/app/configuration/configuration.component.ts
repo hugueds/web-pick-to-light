@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviceService } from "app/services/device.service";
 import { Router } from "@angular/router";
+
+import { DeviceService } from "../services/device.service";
+import { Device } from '../models/Device';
 
 @Component({
   selector: 'app-configuration',
@@ -12,14 +14,18 @@ export class ConfigurationComponent implements OnInit {
   devices: string[] = [];
   user: string = ''
   selectedDevice: any = {};
+  device: Device;
+  stations: any[];
 
 
-  constructor(private _deviceService: DeviceService, private _router: Router) {
+  constructor(private _deviceService: DeviceService, private _router: Router) {    
     this.generateTabletList();
   }
 
   ngOnInit() {
-    this.selectedDevice.name = this.devices[0]
+    this.device = this._deviceService.getDeviceInfo() || new Device();        
+    this.selectedDevice.name = this.device.name || this.devices[0];
+    this.selectedDevice.user = this.device.user || '';
   }
 
   saveChanges() {
@@ -29,8 +35,8 @@ export class ConfigurationComponent implements OnInit {
       return;
     }
 
-    if (this.selectedDevice.user == undefined) {
-      console.log('USUÁRIO NÃO FOI SELECIONADO');
+    if (this.selectedDevice.user == undefined || this.selectedDevice.user == '') {
+      console.log('%c USUÁRIO NÃO FOI SELECIONADO', 'background-color: yellow;');
       return;
     }
 
@@ -53,6 +59,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   unregisterDevice(){
+    this.selectedDevice.user = '';
     this._deviceService.unregisterDevice();
   }
 

@@ -11,6 +11,8 @@ import { NgForm } from '@angular/forms';
 })
 export class ShelfConfigComponent implements OnInit, OnDestroy {
 
+  search: any;
+  searchTerm = '';
   formButton: PickShelf = new PickShelf();
   buttons: PickShelf[];
   headers: string[] = [
@@ -21,7 +23,7 @@ export class ShelfConfigComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buttons = [];
-    this.getButtons();    
+    this.getButtons();
     setTimeout(() => {
       let table = document.getElementsByClassName('container')[0];
       let scroll = localStorage.getItem('scrollPosition');
@@ -32,11 +34,16 @@ export class ShelfConfigComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     let table = document.getElementsByClassName('container')[0];
     let scroll = table.scrollTop.toString();
-    localStorage.setItem('scrollPosition', scroll);    
+    localStorage.setItem('scrollPosition', scroll);
   }
 
+  find() {
+    
+  }
+
+
   getButtons() {
-    this._pickService.getButtons().subscribe(btns => this.buttons = btns);      
+    this._pickService.getButtons().subscribe(btns => this.buttons = btns);
   }
 
   refresh() {
@@ -49,7 +56,7 @@ export class ShelfConfigComponent implements OnInit, OnDestroy {
     })
   }
 
-  
+
 
 
 }

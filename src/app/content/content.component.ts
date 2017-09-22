@@ -45,7 +45,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    localStorage.setItem('currentItem', '0');
+    localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
     this.currentStationSequence = Number(localStorage.getItem('currentStationSequence'));
 
     if (!this.currentStationSequence) {
@@ -53,77 +53,62 @@ export class ContentComponent implements OnInit, OnDestroy {
     }
 
     localStorage.setItem('currentStationSequence', JSON.stringify(this.currentStationSequence));
-
     this.currentStationId = this.device.stations[this.currentStationSequence];
 
     if (this.currentStationId) {
       this.getWagons(this.currentStationId);
-      localStorage.setItem('currentStationId', JSON.stringify(this.currentStationId));
     } else {
-      console.error(`Não foi possível carregar o comboio`);
+      console.error(`%c Não foi possível carregar o comboio`, 'background: red;');
       setTimeout(this.ngOnInit, 1000) //Verificar se esta rotina funciona
     }
 
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe(button => {
-      console.log(`Botao foi pressionado`, button);
       let currentPart = this.wagon.items[this.currentItem].obj;
+      console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: limegreen');
       if (currentPart == (button as any).partNumber) {
-          this.addItem(); 
-      }
-      else if ((button as any).partNumber == '--OPK--'
-        && (button as any).stationId == this.currentStationId
-        || (button as any).opk ) {
-          console.log('Botao pressionado de peça OPK')
-          this.addItem();
+        this.addItem();
       }
     })
-
-    // this.pickSubscriber = PickService.itemUpdated.subscribe(currentItem => {
-    //   console.log('Peças da sequência ' + (currentItem + 1) + ' finalizadas');
-    //   if (this.currentItem < (this.wagon.items.length - 1)) {
-    //     //setTimeout(() => this.addItem(), 200);
-    //   }
-    //   else {
-    //     //setTimeout(() => this.finishWagon(), 0);
-    //   }
-    // })
   }
 
   getWagons(stationId) {
+    localStorage.setItem('currentStationId', JSON.stringify(stationId));
+
     this._pickService.getWagon(stationId).subscribe(wagon => {
       if (wagon.items[0].idPart == 0) {
         return this.finishWagon();
       }
       console.log(`Carregando comboio ${wagon.wagonId}`);
-      localStorage.setItem('currentWagon', JSON.stringify(wagon));
+      this.currentItem = 0;
       this.wagon = wagon;
+      localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
+      localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
+      this.turnOnButton();
       this.updateScreen = false;
-      localStorage.setItem('currentPartNumber', JSON.stringify(wagon.items[0].obj));
-      this._sockService.sendPickMessage('turn on', {
-        stationId: stationId,
-        partNumber: wagon.items[0].obj,
-        item : this.currentItem
-      })
+      if (stationId == 723) {
+        
+      }
+
+      setTimeout(this.returnItem(), 100);
     }
       , error => this.errorMessage = <any>error);
   }
 
-  addItem() {
+  addItem(method: string = '') {
+    if (method == 'picking') {
+      this.wagon.items[this.currentItem].isPicked = true;
+    }
     this.buttonControl = false;
     if (this.currentItem >= this.wagon.items.length - 1) {
-      setTimeout(() => this.buttonControl = true, 500);
-      setTimeout(this.finishWagon(), 500);
+      setTimeout(() => this.buttonControl = true, 750);
+      setTimeout(this.finishWagon(), 700);
     }
     else if (this.currentItem < this.wagon.items.length - 1) {
       this.currentItem++;
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
-      this._sockService.sendPickMessage('turn on', {
-        stationId: this.currentStationId,
-        partNumber: this.wagon.items[this.currentItem].obj,
-        item : this.currentItem
-      })
-      setTimeout(() => this.buttonControl = true, 500);
+      this.turnOnButton();
+      setTimeout(() => this.buttonControl = true, 750);
     }
   }
 
@@ -133,17 +118,12 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.buttonControl = true;
       return;
     }
-    else if (this.currentItem < this.wagon.items.length - 1) {
+    else {
       this.currentItem--;
       localStorage.setItem('currentItem', this.currentItem.toString());
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
-      this._sockService.sendPickMessage('turn on', {
-        stationId: this.currentStationId,
-        partNumber: this.wagon.items[this.currentItem].obj,
-        item: this.currentItem,
-        clearLast: true
-      })
-      setTimeout(() => this.buttonControl = true, 500);      
+      this.turnOnButton(true);
+      setTimeout(() => this.buttonControl = true, 750);
     }
   }
 
@@ -159,8 +139,8 @@ export class ContentComponent implements OnInit, OnDestroy {
     this._pickService.finishWagon(this.log).subscribe(data => {
       this.lastWagon = data.wagon;
       localStorage.setItem('lastWagon', this.lastWagon);
-      localStorage.setItem('currentItem', '0');
       this.currentItem = 0;
+      localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
       this.updateStationSequence();
       this.getWagons(this.currentStationId);
     });
@@ -180,8 +160,22 @@ export class ContentComponent implements OnInit, OnDestroy {
     localStorage.setItem('currentStationId', JSON.stringify(this.currentStationId));
   }
 
+  turnOnButton(toClean = false) {
+    this._sockService.sendPickMessage('turn on', {
+      stationId: this.currentStationId,
+      partNumber: this.wagon.items[this.currentItem].obj,
+      item: this.currentItem,
+      clearLast: toClean
+    })
+  }
+
   changeOrientationTest() {
     return this.orientation = this.orientation == 'horizontal' ? 'vertical' : 'horizontal';
+  }
+
+
+  checkPendingItems() {
+
   }
 
   confirm() {

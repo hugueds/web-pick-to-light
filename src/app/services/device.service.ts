@@ -10,7 +10,7 @@ export class DeviceService {
 
     private static device: Device = new Device();
 
-    tabletUpdatedEvent = new EventEmitter<boolean>();
+    deviceUpdated = new EventEmitter<any>();
 
     constructor(private _pickService: PickService) {
         if (JSON.parse(localStorage.getItem('device'))) {
@@ -24,7 +24,7 @@ export class DeviceService {
 
     registerDevice(device, cb) {
         this.unregisterDevice();
-        console.log(`Registrando dispositivo ${device}`);       
+        console.log(`%c Registrando dispositivo ${JSON.stringify(device)}`, 'color: #5500ff');       
         DeviceService.device.name = device.name;
         DeviceService.device.user = device.user;
         this._pickService.getConfiguration(device.name).subscribe(station => {
@@ -34,11 +34,11 @@ export class DeviceService {
                         DeviceService.device.deviceModel = navigator.userAgent.match(/\((\w.+);/)[1].replace(';', '-');
                         DeviceService.device.groupId = group.id;
                         DeviceService.device.groupName = group.name;
-                        DeviceService.device.stations = group.stations.map(s => s.idStation);
+                        DeviceService.device.stations = group.stations.map(s => s.idStation);                        
                         DeviceService.device.currentStation = 0;
                         DeviceService.device.isRegistered = true;
                         localStorage.setItem('device', JSON.stringify(DeviceService.device));
-                        this.tabletUpdatedEvent.emit(true);
+                        this.deviceUpdated.emit('registered');
                         cb();
                     })
                 }
@@ -50,6 +50,8 @@ export class DeviceService {
     unregisterDevice() {
         localStorage.removeItem('device');
         DeviceService.device.isRegistered = false;
+        console.log('%c Dados do dispositivo foram reiniciados', 'color: #ff0000');
+        this.deviceUpdated.emit('unregistered');
     }
 
     updateLastLogin() {

@@ -1,35 +1,33 @@
-md-card {
-    border: green 2px solid;    
-    height: 5rem;
-    width: 5rem;
+.box-wrapper{
+    width: 20%;
+    border: 1px solid blue;
+    display: inline-block;
+  }
+  
+  .box-number{
+    width: 100%;    
+    text-align: center;
     position: relative;
     float: left;
-    margin-left: 7%;    
-    margin-right: auto; 
-    margin-top: 2.5%;
-    margin-bottom: 2.5%;     
-    text-align: center;    
-    background-color: #9696EE;
+    font-weight: bold;
+  }
+  
+  .box-inner{
+    width: 100%;
     color: white;
-}
-
-.box-quantity{    
-    padding: 0;    
-    font-size: 4.5rem;
-}
+    background-color: #9696EE;
+    text-align: center;
+    position: relative;
+    float: left;
+    height: 100%;
+    display:table-cell;
+    vertical-align:middle;
+    font-size: 5rem;
+    font-weight: bold;
+    /* padding-bottom: 2.5rem; */  
+  }
 
 .box-finished{
+    color: lightgreen;
     background-color: lightgreen;
-    font-size: 4.5vw;    
-}
-
-.box-unfinished{
-    background-color: yellow;
-    font-size: 4.5vw;
-    
-}
-
-.box-sequence{
-    text-align: center;
-    width: 5rem;
 }

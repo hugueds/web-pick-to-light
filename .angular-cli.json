@@ -5,8 +5,8 @@
   },
   "apps": [
     {
-      "root": "src",
-      "outDir": "R:/Desktop/NewPickToLight/public/",
+      "root": "src",     
+      "outDir": "R:/Desktop/NewPickToLight/public/release",
       "assets": [
         "assets",
         "favicon.ico"

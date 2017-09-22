@@ -30,6 +30,7 @@ import { TestsComponent } from './tests/tests.component';
 import { ShelfDetailComponent } from './shelf-config/shelf-detail.component';
 import { OpkComponent } from './opk/opk.component';
 import { OpkDetailComponent } from './opk/detail/opk-detail.component';
+import { SearchPipe } from './shared/search.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { OpkDetailComponent } from './opk/detail/opk-detail.component';
     ShelfDetailComponent,
     OpkComponent,
     OpkDetailComponent,
-    BoxColorDirective, WagonColorDirective, ShelfConfigComponent, TestsComponent, 
+    BoxColorDirective, WagonColorDirective, ShelfConfigComponent, TestsComponent, SearchPipe, 
   ],
   imports: [
     AppRoutingModule,

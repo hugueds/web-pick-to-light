@@ -1,6 +1,8 @@
-<div class='box-wrapper'>
-        <!-- <div class="box-sequence">{{ box.seq }}</div> -->
-        <md-card [class]='boxStyle' (click)='confirm()'>
-                <span class='box-quantity'> {{ box?.quantity}} </span>
-        </md-card>
+<div>
+        <div class='box-number'> {{ box?.seq }} </div>
+        <div class='box-inner' [ngClass]='boxStyle'>
+                {{ box?.quantity}}
+        </div>
 </div>
+
+
