@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 
 import { PickShelf } from '../models/PickShelf';
 import { PickService } from '../services/pick.service';
@@ -9,10 +9,10 @@ import { NgForm } from '@angular/forms';
   templateUrl: './shelf-config.component.html',
   styleUrls: ['./shelf-config.component.css']
 })
-export class ShelfConfigComponent implements OnInit, OnDestroy {
+export class ShelfConfigComponent implements OnInit, OnDestroy, OnChanges {
 
-  search: any;
-  searchTerm = '';
+
+  searchTerm: any = {};
   formButton: PickShelf = new PickShelf();
   buttons: PickShelf[];
   headers: string[] = [
@@ -29,6 +29,10 @@ export class ShelfConfigComponent implements OnInit, OnDestroy {
       let scroll = localStorage.getItem('scrollPosition');
       table.scrollTop = parseInt(scroll);
     }, 100);
+  }
+
+  ngOnChanges(change){
+    console.log(change)
   }
 
   ngOnDestroy() {
