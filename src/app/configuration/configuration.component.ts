@@ -57,11 +57,19 @@ export class ConfigurationComponent implements OnInit {
       }
     }
   }
+  
 
   unregisterDevice(){
     this.selectedDevice.user = '';
     this._deviceService.unregisterDevice();
   }
 
+  changeStation(station, index){
+    localStorage.setItem('currentStationId', JSON.stringify(station));
+    localStorage.setItem('currentStationSequence', JSON.stringify(index));
+    return true;
+  }
+
 
 }
+

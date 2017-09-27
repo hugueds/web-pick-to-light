@@ -2,32 +2,45 @@
 
 <form #deviceForm='ngForm'>
 
-    <select placeholder='DISPOSITIVO' floatPlaceholder="auto" [(ngModel)]='selectedDevice.name' name='deviceName' #deviceName='ngModel' required>
+    <select placeholder='DISPOSITIVO' floatPlaceholder="auto" [(ngModel)]='selectedDevice.name' name='deviceName' #deviceName='ngModel'
+        required>
         <option *ngFor='let device of devices' [value]='device'>
             {{ device }}
         <option>
     </select>
 
-    <input type="text" placeholder='USUARIO' [value]='deviceUser' [(ngModel)]='selectedDevice.user' 
-    id='deviceUser' name='deviceUser' #deviceUser='ngModel' required />
+    <input type="text" placeholder='USUARIO' [value]='deviceUser' [(ngModel)]='selectedDevice.user' id='deviceUser' name='deviceUser'
+        #deviceUser='ngModel' required />
 
-    <button md-raised-button color='primary' (click)='saveChanges()'> SALVAR ALTERAÇÕES</button>     
-    <button md-raised-button color='warn' (click)='unregisterDevice()'> REMOVER DISPOSITIVO</button>     
+    <button md-raised-button color='primary' (click)='saveChanges()'> SALVAR ALTERAÇÕES</button>
+    <button md-raised-button color='warn' (click)='unregisterDevice()'> REMOVER DISPOSITIVO</button>
 
 </form>
 
-<div [hidden]='deviceName.valid || deviceName.pristine' >
-    É NECESSÁRIO DISPONIBILIZAR UM DISPOSITIVO PARA O SISTEMA
+
+<div class='invalid-form-container'>
+    <div [hidden]='deviceName.valid || deviceName.pristine' class='invalid-form'>
+        É NECESSÁRIO DISPONIBILIZAR UM DISPOSITIVO PARA O SISTEMA
+    </div>
+
+    <div [hidden]='deviceUser.valid || deviceUser.pristine' class='invalid-form'>
+        É NECESSÁRIO DISPONIBILIZAR UM USUÁRIO PARA O SISTEMA
+    </div>
 </div>
 
-<div [hidden]='deviceUser.valid || deviceUser.pristine' >
-    É NECESSÁRIO DISPONIBILIZAR UM USUÁRIO PARA O SISTEMA
+<hr>
+<h2> POSTOS DISPONIVEIS PARA ESTE EQUIPAMENTO</h2>
+<div class='stations-container'>
+    <div *ngFor='let station of device.stations; let i = index;'>        
+        <button class='station' md-raised-button (click)='changeStation(station, i)'> {{ station }} </button>
+    </div>
+    <!-- <button md-raised-button style='background:limegreen; color: white;' >SALVAR</button> -->
 </div>
 
-<hr>
-POSTOS DISPONIVEIS PARA ESTE EQUIPAMENTO
-<div *ngFor='let station of device.stations'>{{ station }}</div>
-<hr>
-ORIENTAÇÃO DOS COMBOIOS 
-<hr>
-REENVIAR
+
+
+
+
+
+<hr> ORIENTAÇÃO DOS COMBOIOS
+<hr> REENVIAR

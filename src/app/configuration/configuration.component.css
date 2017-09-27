@@ -10,3 +10,33 @@ select{
 .ng-invalid:not(form){
     border: red solid 1px;
 }
+
+.invalid-form{        
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.invalid-form-container{
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    margin-left: 0 auto;
+    width: 50%;
+    text-align: center;
+    background-color: red;
+    color: white;    
+}
+
+.stations-container{        
+    display: flex;    
+    width: 50%;
+}
+
+.station{        
+    display: inline-block;
+    flex: 1 1 auto;
+    font-size: 1.5rem;
+    padding: 10px;
+    margin-left: 10px;    
+    margin-right: 30px;    
+}
