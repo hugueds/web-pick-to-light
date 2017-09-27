@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",     
-      "outDir": "R:/Desktop/NewPickToLight/public/release",
+      "outDir": "R:/Desktop/NewPickToLight/public",
       "assets": [
         "assets",
         "favicon.ico"

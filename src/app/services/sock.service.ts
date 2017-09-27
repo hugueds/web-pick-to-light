@@ -48,12 +48,12 @@ export class SockService {
   }
 
   sendPickMessage(topic, message) {
-    console.log('Emitindo para o topico: ' + topic + ' Valores: ' + JSON.stringify(message));
+    console.log(`Emitindo para o topico: %c ${topic} \n %c Valores: ${JSON.stringify(message)})`, 'color: green ;', 'color: blue;');    
     this.pickToLightSocket.emit(topic, message);
   }
 
   sendMissingPartMessage(topic, message) {
-    console.log('Emitindo para o topico: ' + topic + ' Valores: ' + JSON.stringify(message));
+    console.log(`Emitindo para o topico: %c ${topic} \n %c Valores: ${JSON.stringify(message)})`, 'color: green ;', 'color: blue;');
     this.partMissingSocket.emit(topic, message);
   }
 

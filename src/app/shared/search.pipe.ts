@@ -6,18 +6,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class SearchPipe implements PipeTransform {
 
-  transform(items: any[], field: string, value: string) : any[]{
+  transform(items: any[], filterName: any) : any[]{
+    
     if (!items){
       return [];
     }
-    if (!field || !value){
+    if (!filterName){
       return items;
     }
 
-    return items.filter( i => i[field] == value )
-
-
-
+    
     
   }
 
