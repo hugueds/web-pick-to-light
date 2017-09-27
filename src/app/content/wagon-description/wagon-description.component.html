@@ -1,4 +1,11 @@
 <md-card>
-  <md-card-title> {{ stationName  }}</md-card-title>
-  <md-card-title> <span class='wagon-number'> {{ wagonId }} </span></md-card-title>  
+  <md-card-title>
+    <!-- <button md-raised-button> (click)='changeStation()' -->
+    {{ stationName  }}
+    <md-icon>arrow_drop_down</md-icon>
+  <!-- </button> -->
+  </md-card-title>
+  <md-card-title>
+    <span class='wagon-number'> {{ wagonId }} </span>
+  </md-card-title>
 </md-card>

@@ -32,7 +32,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   orientation: string = 'horizontal';
   pickSubscriber;
   sockSubscriber;
-  lastOpk;
+  requestBlocked: boolean = false;
 
 
   constructor(private _pickService: PickService
@@ -75,20 +75,20 @@ export class ContentComponent implements OnInit, OnDestroy {
     localStorage.setItem('currentStationId', JSON.stringify(stationId));
 
     this._pickService.getWagon(stationId).subscribe(wagon => {
-      if (wagon.items[0].idPart == 0) {
-        return this.finishWagon();
-      }
-      console.log(`Carregando comboio ${wagon.wagonId}`);
+      console.log(`Carregando comboio %c ${wagon.wagonId}`, 'color: blue;');
       this.currentItem = 0;
       this.wagon = wagon;
+      if (this.wagon.items[0].idPart == 0) {
+        return setTimeout(this.finishWagon(`Finalizando Comoboio sem peças`), 1000);
+      }
       localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.turnOnButton();
       this.updateScreen = false;
       if (stationId == 723) {
-        
+        let itens = this.wagon.items;
+        this.wagon.items.push(...itens);                
       }
-
       setTimeout(this.returnItem(), 100);
     }
       , error => this.errorMessage = <any>error);
@@ -101,7 +101,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.buttonControl = false;
     if (this.currentItem >= this.wagon.items.length - 1) {
       setTimeout(() => this.buttonControl = true, 750);
-      setTimeout(this.finishWagon(), 700);
+      this.finishWagon(`Comboio finalizado via Pick to Light`);
     }
     else if (this.currentItem < this.wagon.items.length - 1) {
       this.currentItem++;
@@ -135,7 +135,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   finishWagon(message: string = '') {
     this.updateScreen = true;
-    this.log = new Log(this.wagon.wagonId, this.device.user, 'test message');
+    this.log = new Log(this.wagon.wagonId, this.device.user, message);
     this._pickService.finishWagon(this.log).subscribe(data => {
       this.lastWagon = data.wagon;
       localStorage.setItem('lastWagon', this.lastWagon);

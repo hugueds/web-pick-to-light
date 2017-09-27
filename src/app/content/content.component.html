@@ -11,7 +11,9 @@
   <part-amount [items]='wagon?.items' [currentItem]="currentItem" ></part-amount>
 
   <button md-raised-button class='part-control return-part' (click)='returnItem()' [disabled]='!buttonControl'>VOLTAR</button>  
-  <button md-raised-button class='part-control confirm-part' (click)='confirm();addItem()' [disabled]='!buttonControl'>CONFIRMAR</button>
+  <button md-raised-button class='part-control confirm-part' (click)='confirm();addItem()' [disabled]='!buttonControl'>CONFIRMAR
+    <!-- <md-icon>done</md-icon> -->
+  </button>
   
   <!-- <md-card style='display: block'> -->
 
