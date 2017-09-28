@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class ClockService {
+export class ClockService {  
 
   constructor() { }
 
@@ -14,17 +14,7 @@ export class ClockService {
     return obs;
   }
 
-  formatDateTime(){
-
-  }
-
-  getDate(){
-
-  }
-
-  getTime(){
-    
-  }
+  
 
 
 }

@@ -6,6 +6,8 @@ import { PickService } from "../services/pick.service";
 import { DeviceService } from "../services/device.service";
 import { MissingPartService } from "../services/missing-part.service";
 import { SockService } from '../services/sock.service';
+import { TimerService } from '../services/timer.service';
+
 
 import { Log } from "../models/Log";
 import { Device } from "../models/Device";
@@ -15,36 +17,38 @@ import { PickShelf } from '../models/PickShelf';
 @Component({
   selector: 'content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css']
+  styleUrls: ['./content.component.css'],
+  providers: [TimerService]
 })
 export class ContentComponent implements OnInit, OnDestroy {
 
   device: Device;
   wagon: Wagon;
+  log: Log;  
   currentItem: number = 0;
   currentStationId: number = 0;
   currentStationSequence: number;
   errorMessage: any;
-  log: Log;
   buttonControl: boolean = true;
   updateScreen: boolean = true;
-  lastWagon: any = 'Nenhum';
+  requestBlocked: boolean = false;  
+  lastWagon: any = 'Nenhum';  
   orientation: string = 'horizontal';
   pickSubscriber;
   sockSubscriber;
-  requestBlocked: boolean = false;
+  
 
 
   constructor(private _pickService: PickService
     , private _deviceService: DeviceService
     , private _sockService: SockService
-    , private _mpService: MissingPartService) {
+    , private _mpService: MissingPartService
+    ,private _timerService: TimerService ) {
     this.device = _deviceService.getDeviceInfo();
     this.wagon = new Wagon();
   }
 
   ngOnInit() {
-
     localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
     this.currentStationSequence = Number(localStorage.getItem('currentStationSequence'));
 
@@ -66,7 +70,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       let currentPart = this.wagon.items[this.currentItem].obj;
       console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: limegreen');
       if (currentPart == (button as any).partNumber) {
-        this.addItem();
+        this.addItem('picking');
       }
     })
   }
@@ -88,8 +92,9 @@ export class ContentComponent implements OnInit, OnDestroy {
       if (stationId == 723) {
         let itens = this.wagon.items;
         this.wagon.items.push(...itens);                
-      }
-      setTimeout(this.returnItem(), 100);
+      }          
+      setTimeout(this.returnItem(), 200);
+      this._timerService.start();
     }
       , error => this.errorMessage = <any>error);
   }
@@ -101,7 +106,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.buttonControl = false;
     if (this.currentItem >= this.wagon.items.length - 1) {
       setTimeout(() => this.buttonControl = true, 750);
-      this.finishWagon(`Comboio finalizado via Pick to Light`);
+      this.finishWagon(`Comboio finalizado via Pick to Light, tempo de Operação: ${this._timerService.getTimeString()}`);
     }
     else if (this.currentItem < this.wagon.items.length - 1) {
       this.currentItem++;
@@ -142,6 +147,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.currentItem = 0;
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
       this.updateStationSequence();
+      this._timerService.reset();
       this.getWagons(this.currentStationId);
     });
   }
@@ -153,9 +159,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     else if (this.currentStationSequence == this.device.stations.length - 1) {
       this.currentStationSequence = 0;
     }
-
     this.currentStationId = this.device.stations[this.currentStationSequence];
-
     localStorage.setItem('currentStationSequence', JSON.stringify(this.currentStationSequence));
     localStorage.setItem('currentStationId', JSON.stringify(this.currentStationId));
   }
@@ -170,7 +174,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   changeOrientationTest() {
-    return this.orientation = this.orientation == 'horizontal' ? 'vertical' : 'horizontal';
+    //return this.orientation = this.orientation == 'horizontal' ? 'vertical' : 'horizontal';
   }
 
 
@@ -188,6 +192,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sockSubscriber.unsubscribe();
+    this._timerService.reset();    
     //this.pickSubscriber.unsubscribe();
   }
 

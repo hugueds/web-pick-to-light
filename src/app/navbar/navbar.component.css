@@ -18,6 +18,11 @@ md-toolbar{
     width: 2rem;    
 }
 
+.date-time{
+    
+}
+
+
 .online {             
     background: radial-gradient(circle at 10px 10px, #55DD44, #000);              
 }
@@ -26,3 +31,7 @@ md-toolbar{
     background: radial-gradient(circle at 10px 10px, #f44242, #000);          
 }
 
+.timer{
+    font-size: 2rem;
+    color: gold;
+}
