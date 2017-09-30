@@ -35,3 +35,17 @@ md-toolbar{
     font-size: 2rem;
     color: gold;
 }
+
+.play {
+    color: limegreen;
+    font-size: 2rem;
+    margin-left: 1.5%;
+    padding-bottom: 8px;
+}
+
+.pause{
+    color: goldenrod;
+    font-size: 2rem;
+    margin-left: 1.5%;
+    padding-bottom: 8px;
+}

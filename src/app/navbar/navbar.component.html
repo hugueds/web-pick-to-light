@@ -51,6 +51,9 @@
 
   <!-- <span> {{ device?.deviceModel }} </span> -->
   <span class='timer'> {{ timer | time }} </span>
+  
+  <md-icon *ngIf='timer > 0 ' class='play'>play_circle_outline</md-icon> 
+  <md-icon *ngIf='timer == 0 ' class='pause'>pause_circle_outline</md-icon> 
 
   <span class="spacer"></span>
 
