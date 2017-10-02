@@ -4,13 +4,13 @@ h1 {
 
 .container {
   position: relative;
-    display: flex;
-    flex-direction: column;
-    max-height: 500px;
-    min-width: 300px;
-    z-index: 0;
-    overflow: auto;    
-  }
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+  z-index: 0;
+  overflow: auto;    
+}
   
   .mat-table {
     overflow: auto;

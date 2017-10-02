@@ -49,3 +49,11 @@ table{
 h1 {
   text-align: center;
 }
+
+#btn-new{
+  margin: auto;
+}
+
+#btn-refresh{
+  margin: auto;
+}

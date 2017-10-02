@@ -8,8 +8,7 @@ button{
  height: 6rem;
  margin-left: 4%;
  margin-top: 1.5%;
- background-color: #E35205;
- /*background: url('assets/images/forklift.png');*/
+ background-color: #E35205 !important; 
 }
 
 img{
