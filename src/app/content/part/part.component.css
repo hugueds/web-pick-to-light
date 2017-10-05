@@ -1,4 +1,4 @@
-md-card{
+md-card {
     position: relative;
     float: left;
     width: 35%;
@@ -7,24 +7,24 @@ md-card{
     padding: 10px 20px 15px 20px;
 }
 
-md-card-title{
+md-card-title {
     text-align: center;
     font-weight: bold;        
     margin-bottom: 1px;
 }
 
-md-card-footer{
+md-card-footer {
     text-align: center;
     font-weight: bold;    
     font-size: 150%;        
     padding: 0px 0px 10px 0px;
 }
 
-img{
+img {
     display: block;
     width: 18rem;
     margin: 0 auto;
-    }
+}
 
 .part-number{
     font-size: 7vw;    

@@ -10,7 +10,6 @@ export class WagonComponent implements OnInit {
   @Input() wagonId: any;
   @Input() stationName: string;
 
-
   constructor() { }
 
   ngOnInit() {
