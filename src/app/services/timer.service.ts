@@ -10,43 +10,44 @@ export class TimerService {
 
   constructor() { }
 
-  getTime(): Observable<any>{
-    let obs = new Observable( o => {      
+  getTime(): Observable<any> {
+    const obs = new Observable(o => {
       setInterval(() => o.next(TimerService.Time), 1000);
-    }); 
+    });
     return obs;
   }
 
-  getTimeString(){
-    let h, m, s: number = 0;  
+  getTimeString() {
+    let m, s = 0;
     let timer: string;
 
-    m = (TimerService.Time / 1000 / 60) << 0;
+    m = (TimerService.Time / 1000 / 60);
     s = (TimerService.Time / 1000) % 60;
 
-    if (s < 10)
+    if (s < 10) {
       timer = `${m}:0${s}`;
-    else
-      timer = `${m}:${s}`;
+    } else {
+    }
+    timer = `${m}:${s}`;
 
-    return timer;    
+    return timer;
   }
 
-  start(){
-    TimerService.interval = setInterval( () => { this.increaseTime() }, 1000 );
+  start() {
+    TimerService.interval = setInterval(() => this.increaseTime(), 1000);
   }
 
-  pause(){
+  pause() {
     clearInterval(TimerService.interval);
   }
 
-  reset(){
+  reset() {
     this.pause();
     TimerService.Time = 0;
   }
 
-  increaseTime(){
-    TimerService.Time += 1000;            
-  } 
+  increaseTime() {
+    TimerService.Time += 1000;
+  }
 
 }
