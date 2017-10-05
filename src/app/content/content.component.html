@@ -1,14 +1,14 @@
 <div class='content-wrapper' *ngIf='!updateScreen'>
 
-  <part [items]='wagon?.items' [currentItem]="currentItem"></part>
+  <app-part [items]='wagon?.items' [currentItem]="currentItem"></app-part>
 
-  <wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></wagon-description>
+  <app-wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></app-wagon-description>
 
-  <missing-part [items]='wagon?.items' [currentItem]="currentItem"></missing-part>
+  <app-missing-part [items]='wagon?.items' [currentItem]="currentItem"></app-missing-part>
 
-  <wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></wagon-container>
+  <app-wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></app-wagon-container>
 
-  <part-amount [items]='wagon?.items' [currentItem]="currentItem" ></part-amount>
+  <app-part-amount [items]='wagon?.items' [currentItem]="currentItem" ></app-part-amount>
 
   <button md-raised-button class='part-control return-part' (click)='returnItem()' [disabled]='!buttonControl'>VOLTAR</button>  
   <button md-raised-button class='part-control confirm-part' (click)='confirm();addItem()' [disabled]='!buttonControl'>CONFIRMAR
@@ -35,4 +35,4 @@
   {{ errorMessage }}
 </div>
 
-<banner *ngIf='updateScreen'></banner>
+<app-banner *ngIf='updateScreen'></app-banner>

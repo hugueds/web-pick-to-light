@@ -1,19 +1,19 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { PickService } from '../../services/pick.service';
 
-import { Item } from "../../models/Item";
+import { Item } from '../../models/Item';
 
 @Component({
-  selector: 'part',
+  selector: 'app-part',
   templateUrl: './part.component.html',
   styleUrls: ['./part.component.css']
 })
 
 export class PartComponent implements OnInit, OnChanges {
 
-  defaultImage: string = 'assets/images/no-image.png';
-  partPicture: string;
-  hasImage: boolean = false;
+  defaultImage: String = 'assets/images/no-image.png';
+  partPicture: String;
+  hasImage: Boolean = false;
 
   @Input() items: Item[];
   @Input() currentItem: number;
@@ -21,14 +21,14 @@ export class PartComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-    this.changePicture()
+    this.changePicture();
   }
 
-  ngOnChanges(changes) {   
-    this.changePicture()
+  ngOnChanges(changes) {
+    this.changePicture();
   }
 
-  changePicture() {   
+  changePicture() {
     if (!this.items[this.currentItem].photo) {
       this.hasImage = false;
       this.partPicture = this.defaultImage;

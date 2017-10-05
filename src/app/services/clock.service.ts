@@ -14,7 +14,4 @@ export class ClockService {
     return observable;
   }
 
-
-
-
 }

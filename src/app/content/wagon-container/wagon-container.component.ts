@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { PickService } from "app/services/pick.service";
+import { PickService } from '../../services/pick.service';
 
 @Component({
-  selector: 'wagon-container',
+  selector: 'app-wagon-container',
   templateUrl: './wagon-container.component.html',
-  styleUrls: ['./wagon-container.component.css']  
+  styleUrls: ['./wagon-container.component.css']
 })
 export class WagonContainerComponent implements OnInit, OnChanges {
 
@@ -19,20 +19,20 @@ export class WagonContainerComponent implements OnInit, OnChanges {
   remainingParts: number;
 
   constructor(private _pickService: PickService) {
-    this.boxes = [];    
-    this.orientation = 'horizontal';    
+    this.boxes = [];
+    this.orientation = 'horizontal';
   }
 
   ngOnInit() {
     if (this.boxes.length > 0) {
-      this.boxes = this.items[this.currentItem].boxes;  
-      this.remainingParts = this.boxes.map( box => box.quantity).reduce( (a,b) => a + b);      
-    }    
+      this.boxes = this.items[this.currentItem].boxes;
+      this.remainingParts = this.boxes.map(box => box.quantity).reduce((a, b) => a + b);
+    }
   }
 
   ngOnChanges() {
     this.items ? this.boxes = this.items[this.currentItem].boxes : null;
-    this.remainingParts = this.boxes.map( box => box.quantity).reduce( (a,b) => a + b);    
+    this.remainingParts = this.boxes.map(box => box.quantity).reduce((a, b) => a + b);
   }
 
   checkWagon() {
@@ -41,12 +41,12 @@ export class WagonContainerComponent implements OnInit, OnChanges {
 
   boxChanged($event) {
     this.remainingParts -= 0; //Enviar quantidade para subtrair
-    if (this.remainingParts == 0){
+    if (this.remainingParts == 0) {
       this.getNextPart();
     }
   }
 
-  getNextPart() {    
+  getNextPart() {
     this.border = '20px solid limegreen';
     setTimeout(() => {
       this.border = '20px solid red';

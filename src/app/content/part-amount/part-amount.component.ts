@@ -1,33 +1,33 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Item } from "app/models/Item";
-import { Box } from "app/models/Box";
+import { Item } from '../../models/Item';
+import { Box } from '../../models/Box';
 
 @Component({
-  selector: 'part-amount',
+  selector: 'app-part-amount',
   templateUrl: './part-amount.component.html',
   styleUrls: ['./part-amount.component.css']
 })
 export class PartAmountComponent implements OnInit, OnChanges {
 
-  @Input() items:Item[];
-  @Input() currentItem:number;
+  @Input() items: Item[];
+  @Input() currentItem: number;
 
-  amount:number;
+  amount: number;
 
-  constructor() { 
+  constructor() {
     this.currentItem = 0;
   }
 
   ngOnInit() {
-    
+
   }
 
-  ngOnChanges(){
+  ngOnChanges() {
     this.getAmount(this.currentItem);
   }
 
-  getAmount(item){    
-    this.amount = this.items[item].boxes.map(a => a.quantity).reduce( (b,c) => b + c );    
+  getAmount(item) {
+    this.amount = this.items[item].boxes.map(a => a.quantity).reduce((b, c) => b + c);
   }
 
 }
