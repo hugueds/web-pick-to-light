@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class ClockService {  
+export class ClockService {
 
   constructor() { }
 
-  getDateTime(){       
-    let obs = new Observable( obs => {
-      let dateTime = new Date();
+  getDateTime() {
+    const observable = new Observable(obs => {
+      const dateTime = new Date();
       obs.next(dateTime);
-    }); 
-    return obs;
+    });
+    return observable;
   }
 
-  
+
 
 
 }

@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
 
-import { ClockService } from "../services/clock.service";
-import { SockService } from "../services/sock.service";
+import { ClockService } from '../services/clock.service';
+import { SockService } from '../services/sock.service';
 import { Device } from '../models/Device';
 import { DeviceService } from '../services/device.service';
 import { TimerService } from '../services/timer.service';
 
 @Component({
-  selector: 'navbar',
+  selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   providers: [ClockService, TimerService]
@@ -19,8 +19,8 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
   connection;
   checkConnection;
   dateTime: any;
-  ip:string  = 'Aguardando Conexão...';
-  isOnline: boolean = false;
+  ip: String  = 'Aguardando Conexão...';
+  isOnline: Boolean = false;
   timer: any;
   timerSubscriber;
 
@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     , private _timerService: TimerService) { }
 
   ngOnInit() {
-    this.getTime();    
+    this.getTime();
     this.timerSubscriber = this._timerService.getTime().subscribe(t => this.timer = t);
     this.device = this._deviceService.getDeviceInfo();
     this.connection = this._sock.getMessageFromPick('ip').subscribe(ip => {
@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         this.isOnline = false;
         this.ip = 'Aguardando conexão...';
       }
-    })
+    });
 
   }
 

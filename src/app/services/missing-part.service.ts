@@ -7,12 +7,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { MissingPart } from "../models/MissingPart";
+import { MissingPart } from '../models/MissingPart';
 
 @Injectable()
 
 export class MissingPartService {
-       
 
     constructor(private _http: Http, private _config: Config) {  }
 
@@ -21,7 +20,7 @@ export class MissingPartService {
     }
     sendMissingPart(part: MissingPart) {
         return this._http.post(`${this._config.server}/cel/1/parts`, part).map(body => body.json()).catch(this.handleError);
-    }   
+    }
 
     private handleError(error: Response | any) {
         let errMsg: string;

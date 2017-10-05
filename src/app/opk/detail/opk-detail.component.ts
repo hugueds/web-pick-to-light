@@ -5,32 +5,31 @@ import { NgForm } from '@angular/forms';
 import { PickService } from '../../services/pick.service';
 
 @Component({
-  selector: 'opk-detail',
+  selector: 'app-opk-detail',
   templateUrl: './opk-detail.component.html',
   styleUrls: ['../opk.component.css']
 })
 export class OpkDetailComponent implements OnInit {
-  
-  formOpk: any = { partNumber: 0, stationId: 0};
+
+  formOpk: any = { partNumber: 0, stationId: 0 };
   opks: any[];
-  isEditMode: boolean = false;
+  isEditMode: Boolean = false;
 
   constructor(private _pickService: PickService,
     private _router: Router,
-    private route: ActivatedRoute) {        
+    private _route: ActivatedRoute) {
   }
 
-
-  ngOnInit() {    
+  ngOnInit() {
     this.getOpks();
-    this.route.params.subscribe(params => {
+    this._route.params.subscribe(params => {
       if (params['partNumber']) {
         this.isEditMode = true;
         this._pickService.getOpk(params['partNumber']).subscribe(opk => {
           this.formOpk = opk;
-        })
+        });
       }
-    })
+    });
   }
 
   getOpks() {
@@ -49,25 +48,25 @@ export class OpkDetailComponent implements OnInit {
     }
 
     this._pickService.saveOpk(opk).subscribe(data => {
-      this._router.navigate(['opk'])      
-    })
+      this._router.navigate(['opk']);
+    });
 
   }
 
   edit(opk) {
-    this._pickService.updateOpk(opk).subscribe(data => {      
-      this._router.navigate(['opk'])
-    })
+    this._pickService.updateOpk(opk).subscribe(data => {
+      this._router.navigate(['opk']);
+    });
   }
 
-  
+
   clean() {
 
   }
 
   checkData(opk) {
     for (let i = 0; i < this.opks.length; i++) {
-      if (this.opks[i].partNumber == opk.partNumber) {
+      if (this.opks[i].partNumber === opk.partNumber) {
         return false;
       }
     }

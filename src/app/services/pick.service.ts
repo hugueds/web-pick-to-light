@@ -10,21 +10,21 @@ import 'rxjs/add/operator/map';
 import { Wagon } from '../models/Wagon';
 import { WAGON_EXAMPLE } from '../examples/wagon.example';
 import { Log } from '../models/Log';
-import { Item } from "../models/Item";
+import { Item } from '../models/Item';
 
 @Injectable()
 
 export class PickService {
 
   public static wagon: Wagon;
-  public static currentItem: number = 0;
+  public static currentItem: Number = 0;
 
   public static itemUpdated = new EventEmitter<any>();
 
   constructor(private _http: Http, private _config: Config) { }
 
   getWagon(stationId): Observable<Wagon> {
-    let url = `${this._config.server}/getwagon/${stationId}`;
+    const url = `${this._config.server}/getwagon/${stationId}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
@@ -33,74 +33,74 @@ export class PickService {
   }
 
   getConfiguration(deviceName: string) {
-    let url = `${this._config.server}/getconfiguration/${deviceName}`;
+    const url = `${this._config.server}/getconfiguration/${deviceName}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
   getGroup(groupId) {
-    let url = `${this._config.server}/getgroupid/${groupId}`;
+    const url = `${this._config.server}/getgroupid/${groupId}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
   finishWagon(log: Log) {
-    let url = `${this._config.server}/finishWagon`;
-    let headers = { 'Content-Type': 'application/json' };
-    let options = { headers: headers };
+    const url = `${this._config.server}/finishWagon`;
+    const headers = { 'Content-Type': 'application/json' };
+    const options = { headers: headers };
     return this._http.post(url, log).map(this.extractData).catch(this.handleError);
   }
 
   getButtons() {
-    let url = `${this._config.server}/buttons`;
+    const url = `${this._config.server}/buttons`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
   getButton(buttonId) {
-    let url = `${this._config.server}/buttons/${buttonId}`;
+    const url = `${this._config.server}/buttons/${buttonId}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
   saveButton(button) {
-    let url = `${this._config.server}/buttons`;
+    const url = `${this._config.server}/buttons`;
     return this._http.post(url, button).map(this.extractData).catch(this.handleError);
   }
 
   updateButton(button) {
-    let url = `${this._config.server}/buttons/${button.buttonId}`;
+    const url = `${this._config.server}/buttons/${button.buttonId}`;
     return this._http.put(url, button).map(this.extractData).catch(this.handleError);
   }
 
   deleteButton(button) {
-    let url = `${this._config.server}/buttons/${button._id}`;
+    const url = `${this._config.server}/buttons/${button._id}`;
     return this._http.delete(url).map(this.extractData).catch(this.handleError);
   }
 
   getAllOpks() {
-    let url = `${this._config.server}/opklist`;
+    const url = `${this._config.server}/opklist`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
   saveOpk(opk) {
-    let url = `${this._config.server}/opklist`;
+    const url = `${this._config.server}/opklist`;
     return this._http.post(url, opk).map(this.extractData).catch(this.handleError);
   }
 
   deleteOpk(opk) {
-    let url = `${this._config.server}/opklist/${opk.partNumber}`;    
+    const url = `${this._config.server}/opklist/${opk.partNumber}`;
     return this._http.delete(url).map(this.extractData).catch(this.handleError);
   }
 
   getOpk(partNumber) {
-    let url = `${this._config.server}/opklist/${partNumber}`;
+    const url = `${this._config.server}/opklist/${partNumber}`;
     return this._http.get(url).map(this.extractData).catch(this.handleError);
-  }  
+  }
 
   updateOpk(opk) {
-    let url = `${this._config.server}/opklist/${opk.partNumber}`;
+    const url = `${this._config.server}/opklist/${opk.partNumber}`;
     return this._http.put(url, opk).map(this.extractData).catch(this.handleError);
   }
- 
+
   private extractData(res: Response) {
-    let body = res.json();
+    const body = res.json();
     return body || {};
   }
 
