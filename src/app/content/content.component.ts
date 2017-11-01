@@ -19,6 +19,7 @@ import { PickShelf } from '../models/PickShelf';
   styleUrls: ['./content.component.css'],
   providers: [TimerService]
 })
+
 export class ContentComponent implements OnInit, OnDestroy {
 
   device: Device;
@@ -90,7 +91,7 @@ export class ContentComponent implements OnInit, OnDestroy {
         const itens = this.wagon.items;
         this.wagon.items.push(...itens);
       }
-      setTimeout(this.returnItem(), 200);
+      setTimeout(this.returnItem(), 400);
       this._timerService.start();
     }
       , error => this.errorMessage = <any>error);
@@ -105,11 +106,11 @@ export class ContentComponent implements OnInit, OnDestroy {
       setTimeout(() => this.buttonControl = true, 750);
       this.finishWagon(`Comboio finalizado via Pick to Light, tempo de Operação: ${this._timerService.getTimeString()}`);
     } else if (this.currentItem < this.wagon.items.length - 1) {
+      setTimeout(() => this.buttonControl = true, 800);
       this.currentItem++;
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.turnOnButton();
-      setTimeout(() => this.buttonControl = true, 750);
     }
   }
 
@@ -143,7 +144,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
       this.updateStationSequence();
       this._timerService.reset();
-      this.getWagons(this.currentStationId);
+      setTimeout(() => this.getWagons(this.currentStationId),0);
     });
   }
 
