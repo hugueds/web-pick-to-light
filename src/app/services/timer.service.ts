@@ -21,7 +21,7 @@ export class TimerService {
     let m, s = 0;
     let timer: string;
 
-    m = (TimerService.Time / 1000 / 60);
+    m = Math.floor((TimerService.Time / 1000 / 60));
     s = (TimerService.Time / 1000) % 60;
 
     if (s < 10) {
