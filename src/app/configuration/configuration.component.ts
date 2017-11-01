@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
-import { DeviceService } from "../services/device.service";
+import { DeviceService } from '../services/device.service';
 import { Device } from '../models/Device';
 
 @Component({
@@ -12,30 +12,30 @@ import { Device } from '../models/Device';
 export class ConfigurationComponent implements OnInit {
 
   devices: string[] = [];
-  user: string = ''
+  user: String = '';
   selectedDevice: any = {};
   device: Device;
   stations: any[];
 
 
-  constructor(private _deviceService: DeviceService, private _router: Router) {    
+  constructor(private _deviceService: DeviceService, private _router: Router) {
     this.generateTabletList();
   }
 
   ngOnInit() {
-    this.device = this._deviceService.getDeviceInfo() || new Device();        
+    this.device = this._deviceService.getDeviceInfo() || new Device();
     this.selectedDevice.name = this.device.name || this.devices[0];
     this.selectedDevice.user = this.device.user || '';
   }
 
   saveChanges() {
 
-    if (this.selectedDevice.name == '') {
+    if (this.selectedDevice.name === '') {
       console.log('DISPOSITIVO NÃO FOI SELECIONADO');
       return;
     }
 
-    if (this.selectedDevice.user == undefined || this.selectedDevice.user == '') {
+    if (this.selectedDevice.user === undefined || this.selectedDevice.user === '') {
       console.log('%c USUÁRIO NÃO FOI SELECIONADO', 'background-color: yellow;');
       return;
     }
@@ -48,23 +48,20 @@ export class ConfigurationComponent implements OnInit {
   }
 
   generateTabletList() {
-    for (let i = 1; i <= 10; i++) {
-      if (i < 10) {
-        this.devices.push('TABLET0' + i);
-      }
-      else {
-        this.devices.push('TABLET' + i);
-      }
+    const tabletList = ['60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70'];
+    for (let i = 0; i < tabletList.length; i++) {
+      this.devices.push('TABLET' + tabletList[i]);
     }
+    return true;
   }
-  
 
-  unregisterDevice(){
+
+  unregisterDevice() {
     this.selectedDevice.user = '';
     this._deviceService.unregisterDevice();
   }
 
-  changeStation(station, index){
+  changeStation(station, index) {
     localStorage.setItem('currentStationId', JSON.stringify(station));
     localStorage.setItem('currentStationSequence', JSON.stringify(index));
     return true;
