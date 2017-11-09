@@ -24,7 +24,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   static buttonPressed: boolean;
   device: Device;
-  wagon: Wagon;
+  wagon: Wagon = new Wagon();
   log: Log;
   currentItem = 0;
   currentStationId = 0;
@@ -45,7 +45,6 @@ export class ContentComponent implements OnInit, OnDestroy {
     , private _mpService: MissingPartService
     , private _timerService: TimerService) {
     this.device = _deviceService.getDeviceInfo();
-    this.wagon = new Wagon();
   }
 
   ngOnInit() {
@@ -72,9 +71,8 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe((button: PickShelf) => {
       const currentPart = this.wagon.items[this.currentItem].obj;
-      if ( (parseInt(currentPart, 10) == button.partNumber) && !ContentComponent.buttonPressed) {
-        console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: limegreen');
-        ContentComponent.buttonPressed = true;
+      console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: limegreen');
+      if (this.lastPartNumber == button.partNumber) {
         this.lastPartNumber = button.partNumber;
         this.addItem('picking');
       }
@@ -86,6 +84,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     localStorage.setItem('currentStationId', JSON.stringify(stationId));
     this.cleanPendingButtons(this.currentStationId);
     this._pickService.getWagon(stationId).subscribe(wagon => {
+      this.lastPartNumber = null;
       console.log(`Carregando comboio %c ${wagon.wagonId}`, 'color: blue;');
       this.currentItem = 0;
       this.wagon = wagon;
@@ -120,6 +119,10 @@ export class ContentComponent implements OnInit, OnDestroy {
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.turnOnButton();
     }
+  }
+
+  buttonAddItem() {
+    this.addItem('button');
   }
 
   returnItem() {
