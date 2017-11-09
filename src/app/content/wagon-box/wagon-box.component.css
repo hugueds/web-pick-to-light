@@ -1,15 +1,24 @@
-.box-wrapper{
-    width: 20%;
+wrapper{
+    width: 20%;    
     border: 1px solid blue;
-    display: inline-block;
+    display: block;
   }
   
   .box-number{
+    width: 100%;        
+    text-align: center;    
+    position: relative;    
+    background-color: lightseagreen ;    
+    color: white;
+  }
+
+  .box-popid {    
     width: 100%;    
     text-align: center;
     position: relative;
-    float: left;
+    font-size: 1.1em;
     font-weight: bold;
+    
   }
   
   .box-inner{
@@ -18,13 +27,11 @@
     background-color: #9696EE;
     text-align: center;
     position: relative;
-    float: left;
-    height: 100%;
+    float: left;    
     display:table-cell;
     vertical-align:middle;
-    font-size: 5rem;
-    font-weight: bold;
-    /* padding-bottom: 2.5rem; */  
+    font-size: 5.7em;
+    font-weight: bold;    
   }
 
 .box-finished{

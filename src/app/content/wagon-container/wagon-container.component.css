@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
     width: 56%;
     position: relative;
     float: left;
@@ -6,7 +6,7 @@
     margin-top: 2%;
     display: flex;
     margin-bottom: 1%;
-    height: 18rem;
+    height: 22rem;
 }
 
 .wrapper::after{
