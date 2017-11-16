@@ -1,12 +1,13 @@
 .wrapper {
-    width: 56%;
+    width: 53%;
     position: relative;
     float: left;
     margin-left: 3%;
     margin-top: 2%;
-    display: flex;
     margin-bottom: 1%;
     height: 22rem;
+    background-color:  #dbeffc;
+    border: 12px solid red;
 }
 
 .wrapper::after{

@@ -45,7 +45,7 @@ import { TimePipe } from './shared/time.pipe';
     ShelfDetailComponent,
     OpkComponent,
     OpkDetailComponent,
-    BoxColorDirective, WagonColorDirective, ShelfConfigComponent, TestsComponent, SearchPipe, TimePipe
+    BoxColorDirective, WagonColorDirective, ShelfConfigComponent, TestsComponent, SearchPipe, TimePipe,
   ],
   imports: [
     AppRoutingModule,

@@ -71,9 +71,11 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe((button: PickShelf) => {
       const currentPart = this.wagon.items[this.currentItem].obj;
-      console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: limegreen');
-      if (this.lastPartNumber == button.partNumber) {
-        this.lastPartNumber = button.partNumber;
+      console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: cyan');
+
+      if ((currentPart === button.partNumber.toString()) && (currentPart !== this.lastPartNumber)) {
+        console.log(`%c Botao da peça ${button.partNumber} pressionado`, 'background: limegreen');
+        this.lastPartNumber = currentPart;
         this.addItem('picking');
       }
 
@@ -83,7 +85,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   getWagons(stationId) {
     localStorage.setItem('currentStationId', JSON.stringify(stationId));
     this.cleanPendingButtons(this.currentStationId);
-    this._pickService.getWagon(stationId).subscribe(wagon => {
+    this._pickService.getWagon(stationId).subscribe((wagon: Wagon) => {
+      ContentComponent.buttonPressed = false;
       this.lastPartNumber = null;
       console.log(`Carregando comboio %c ${wagon.wagonId}`, 'color: blue;');
       this.currentItem = 0;
@@ -94,10 +97,6 @@ export class ContentComponent implements OnInit, OnDestroy {
       localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.updateScreen = false;
-      if (stationId === 723) {
-        const itens = this.wagon.items;
-        this.wagon.items.push(...itens);
-      }
       this._timerService.start();
       this.turnOnButton();
     }
@@ -110,14 +109,18 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.wagon.items[this.currentItem].isPicked = true;
     }
     if (this.currentItem >= this.wagon.items.length - 1) {
-      setTimeout(() => this.buttonControl = true, 750);
+      setTimeout(() => {
+        this.buttonControl = true;
+        ContentComponent.buttonPressed = false;
+      }, 1000);
       this.finishWagon(`Comboio finalizado via Pick to Light, tempo de Operação: ${this._timerService.getTimeString()}`);
     } else if (this.currentItem < this.wagon.items.length - 1) {
-      setTimeout(() => this.buttonControl = true, 750);
+      setTimeout(() => this.buttonControl = true, 500);
       this.currentItem++;
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.turnOnButton();
+      return;
     }
   }
 
@@ -131,11 +134,13 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.buttonControl = true;
       return;
     } else {
+      this.lastPartNumber = this.wagon.items[this.currentItem].obj;
       this.currentItem--;
+      ContentComponent.buttonPressed = false;
       localStorage.setItem('currentItem', this.currentItem.toString());
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.turnOnButton(true);
-      setTimeout(() => this.buttonControl = true, 750);
+      setTimeout(() => this.buttonControl = true, 800);
     }
   }
 
@@ -155,7 +160,10 @@ export class ContentComponent implements OnInit, OnDestroy {
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
       this.updateStationSequence();
       this._timerService.reset();
-      setTimeout(() => this.getWagons(this.currentStationId), 0);
+      setTimeout(() => {
+        this.getWagons(this.currentStationId);
+        this.returnItem();
+      }, 100);
     });
   }
 

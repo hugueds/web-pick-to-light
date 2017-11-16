@@ -14,18 +14,18 @@ export class SockService {
   public static newPartMissing = new EventEmitter<string>();
 
   private partMissingSocket;
-  private pickToLightSocket;
+  private static pickToLightSocket;
 
 
   constructor(private _config: Config) {
     this.partMissingSocket = io.connect(this._config.missingPartServer);
-    this.pickToLightSocket = io.connect(this._config.server);
+    SockService.pickToLightSocket = io.connect(this._config.server);
   }
 
   checkConnection() {
     const observable = new Observable(observer => {
       setInterval(() => {
-        if (this.pickToLightSocket.connected) {
+        if (SockService.pickToLightSocket.connected) {
           observer.next(true);
         } else {
           observer.next(false);
@@ -37,7 +37,7 @@ export class SockService {
 
   getMessageFromPick(message) {
     const observable = new Observable(observer => {
-      this.pickToLightSocket.on(message, data => {
+      SockService.pickToLightSocket.on(message, data => {
         observer.next(data);
       });
     });
@@ -50,7 +50,7 @@ export class SockService {
 
   sendPickMessage(topic, message) {
     console.log(`Emitindo para o topico: %c ${topic} \n %c Valores: ${JSON.stringify(message)})`, 'color: green ;', 'color: blue;');
-    this.pickToLightSocket.emit(topic, message);
+    SockService.pickToLightSocket.emit(topic, message);
   }
 
   sendMissingPartMessage(topic, message) {

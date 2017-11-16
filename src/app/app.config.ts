@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 export class Config {
 
     server =  'http://10.8.66.81:8082';
-    pickServer =  'pick.br.scania.com';        
+    pickServer =  'pick.br.scania.com';
     missingPartServer = 'http://10.8.66.81:8083';
 
 }
