@@ -1,0 +1,9 @@
+.wrapper {
+    width: 35%;
+    float: left;
+    margin: 1%;
+}
+
+md-card {
+    height: 4.5rem;
+}

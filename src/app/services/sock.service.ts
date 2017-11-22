@@ -14,8 +14,8 @@ export class SockService {
   public static newPartMissing = new EventEmitter<string>();
 
   private partMissingSocket;
+  // tslint:disable-next-line:member-ordering
   private static pickToLightSocket;
-
 
   constructor(private _config: Config) {
     this.partMissingSocket = io.connect(this._config.missingPartServer);
@@ -49,12 +49,12 @@ export class SockService {
   }
 
   sendPickMessage(topic, message) {
-    console.log(`Emitindo para o topico: %c ${topic} \n %c Valores: ${JSON.stringify(message)})`, 'color: green ;', 'color: blue;');
+    console.log(`Emitindo para o topico: %c ${topic} \n %c Valores: ${JSON.stringify(message)}`, 'color: green ;', 'color: blue;');
     SockService.pickToLightSocket.emit(topic, message);
   }
 
   sendMissingPartMessage(topic, message) {
-    console.log(`Emitindo para o topico: %c ${topic} \n %c Valores: ${JSON.stringify(message)})`, 'color: green ;', 'color: blue;');
+    console.log(`Emitindo para o topico: %c ${topic} \n %c Valores: ${JSON.stringify(message)}`, 'color: green ;', 'color: blue;');
     this.partMissingSocket.emit(topic, message);
   }
 

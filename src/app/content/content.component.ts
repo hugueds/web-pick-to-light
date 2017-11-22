@@ -12,6 +12,7 @@ import { Log } from '../models/Log';
 import { Device } from '../models/Device';
 import { Wagon } from '../models/Wagon';
 import { PickShelf } from '../models/PickShelf';
+import { PopidList } from '../models/PopidList';
 
 @Component({
   selector: 'app-content',
@@ -36,6 +37,11 @@ export class ContentComponent implements OnInit, OnDestroy {
   lastWagon: any = 'Nenhum';
   lastPartNumber;
   orientation: String = 'horizontal';
+  pickingMethod = 'partNumber';
+
+  currentPopidSequence = 0;
+  popidList: PopidList[];
+
   pickSubscriber;
   sockSubscriber;
 
@@ -86,10 +92,11 @@ export class ContentComponent implements OnInit, OnDestroy {
     localStorage.setItem('currentStationId', JSON.stringify(stationId));
     this.cleanPendingButtons(this.currentStationId);
     this._pickService.getWagon(stationId).subscribe((wagon: Wagon) => {
+      console.log(`Carregando comboio %c ${wagon.wagonId} do posto de ID: ${stationId}`, 'color: blue;');
       ContentComponent.buttonPressed = false;
       this.lastPartNumber = null;
-      console.log(`Carregando comboio %c ${wagon.wagonId}`, 'color: blue;');
-      this.currentItem = 0;
+      this.pickingMethod = stationId === 3253 ? 'popid' : 'partNumber';  // Criar uma funcao para buscas postos desse tipo
+      this.popidList = this.rearrange(wagon.items);
       this.wagon = wagon;
       if (this.wagon.items[0].idPart === 0) {
         return setTimeout(this.finishWagon(`Finalizando Comoboio sem peças`), 1000);
@@ -108,6 +115,14 @@ export class ContentComponent implements OnInit, OnDestroy {
     if (method === 'picking') {
       this.wagon.items[this.currentItem].isPicked = true;
     }
+    if (this.pickingMethod === 'partNumber') {
+      this.addPartNumber();
+    } else if (this.pickingMethod === 'popid') {
+      this.addPopid();
+    }
+  }
+
+  private addPartNumber() {
     if (this.currentItem >= this.wagon.items.length - 1) {
       setTimeout(() => {
         this.buttonControl = true;
@@ -124,11 +139,29 @@ export class ContentComponent implements OnInit, OnDestroy {
     }
   }
 
+  private addPopid() {
+    this.buttonControl = true;
+    this.currentPopidSequence++;
+    if (this.currentPopidSequence >= this.popidList.length) {
+      this.finishWagon();
+    }
+  }
+
+  // Criar um metodo para tratar o tipo de picking separadamente
+
   buttonAddItem() {
     this.addItem('button');
   }
 
   returnItem() {
+    if (this.pickingMethod === 'partNumber') {
+      this.returnPartNumber();
+    } else if (this.pickingMethod === 'popid') {
+      this.returnPopid();
+    }
+  }
+
+  private returnPartNumber() {
     this.buttonControl = false;
     if (this.currentItem === 0) {
       this.buttonControl = true;
@@ -144,6 +177,16 @@ export class ContentComponent implements OnInit, OnDestroy {
     }
   }
 
+  private returnPopid() {
+    this.buttonControl = false;
+    if (this.currentPopidSequence === 0) {
+      this.buttonControl = true;
+      return;
+    }
+    this.currentPopidSequence--;
+    this.buttonControl = true;
+  }
+
   resetWagon() {
     this.currentItem = 0;
     localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
@@ -157,6 +200,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.lastWagon = data.wagon;
       localStorage.setItem('lastWagon', this.lastWagon);
       this.currentItem = 0;
+      this.currentPopidSequence = 0;
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
       this.updateStationSequence();
       this._timerService.reset();
@@ -209,5 +253,20 @@ export class ContentComponent implements OnInit, OnDestroy {
     // this.pickSubscriber.unsubscribe();
   }
 
+  private rearrange(items) {
+    return items[0].boxes.map((item, i) => {
+      const parts = [];
+      for (let j = 0; j < items.length; j++) {
+        if (items[j].boxes[i].quantity > 0) {
+          parts.push({
+            obj: items[j].obj,
+            sname: items[j].sname,
+            quantity: items[j].boxes[i].quantity
+          });
+        }
+      }
+      return new PopidList(item.popId, parts);
+    });
+  }
 
 }

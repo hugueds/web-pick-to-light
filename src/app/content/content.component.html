@@ -1,38 +1,43 @@
 <div class='content-wrapper' *ngIf='!updateScreen'>
 
-  <app-part [items]='wagon?.items' [currentItem]="currentItem"></app-part>
+    <app-part *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part>
 
-  <app-wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></app-wagon-description>
+    <app-wagon-popid [popid]="popidList[currentPopidSequence]"></app-wagon-popid>
 
-  <app-missing-part [items]='wagon?.items' [currentItem]="currentItem"></app-missing-part>
+    <app-wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></app-wagon-description>
 
-  <app-wagon-container [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></app-wagon-container>
+    <app-missing-part [items]='wagon?.items' [currentItem]="currentItem"></app-missing-part>
 
-  <app-part-amount [items]='wagon?.items' [currentItem]="currentItem" ></app-part-amount>
+    <app-wagon-container *ngIf="pickingMethod === 'partNumber'" [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></app-wagon-container>
 
-  <button md-raised-button class='part-control return-part' (click)='returnItem()' [disabled]='!buttonControl'>VOLTAR</button>  
-  <button md-raised-button class='part-control confirm-part' (click)='buttonAddItem()' [disabled]='!buttonControl'>CONFIRMAR
+    <app-wagon-container-popid [popidList]="popidList" [currentPopidSequence]="currentPopidSequence"></app-wagon-container-popid>
+
+
+    <app-part-amount *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part-amount>
+
+    <button md-raised-button class='part-control return-part' (click)='returnItem()' [disabled]='!buttonControl'>VOLTAR</button>
+    <button md-raised-button class='part-control confirm-part' (click)='buttonAddItem()' [disabled]='!buttonControl'>CONFIRMAR
     <!-- <md-icon>done</md-icon> -->
   </button>
-  
-  <!-- <md-card style='display: block'> -->
+
+    <!-- <md-card style='display: block'> -->
 
     <!-- <md-card-header>
       <md-card-title> BOTÕES PARA TESTE </md-card-title>
     </md-card-header> -->
 
-    <!-- <button md-raised-button (click)='changeOrientationTest()'> MUDAR ORIENTAÇÃO </button> -->    
-<!-- 
+    <!-- <button md-raised-button (click)='changeOrientationTest()'> MUDAR ORIENTAÇÃO </button> -->
+    <!-- 
     <button md-raised-button color='warn' (click)='addItem()'> PROXIMO </button>
     <button md-raised-button color='accent' (click)='resetWagon()'> RESET </button>
     <button md-raised-button color='primary' (click)='finishWagon()'> FINALIZADO </button> -->
 
-  <!-- </md-card> -->
+    <!-- </md-card> -->
 
 </div>
 
 <div *ngIf='errorMessage'>
-  {{ errorMessage }}
+    {{ errorMessage }}
 </div>
 
 <app-banner *ngIf='updateScreen'></app-banner>

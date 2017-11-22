@@ -1,0 +1,22 @@
+<div class="wrapper">
+
+    <div class="header">
+        <div></div>
+        <div>Nome</div>
+        <div>Numero</div>
+        <div>Quantidade</div>
+    </div>
+
+    <div class="body">
+        <div class="line" *ngFor="let item of popid.parts; let i = index;">
+            <div>{{ i + 1}}</div>
+            <div>{{ item.sname }}</div>
+            <div>{{ item.obj }}</div>
+            <div>{{ item.quantity }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="empty-box">
+
+</div>
