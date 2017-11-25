@@ -2,7 +2,7 @@
 
     <app-part *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part>
 
-    <app-wagon-popid [popid]="popidList[currentPopidSequence]"></app-wagon-popid>
+    <app-wagon-popid *ngIf="pickingMethod === 'popid'" [popidList]="popidList" [currentPopidSequence]="currentPopidSequence" [wagonLength]="popidList.length"></app-wagon-popid>
 
     <app-wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></app-wagon-description>
 
@@ -10,8 +10,7 @@
 
     <app-wagon-container *ngIf="pickingMethod === 'partNumber'" [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></app-wagon-container>
 
-    <app-wagon-container-popid [popidList]="popidList" [currentPopidSequence]="currentPopidSequence"></app-wagon-container-popid>
-
+    <app-wagon-container-popid *ngIf="pickingMethod === 'popid'" [popidList]="popidList" [currentPopidSequence]="currentPopidSequence"></app-wagon-container-popid>
 
     <app-part-amount *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part-amount>
 

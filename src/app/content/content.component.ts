@@ -13,6 +13,8 @@ import { Device } from '../models/Device';
 import { Wagon } from '../models/Wagon';
 import { PickShelf } from '../models/PickShelf';
 import { PopidList } from '../models/PopidList';
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'app-content',
@@ -39,6 +41,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   orientation: String = 'horizontal';
   pickingMethod = 'partNumber';
 
+  loading = false;
+
   currentPopidSequence = 0;
   popidList: PopidList[];
 
@@ -54,22 +58,21 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
-    this.currentStationSequence = Number(localStorage.getItem('currentStationSequence'));
 
-    if (!this.currentStationSequence) {
-      this.currentStationSequence = 0;
-    }
+    this.currentStationSequence = Number(localStorage.getItem('currentStationSequence')) || 0;
 
     localStorage.setItem('currentStationSequence', JSON.stringify(this.currentStationSequence));
     this.currentStationId = this.device.stations[this.currentStationSequence];
 
-    if (this.currentStationId) {
-      this.getWagons(this.currentStationId);
-    } else {
+    if (!this.currentStationId) {
       console.error(`%c Não foi possível carregar o comboio`, 'background: red;');
-      setTimeout(this.ngOnInit, 1000);
+      setTimeout(() => window.location.href = '/', 1000);
+      return;
     }
+
+    this.getWagons(this.currentStationId);
+
+    localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
 
     this._sockService.getMessageFromPick('turned on').subscribe((value: boolean) => {
       ContentComponent.buttonPressed = false;
@@ -78,7 +81,9 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe((button: PickShelf) => {
       const currentPart = this.wagon.items[this.currentItem].obj;
       console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: cyan');
-
+      if (this.loading) {
+        return;
+      }
       if ((currentPart === button.partNumber.toString()) && (currentPart !== this.lastPartNumber)) {
         console.log(`%c Botao da peça ${button.partNumber} pressionado`, 'background: limegreen');
         this.lastPartNumber = currentPart;
@@ -89,16 +94,17 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   getWagons(stationId) {
+    this.loading = true;
     localStorage.setItem('currentStationId', JSON.stringify(stationId));
-    this.cleanPendingButtons(this.currentStationId);
+    this.cleanPendingButtons(stationId);
     this._pickService.getWagon(stationId).subscribe((wagon: Wagon) => {
       console.log(`Carregando comboio %c ${wagon.wagonId} do posto de ID: ${stationId}`, 'color: blue;');
       ContentComponent.buttonPressed = false;
       this.lastPartNumber = null;
-      this.pickingMethod = stationId === 3253 ? 'popid' : 'partNumber';  // Criar uma funcao para buscas postos desse tipo
-      this.popidList = this.rearrange(wagon.items);
+      this.pickingMethod = this.getPickMethod(stationId);
+      this.popidList = this.rearrange(wagon.items).reverse();
       this.wagon = wagon;
-      if (this.wagon.items[0].idPart === 0) {
+      if (this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
         return setTimeout(this.finishWagon(`Finalizando Comoboio sem peças`), 1000);
       }
       localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
@@ -106,12 +112,23 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.updateScreen = false;
       this._timerService.start();
       this.turnOnButton();
+      setTimeout(() => this.loading = false, 3000);
     }
       , error => this.errorMessage = <any>error);
   }
 
+  private getPickMethod(stationId) {
+    return stationId === 3253 ? 'popid' : 'partNumber';
+  }
+
   addItem(method: string = '') {
+
+    if (this.loading) {
+      return;
+    }
+
     this.buttonControl = false;
+
     if (method === 'picking') {
       this.wagon.items[this.currentItem].isPicked = true;
     }
@@ -141,13 +158,11 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   private addPopid() {
     this.buttonControl = true;
-    this.currentPopidSequence++;
-    if (this.currentPopidSequence >= this.popidList.length) {
-      this.finishWagon();
+    if (this.currentPopidSequence >= this.popidList.length - 1) {
+      this.finishWagon(`Comboio finalizado via Pick to Light, tempo de Operação: ${this._timerService.getTimeString()}`);
     }
+    this.currentPopidSequence++;
   }
-
-  // Criar um metodo para tratar o tipo de picking separadamente
 
   buttonAddItem() {
     this.addItem('button');
@@ -173,7 +188,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       localStorage.setItem('currentItem', this.currentItem.toString());
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.turnOnButton(true);
-      setTimeout(() => this.buttonControl = true, 800);
+      setTimeout(() => this.buttonControl = true, 1000);
     }
   }
 
