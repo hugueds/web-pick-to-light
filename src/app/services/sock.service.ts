@@ -12,10 +12,9 @@ import * as io from 'socket.io-client';
 export class SockService {
 
   public static newPartMissing = new EventEmitter<string>();
+  private static pickToLightSocket;
 
   private partMissingSocket;
-  // tslint:disable-next-line:member-ordering
-  private static pickToLightSocket;
 
   constructor(private _config: Config) {
     this.partMissingSocket = io.connect(this._config.missingPartServer);

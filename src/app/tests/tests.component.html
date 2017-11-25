@@ -1,14 +1,7 @@
-<br>
-
-<input [(ngModel)]='stationId' type="text">
-<input [(ngModel)]='partNumber' type="text">
-<button (click)='turnOn()'>ENVIAR</button>
-
-<hr>
 <div>
     <h5>Controladora</h5>
     <md-radio-group style='display: inline;' [(ngModel)]='selected.controller'>
-        <md-radio-button  value='-1' name='controller' seleted> TODOS </md-radio-button>
+        <md-radio-button value='-1' name='controller' seleted> TODOS </md-radio-button>
         <md-radio-button *ngFor="let controller of controllers" [value]='controller' name="controller"> {{ controller }} </md-radio-button>
     </md-radio-group>
 
@@ -18,9 +11,9 @@
         <option *ngFor='let node of nodes' [ngValue]="node" > {{ node }} </option>
     </select>
 
-    <h5>Cor</h5>
-    <md-radio-group style='display: inline;' [(ngModel)]='selected.color'>
-        <md-radio-button *ngFor="let color of colors" [value]='color.index' name="color"> {{ color.name }}</md-radio-button>
+    <h4>Cor</h4>
+    <md-radio-group style='display: flex;' [(ngModel)]='selected.color'>
+        <md-radio-button *ngFor="let color of colors" [value]='color' name="color"> {{ color }}</md-radio-button>
     </md-radio-group>
 
     <br>
@@ -36,4 +29,4 @@
 <input [(ngModel)]='selected.node' type="text">
 <input [(ngModel)]='selected.color' type="text">
 
-<br><br>    
+<br><br>

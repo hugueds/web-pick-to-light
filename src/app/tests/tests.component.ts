@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SockService } from '../services/sock.service';
 
+
 @Component({
   selector: 'tests',
   templateUrl: './tests.component.html',
@@ -13,13 +14,13 @@ export class TestsComponent implements OnInit, OnDestroy {
   controllers: number[] = Array.from(Array(8).keys());
   nodes: number[] = Array.from(Array(30).keys());
   colors: any = [
+    { index: -1, name: 'Desligar' },
     { index: 0, name: 'Vermelho' },
     { index: 1, name: 'Verde' },
     { index: 2, name: 'Amarelo' },
     { index: 3, name: 'Cyan' },
     { index: 4, name: 'Rosa' },
-    { index: 5, name: 'Azul' },
-    { index: -1, name: 'Desligar' }
+    { index: 5, name: 'Azul' }
   ];
   subscriber;
   selected: any = {};
