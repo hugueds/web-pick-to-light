@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { PopidList } from '../../models/PopidList';
 
 @Component({
   selector: 'app-wagon-popid',
@@ -7,9 +8,10 @@ import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./wagon-popid.component.css']
 })
 export class WagonPopidComponent implements OnInit, OnChanges {
-  
 
-  @Input() popid = '';
+  @Input() popidList: PopidList;
+  @Input() currentPopidSequence = 0;
+  @Input() wagonLength = 0;
 
   constructor() { }
 
@@ -17,6 +19,7 @@ export class WagonPopidComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+
   }
 
 }

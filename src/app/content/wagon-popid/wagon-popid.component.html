@@ -1,7 +1,11 @@
 <div class="wrapper">
     <md-card>
-        <md-card-title>POPID</md-card-title>
-        <md-card-subtitle> 1/ 8 </md-card-subtitle>
-        <md-card-content> {{popid.popid}} </md-card-content>
+        <div class="row">
+            <div>POPID</div>
+            <div class="popids">{{ popidList[currentPopidSequence]?.popid }}</div>
+        </div>
+        <div class="row">
+            <div class="sequence">{{ currentPopidSequence + 1 }} / {{ wagonLength }}</div>
+        </div>
     </md-card>
 </div>
