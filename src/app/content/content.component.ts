@@ -102,11 +102,11 @@ export class ContentComponent implements OnInit, OnDestroy {
       ContentComponent.buttonPressed = false;
       this.lastPartNumber = null;
       this.pickingMethod = this.getPickMethod(stationId);
-      this.popidList = this.rearrange(wagon.items).reverse();
       this.wagon = wagon;
       if (this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
         return setTimeout(this.finishWagon(`Finalizando Comoboio sem peças`), 1000);
       }
+      this.popidList = this.rearrange(wagon.items).reverse();
       localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.updateScreen = false;
@@ -265,10 +265,12 @@ export class ContentComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sockSubscriber.unsubscribe();
     this._timerService.reset();
-    // this.pickSubscriber.unsubscribe();
   }
 
   private rearrange(items) {
+    if (!items.length) {
+      return new PopidList('0', { obj : 0, sname: '', quantity: '' });
+    }
     return items[0].boxes.map((item, i) => {
       const parts = [];
       for (let j = 0; j < items.length; j++) {

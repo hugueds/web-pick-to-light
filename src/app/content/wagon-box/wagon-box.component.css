@@ -7,39 +7,40 @@
     display: block;
     margin-left: 1.6rem;
     margin-top: 0.8rem;
-  }
-  
-  .box-number{
-    width: 100%;        
-    text-align: center;    
-    position: relative;    
-    background-color: lightseagreen ;    
-    color: white;
-  }
+}
 
-  .box-popid {    
-    width: 100%;    
+.box-number {
+    width: 100%;
     text-align: center;
     position: relative;
-    font-size: 1.1em;
+    background-color: lightseagreen;
+    color: white;
+}
+
+.box-popid {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    font-size: 1.8em;
     font-weight: bold;
-    padding-top: 7px;
-  }
-  
-  .box-inner{
+    text-shadow: 1px 1px 1px rgb(226, 226, 226);
+    background-color: white;
+}
+
+.box-inner {
     width: 100%;
     color: white;
     background-color: #9696EE;
     text-align: center;
     position: relative;
-    float: left;    
-    display:table-cell;
-    vertical-align:middle;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
     font-size: 5.5em;
-    font-weight: bold;    
-  }
+    font-weight: bold;
+}
 
-.box-finished{
+.box-finished {
     color: lightgreen;
     background-color: lightgreen;
 }
