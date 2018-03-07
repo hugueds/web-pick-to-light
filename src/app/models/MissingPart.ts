@@ -1,12 +1,13 @@
-export class MissingPart{
+export class MissingPart {
 
-    part : number;
-    buffer : number;
-    module : number;
+    part: number;
+    buffer: number;
+    module: number;
 
-    constructor(){       
+    constructor() {
         this.part = 0;
         this.buffer = 0;
         this.module = 0;
     }
+
 }

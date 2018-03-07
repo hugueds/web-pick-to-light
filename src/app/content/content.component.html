@@ -8,6 +8,9 @@
 
     <app-missing-part [items]='wagon?.items' [currentItem]="currentItem"></app-missing-part>
 
+    <!-- Aparecer apenas se a peça atual for faltante -->
+    <app-pending-part *ngIf="wagon?.items[currentItem].isMissing" [items]='wagon?.items' [currentItem]="currentItem"></app-pending-part>
+
     <app-wagon-container *ngIf="pickingMethod === 'partNumber'" [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></app-wagon-container>
 
     <app-wagon-container-popid *ngIf="pickingMethod === 'popid'" [popidList]="popidList" [currentPopidSequence]="currentPopidSequence"></app-wagon-container-popid>

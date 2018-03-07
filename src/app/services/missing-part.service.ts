@@ -8,18 +8,30 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { MissingPart } from '../models/MissingPart';
+import { Item } from '../models/Item';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 
 export class MissingPartService {
 
-    constructor(private _http: Http, private _config: Config) {  }
+    private subject = new Subject();
+    currentMessage$ = this.subject.asObservable();
+
+    constructor(private _http: Http, private _config: Config) {
+
+    }
 
     getMissingParts() {
         return this._http.get(`${this._config.server}/cel/1/parts`).map(body => body.json()).catch(this.handleError);
     }
     sendMissingPart(part: MissingPart) {
         return this._http.post(`${this._config.server}/cel/1/parts`, part).map(body => body.json()).catch(this.handleError);
+    }
+
+    addMissingPartToList(item: Item) {
+        this.subject.next(item);
     }
 
     private handleError(error: Response | any) {

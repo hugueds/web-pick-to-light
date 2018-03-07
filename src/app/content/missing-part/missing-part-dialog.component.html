@@ -1,4 +1,4 @@
-<h1 md-dialog-title> PEÇA FALTANTE </h1>
+<h1 md-dialog-title> SOLICITAR EMPILHADEIRA </h1>
 
 <md-dialog-content>        
            
@@ -19,8 +19,10 @@
 <md-dialog-actions>
 
     <span class='spacer'></span>
-    <button md-raised-button md-dialog-close color='primary' (click)='send()' > SOLICITAR </button>
+    <button md-raised-button md-dialog-close color='primary' (click)='requestMissing(true)' > FALTANTE </button>
     <span class='spacer'></span>
+    <button md-raised-button md-dialog-close (click)='requestMissing(false)'> NÃO FALTANTE </button>
+    <span class='spacer'></span>    
     <button md-raised-button md-dialog-close color='warn'> CANCELAR </button>
     <span class='spacer'></span>    
 

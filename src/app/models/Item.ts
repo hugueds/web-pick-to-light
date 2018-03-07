@@ -16,8 +16,8 @@ export class Item {
     timePickingPart: any;
     columns: number;
     partName: string;
-    boxes : Box[];
+    boxes: Box[];
 
-    constructor(){ }
-    
+    constructor() {
+     }
 }

@@ -16,6 +16,7 @@ import { MissingPartService } from '../services/missing-part.service';
 import { PartAmountComponent } from './part-amount/part-amount.component';
 import { WagonContainerPopidComponent } from './wagon-container-popid/wagon-container-popid.component';
 import { WagonPopidComponent } from './wagon-popid/wagon-popid.component';
+import { PendingPartComponent } from './missing-part/pending-part.component';
 
 @NgModule({
     imports: [CommonModule, MaterialModule, FormsModule],
@@ -23,7 +24,7 @@ import { WagonPopidComponent } from './wagon-popid/wagon-popid.component';
         ContentComponent,
         PartComponent,
         WagonComponent,
-        MissingPartComponent,
+        MissingPartComponent,  PendingPartComponent,
         WagonBoxComponent, WagonContainerComponent,
         MissingPartComponent, MissingPartDialogComponent,
         BannerComponent,

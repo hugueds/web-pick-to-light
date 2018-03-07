@@ -14,6 +14,7 @@ import { Wagon } from '../models/Wagon';
 import { PickShelf } from '../models/PickShelf';
 import { PopidList } from '../models/PopidList';
 import { Observable } from 'rxjs/Observable';
+import { Item } from '../models/Item';
 
 
 @Component({
@@ -91,6 +92,12 @@ export class ContentComponent implements OnInit, OnDestroy {
       }
 
     });
+
+    this._mpService.currentMessage$.subscribe( (item: Item) => {
+      this.wagon.items.push(item);
+      this.addItem('partNumber');
+    });
+
   }
 
   getWagons(stationId) {

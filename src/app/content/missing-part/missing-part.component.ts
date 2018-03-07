@@ -12,7 +12,7 @@ import { Wagon } from '../../models/Wagon';
 @Component({
   selector: 'app-missing-part',
   template: `
-  <button md-fab (click)='openDialog()' >
+  <button md-fab class="missing-part-button" (click)='openDialog()' >
     <img src='assets/images/forklift.png'/>
   </button>
   `,
@@ -28,7 +28,6 @@ export class MissingPartComponent implements OnInit {
 
   constructor(
     private _dialog: MdDialog
-    , private _mpService: MissingPartService
     , private _sockService: SockService
     , private _pickService: PickService) {
 
@@ -39,17 +38,17 @@ export class MissingPartComponent implements OnInit {
   }
 
   openDialog() {
-
-    //
     this.dialogRef = this._dialog.open(MissingPartDialogComponent, {
       disableClose: true,
       hasBackdrop: true,
       width: '70%',
-      data: { part: this.items[this.currentItem].obj }
+      data: {
+        part: this.items[this.currentItem].obj,
+        item: this.items[this.currentItem]
+      }
     });
 
     this.dialogRef.afterClosed().subscribe(part => {
-      // this._mpService.sendMissingPart(result).subscribe(res => console.log(res))
       this._sockService.sendMissingPartMessage('dec-part', part);
     });
   }
@@ -65,15 +64,22 @@ export class MissingPartComponent implements OnInit {
 export class MissingPartDialogComponent {
 
   partMissing: MissingPart = new MissingPart();
+  item: Item;
 
   constructor(
     @Inject(MD_DIALOG_DATA) public data: any,
-    public dialogRef: MdDialogRef<MissingPartDialogComponent>,
+    public dialogRef: MdDialogRef<MissingPartDialogComponent>
+    , private _mpService: MissingPartService
   ) {
     this.partMissing.part = data.part;
+    this.item = data.item;
   }
 
-  send() {
+  requestMissing(isMissing: boolean) {
+    if (isMissing) {
+      this.item.isMissing = true;
+      this._mpService.addMissingPartToList(this.item);
+    }
     this.dialogRef.close(this.partMissing);
   }
 
