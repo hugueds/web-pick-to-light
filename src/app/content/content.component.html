@@ -1,12 +1,12 @@
 <div class='content-wrapper' *ngIf='!updateScreen'>
 
-    <app-part *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part>
+    <app-part [mcc]=isMCC *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part>
 
-    <app-wagon-popid *ngIf="pickingMethod === 'popid'" [popidList]="popidList" [currentPopidSequence]="currentPopidSequence" [wagonLength]="popidList.length"></app-wagon-popid>
+    <app-wagon-popid  *ngIf="pickingMethod === 'popid'" [popidList]="popidList" [currentPopidSequence]="currentPopidSequence" [wagonLength]="popidList.length"></app-wagon-popid>
 
-    <app-wagon-description [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></app-wagon-description>
+    <app-wagon-description [mcc]=isMCC [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></app-wagon-description>
 
-    <app-missing-part [items]='wagon?.items' [currentItem]="currentItem"></app-missing-part>
+    <app-missing-part  [items]='wagon?.items' [currentItem]="currentItem"></app-missing-part>
 
     <!-- Aparecer apenas se a peça atual for faltante -->
     <app-pending-part *ngIf="wagon?.items[currentItem].isMissing" [items]='wagon?.items' [currentItem]="currentItem"></app-pending-part>

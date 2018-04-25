@@ -34,13 +34,14 @@ export class ContentComponent implements OnInit, OnDestroy {
   currentStationId = 0;
   currentStationSequence: number;
   errorMessage: any;
-  buttonControl: Boolean = true;
-  updateScreen: Boolean = true;
-  requestBlocked: Boolean = false;
+  buttonControl = true;
+  updateScreen = true;
+  requestBlocked = false;
   lastWagon: any = 'Nenhum';
   lastPartNumber;
   orientation: String = 'horizontal';
   pickingMethod = 'partNumber';
+  isMCC: boolean;
 
   loading = false;
 
@@ -109,6 +110,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       ContentComponent.buttonPressed = false;
       this.lastPartNumber = null;
       this.pickingMethod = this.getPickMethod(stationId);
+      this.isMCC = this.verifyMCC(stationId);
       this.wagon = wagon;
       if (this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
         return setTimeout(this.finishWagon(`Finalizando Comoboio sem peças`), 1000);
@@ -126,6 +128,10 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   private getPickMethod(stationId) {
     return stationId === 3253 ? 'popid' : 'partNumber';
+  }
+
+  private verifyMCC(stationId) {
+    return stationId === 5705;
   }
 
   addItem(method: string = '') {

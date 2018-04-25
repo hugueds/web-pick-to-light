@@ -17,6 +17,7 @@ export class PartComponent implements OnInit, OnChanges {
 
   @Input() items: Item[];
   @Input() currentItem: number;
+  @Input() mcc: boolean;
 
   constructor() { }
 

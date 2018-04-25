@@ -36,3 +36,7 @@ img {
     height: 275px;
     margin-bottom: 0px;
 }
+
+.mcc {
+    background-color: yellow !important;
+}

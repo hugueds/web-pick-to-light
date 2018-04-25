@@ -5,14 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { MaterialModule } from "./material/material.module";
-import { ContentModule } from "./content/content.module";
-import { AppRoutingModule } from "./app-routing.module";
+import { MaterialModule } from './material/material.module';
+import { ContentModule } from './content/content.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { Config } from './app.config';
-import { DeviceService } from "./services/device.service";
-import { SockService } from "./services/sock.service";
-import { PickService } from "./services/pick.service";
+import { DeviceService } from './services/device.service';
+import { SockService } from './services/sock.service';
+import { PickService } from './services/pick.service';
 
 import { ContentComponent } from './content/content.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -35,11 +35,11 @@ import { TimePipe } from './shared/time.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent,           
-    NavbarComponent,    
+    AppComponent,
+    NavbarComponent,
     FooterComponent,
-    ConfigurationComponent, 
-    AboutComponent,     
+    ConfigurationComponent,
+    AboutComponent,
     TestsComponent,
     ShelfConfigComponent,
     ShelfDetailComponent,

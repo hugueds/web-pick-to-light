@@ -4,16 +4,16 @@
 }
 
 button {
- width: 5rem;
- height: 5rem;
- margin-left: 1%;
+ width: 4rem;
+ height: 4rem;
+ margin-left: 0.5%;
  margin-top: 2.75%;
  background-color: rgb(223, 227, 5) !important; 
 }
 
-img{
+img {
     width: 80%;
-    margin-left: 10%;
+    margin-left: 10%;    
 }
 
 .pending-part-button {

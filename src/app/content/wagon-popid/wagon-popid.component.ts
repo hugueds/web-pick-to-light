@@ -12,6 +12,7 @@ export class WagonPopidComponent implements OnInit, OnChanges {
   @Input() popidList: PopidList;
   @Input() currentPopidSequence = 0;
   @Input() wagonLength = 0;
+  @Input() mcc: boolean;
 
   constructor() { }
 
