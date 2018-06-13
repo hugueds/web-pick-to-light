@@ -22,7 +22,7 @@ const routes: Routes = [
     { path : 'opk/create', component: OpkDetailComponent },
     { path: 'configuration', component: ConfigurationComponent },
     { path: 'about', component: AboutComponent },
-    {path: 'tests', component: TestsComponent},
+    { path: 'tests', component: TestsComponent},
     { path: '', component: ContentComponent, canActivate : [DeviceGuard]  },
 ];
 

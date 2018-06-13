@@ -112,7 +112,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.pickingMethod = this.getPickMethod(stationId);
       this.isMCC = this.verifyMCC(stationId);
       this.wagon = wagon;
-      if (this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
+      if (!this.wagon.items || this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
         return setTimeout(this.finishWagon(`Finalizando Comoboio sem peças`), 1000);
       }
       this.popidList = this.rearrange(wagon.items).reverse();
@@ -127,11 +127,11 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   private getPickMethod(stationId) {
-    return stationId === 3253 ? 'popid' : 'partNumber';
+    return stationId === 3253 || stationId === 5738  ? 'popid' : 'partNumber'; // Verficar alterações posteriores
   }
 
   private verifyMCC(stationId) {
-    return stationId === 5705;
+    return stationId === 5705; // Verificar alterações posteriores
   }
 
   addItem(method: string = '') {
