@@ -48,6 +48,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   generateTabletList() {
+    this.devices = [];
     const tabletList = ['60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '966', '967'];
     for (let i = 0; i < tabletList.length; i++) {
       this.devices.push('TABLET' + tabletList[i]);
