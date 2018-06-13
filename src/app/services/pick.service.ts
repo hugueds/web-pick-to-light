@@ -101,7 +101,6 @@ export class PickService {
 
   private extractData(res: Response) {
     const body = res.json();
-    console.log('ok');
     return body || {};
   }
 
