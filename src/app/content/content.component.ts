@@ -127,7 +127,10 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   private getPickMethod(stationId) {
-    return stationId === 3253 || stationId === 5738  ? 'popid' : 'partNumber'; // Verficar alterações posteriores
+    const popidStations = [3253, 5738, 5804, 565, 5814];
+    const isPopid = popidStations.includes(stationId);
+    return isPopid ? 'popid' : 'partNumber';
+    // return stationId === 3253 || stationId === 5738  ? 'popid' : 'partNumber'; // Verficar alterações posteriores
   }
 
   private verifyMCC(stationId) {

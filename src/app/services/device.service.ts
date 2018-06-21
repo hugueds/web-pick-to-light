@@ -9,6 +9,7 @@ import { DEVICE_EXAMPLE } from './../examples/device.example';
 export class DeviceService {
 
     private static device: Device = new Device();
+    public deviceList: string[];
 
     deviceUpdated = new EventEmitter<any>();
 
@@ -16,6 +17,7 @@ export class DeviceService {
         if (JSON.parse(localStorage.getItem('device'))) {
             DeviceService.device = JSON.parse(localStorage.getItem('device'));
         }
+        this.deviceList = ['60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '963', '964', '965', '966', '967'];
     }
 
     getDeviceInfo(): Device {
