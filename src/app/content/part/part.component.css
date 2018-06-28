@@ -20,6 +20,11 @@ md-card-footer {
     padding: 0px 0px 10px 0px;
 }
 
+md-card-subtitle {
+    text-align: center;
+    font-size: 2rem;
+}
+
 img {
     display: block;
     width: 18rem;

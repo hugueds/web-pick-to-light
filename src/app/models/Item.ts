@@ -17,6 +17,7 @@ export class Item {
     columns: number;
     partName: string;
     boxes: Box[];
+    popName: string;
 
     constructor() {
      }
