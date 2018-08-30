@@ -14,16 +14,17 @@ import { OpkDetailComponent } from './opk/detail/opk-detail.component';
 
 
 const routes: Routes = [
-    { path : 'shelf-config', component: ShelfConfigComponent },
-    { path : 'shelf-config/create', component: ShelfDetailComponent },
-    { path : 'shelf-config/edit/:buttonId', component: ShelfDetailComponent },
-    { path : 'opk', component: OpkComponent },
-    { path : 'opk/edit/:partNumber', component: OpkDetailComponent },
-    { path : 'opk/create', component: OpkDetailComponent },
+    { path: 'shelf-config', component: ShelfConfigComponent },
+    { path: 'shelf-config/create', component: ShelfDetailComponent },
+    { path: 'shelf-config/edit/:buttonId', component: ShelfDetailComponent },
+    { path: 'opk', component: OpkComponent },
+    { path: 'opk/create', component: OpkDetailComponent },
+    { path: 'opk/edit/:partNumber', component: OpkDetailComponent },
     { path: 'configuration', component: ConfigurationComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'tests', component: TestsComponent},
-    { path: '', component: ContentComponent, canActivate : [DeviceGuard]  },
+    { path: 'tests', component: TestsComponent },
+    { path: 'home', component: ContentComponent, canActivate: [DeviceGuard] },
+    { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
 @NgModule({

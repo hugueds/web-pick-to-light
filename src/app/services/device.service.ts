@@ -14,10 +14,15 @@ export class DeviceService {
     deviceUpdated = new EventEmitter<any>();
 
     constructor(private _pickService: PickService) {
+
         if (JSON.parse(localStorage.getItem('device'))) {
             DeviceService.device = JSON.parse(localStorage.getItem('device'));
         }
-        this.deviceList = ['60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '963', '964', '965', '966', '967'];
+
+        // Criar um serviço para salvar os dados e buscar via API
+        this.deviceList = ['60', '61', '62', '63', '64', '65', '66',
+            '67', '68', '69', '70', '963', '964', '965', '966', '967',
+            '1110', '1111', '1112', '1132', '1131', '1134'];
     }
 
     getDeviceInfo(): Device {
@@ -30,23 +35,23 @@ export class DeviceService {
         DeviceService.device.name = device.name;
         DeviceService.device.user = device.user;
         this._pickService.getConfiguration(device.name).subscribe(station => {
-                if (station.idGroupStationVp) {
-                    const stationId = station.idGroupStationVp.toString();
-                    this._pickService.getGroup(stationId).subscribe(group => {
-                        DeviceService.device.deviceModel = navigator.userAgent.match(/\((\w.+);/)[1].replace(';', '-');
-                        DeviceService.device.groupId = group.id;
-                        DeviceService.device.groupName = group.name;
-                        DeviceService.device.stations = group.stations.map(s => s.idStation);
-                        DeviceService.device.currentStation = 0;
-                        DeviceService.device.isRegistered = true;
-                        localStorage.setItem('device', JSON.stringify(DeviceService.device));
-                        this.deviceUpdated.emit('registered');
-                        cb();
-                    });
-                }
-            }, error => {
-                console.error(error);
-            });
+            if (station.idGroupStationVp) {
+                const stationId = station.idGroupStationVp.toString();
+                this._pickService.getGroup(stationId).subscribe(group => {
+                    DeviceService.device.deviceModel = navigator.userAgent.match(/\((\w.+);/)[1].replace(';', '-');
+                    DeviceService.device.groupId = group.id;
+                    DeviceService.device.groupName = group.name;
+                    DeviceService.device.stations = group.stations.map(s => s.idStation);
+                    DeviceService.device.currentStation = 0;
+                    DeviceService.device.isRegistered = true;
+                    localStorage.setItem('device', JSON.stringify(DeviceService.device));
+                    this.deviceUpdated.emit('registered');
+                    cb();
+                });
+            }
+        }, error => {
+            console.error(error);
+        });
     }
 
     unregisterDevice() {

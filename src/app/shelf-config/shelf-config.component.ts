@@ -25,24 +25,24 @@ export class ShelfConfigComponent implements OnInit, OnDestroy, OnChanges {
     this.buttons = [];
     this.getButtons();
     setTimeout(() => {
-      let table = document.getElementsByClassName('container')[0];
-      let scroll = localStorage.getItem('scrollPosition');
-      table.scrollTop = parseInt(scroll);
+      const table = document.getElementsByClassName('container')[0];
+      const scroll = localStorage.getItem('scrollPosition');
+      table.scrollTop = parseInt(scroll, 10);
     }, 100);
   }
 
-  ngOnChanges(change){
-    console.log(change)
+  ngOnChanges(change) {
+    console.log(change);
   }
 
   ngOnDestroy() {
-    let table = document.getElementsByClassName('container')[0];
-    let scroll = table.scrollTop.toString();
+    const table = document.getElementsByClassName('container')[0];
+    const scroll = table.scrollTop.toString();
     localStorage.setItem('scrollPosition', scroll);
   }
 
   find() {
-    
+
   }
 
 

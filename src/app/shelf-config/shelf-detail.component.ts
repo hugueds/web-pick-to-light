@@ -14,7 +14,7 @@ export class ShelfDetailComponent implements OnInit {
 
   formButton: PickShelf = new PickShelf();
   buttons: PickShelf[];
-  isEditMode: boolean = false;
+  isEditMode = false;
 
   constructor(private _pickService: PickService,
     private _router: Router,
@@ -30,9 +30,9 @@ export class ShelfDetailComponent implements OnInit {
         this.isEditMode = true;
         this._pickService.getButton(params['buttonId']).subscribe(btn => {
           this.formButton = btn;
-        })
+        });
       }
-    })
+    });
   }
 
   getButtons() {
@@ -51,29 +51,29 @@ export class ShelfDetailComponent implements OnInit {
     }
 
     this._pickService.saveButton(button).subscribe(data => {
-      this._router.navigate(['shelf-config'])      
-    })
+      this._router.navigate(['shelf-config']);
+    });
 
   }
 
   edit(button) {
-    this._pickService.updateButton(button).subscribe(data => {      
-      this._router.navigate(['shelf-config'])
-    })
+    this._pickService.updateButton(button).subscribe(data => {
+      this._router.navigate(['shelf-config']);
+    });
   }
 
-  
+
   clean() {
 
   }
 
   checkData(button: PickShelf) {
-    if ((typeof button.buttonId) != 'number') {
+    if ((typeof button.buttonId) !== 'number') {
       return false;
     }
 
     for (let i = 0; i < this.buttons.length; i++) {
-      if (this.buttons[i].buttonId == button.buttonId) {
+      if (this.buttons[i].buttonId === button.buttonId) {
         return false;
       }
     }
