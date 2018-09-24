@@ -24,7 +24,7 @@
   background-color: white;
 }
 
-md-card {
+mat-card {
     padding: 0px 0px 0px 0px ;
     background-color:  #dbeffc;
     border: 12px solid red;

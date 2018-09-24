@@ -6,13 +6,13 @@ import { Device } from '../models/Device';
 @Component({
   selector: 'app-footer',
   template: `
-  <md-toolbar>
+  <mat-toolbar>
     <span>USUÁRIO: {{ device?.user }}</span>
     <span class="spacer"></span>
     <span>{{ device?.name }}</span>
     <span class="spacer"></span>
     <span>{{ device?.groupName }}</span>
-  </md-toolbar>`,
+  </mat-toolbar>`,
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {

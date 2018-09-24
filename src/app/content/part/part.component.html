@@ -1,13 +1,13 @@
-<md-card [class.mcc]=mcc>
+<mat-card [class.mcc]=mcc>
 
-    <md-card-title> PEÇA {{ currentItem + 1 }} / {{ items?.length }} </md-card-title>
-    <md-card-title class='part-number'> {{ items[currentItem]?.obj }}</md-card-title>
-    <md-card-content>
-        <img md-card-lg-image [src]="partPicture" [class.photo]='hasImage' />
-        <md-card-subtitle> {{ items[currentItem]?.popName }}</md-card-subtitle>
-    </md-card-content>
-    <md-card-footer> {{ items[currentItem]?.sname }}</md-card-footer>
+    <mat-card-title> PEÇA {{ currentItem + 1 }} / {{ items?.length }} </mat-card-title>
+    <mat-card-title class='part-number'> {{ items[currentItem]?.obj }}</mat-card-title>
+    <mat-card-content>
+        <img mat-card-lg-image [src]="partPicture" [class.photo]='hasImage' />
+        <mat-card-subtitle> {{ items[currentItem]?.popName }}</mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-footer> {{ items[currentItem]?.sname }}</mat-card-footer>
 
 
 
-</md-card>
+</mat-card>

@@ -1,4 +1,4 @@
-md-card{
+mat-card{
     float: left;
     width: 40%;
     margin-left: 3%;    
@@ -7,7 +7,7 @@ md-card{
     
 }
 
-md-card-title{
+mat-card-title{
     text-align: center;
     font-weight: bold;
     margin-bottom: 2%;        

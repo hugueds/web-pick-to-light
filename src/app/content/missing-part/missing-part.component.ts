@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MissingPart } from '../../models/MissingPart';
 import { Item } from '../../models/Item';
@@ -27,7 +27,7 @@ export class MissingPartComponent implements OnInit {
   @Input() currentItem;
 
   constructor(
-    private _dialog: MdDialog
+    private _dialog: MatDialog
     , private _sockService: SockService
     , private _pickService: PickService) {
 
@@ -67,8 +67,8 @@ export class MissingPartDialogComponent {
   item: Item;
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public dialogRef: MdDialogRef<MissingPartDialogComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<MissingPartDialogComponent>
     , private _mpService: MissingPartService
   ) {
     this.partMissing.part = data.part;

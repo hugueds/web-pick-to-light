@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'shelf-detail',
   templateUrl: './shelf-detail.component.html',
   styleUrls: ['./shelf-config.component.css']

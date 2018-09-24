@@ -1,9 +1,11 @@
-import { DeviceGuard } from './guard/device.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+import { DeviceGuard } from './guard/device.guard';
 
 import { MaterialModule } from './material/material.module';
 import { ContentModule } from './content/content.module';
@@ -56,7 +58,8 @@ import { TimePipe } from './shared/time.pipe';
     MaterialModule,
     ContentModule
   ],
-  providers: [SockService, DeviceService, PickService, DeviceGuard, Config],
+  providers: [SockService, DeviceService, PickService, DeviceGuard, Config, { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

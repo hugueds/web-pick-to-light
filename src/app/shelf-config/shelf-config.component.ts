@@ -16,7 +16,7 @@ export class ShelfConfigComponent implements OnInit, OnDestroy, OnChanges {
   formButton: PickShelf = new PickShelf();
   buttons: PickShelf[];
   headers: string[] = [
-    'ID UNICO', 'CONTROLADORA', 'NUMERO', 'PEÇA', 'ID DO POSTO', 'COR', 'EDITAR', 'APAGAR'
+    'PLC', 'ID UNICO', 'CONTROLADORA', 'NUMERO', 'PEÇA', 'ID DO POSTO', 'COR', 'EDITAR', 'APAGAR'
   ];
 
   constructor(private _pickService: PickService) { }
@@ -57,10 +57,7 @@ export class ShelfConfigComponent implements OnInit, OnDestroy, OnChanges {
   delete(button) {
     this._pickService.deleteButton(button).subscribe(data => {
       this.getButtons();
-    })
+    });
   }
-
-
-
 
 }

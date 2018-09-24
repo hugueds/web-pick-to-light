@@ -53,6 +53,7 @@ export class ConfigurationComponent implements OnInit {
     for (let i = 0; i < tabletList.length; i++) {
       this.devices.push('TABLET' + tabletList[i]);
     }
+    this.devices.push('SPARE_BOX');
     return true;
   }
 

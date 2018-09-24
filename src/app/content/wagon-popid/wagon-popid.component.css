@@ -4,7 +4,7 @@
     margin: 1%;    
 }
 
-md-card {
+mat-card {
     height: 4.7rem;
     display: flex;
     flex-flow: column nowrap;

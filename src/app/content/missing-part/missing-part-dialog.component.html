@@ -1,29 +1,29 @@
-<h1 md-dialog-title> SOLICITAR EMPILHADEIRA </h1>
+<h1 mat-dialog-title> SOLICITAR EMPILHADEIRA </h1>
 
-<md-dialog-content>        
+<mat-dialog-content>        
            
-    <md-input-container > <!-- class='full-width' -->
-        <input mdInput id='partNumber' type="number" placeholder="PEÇA Nº" min=0 [(ngModel)]='partMissing.part' [value]="partMissing.part"/>
-    </md-input-container>    
+    <mat-input-container > <!-- class='full-width' -->
+        <input matInput id='partNumber' type="number" placeholder="PEÇA Nº" min=0 [(ngModel)]='partMissing.part' [value]="partMissing.part"/>
+    </mat-input-container>    
 
-    <md-input-container > <!-- class='full-width' -->
-        <input mdInput id='partBuffer' type='number' placeholder="BUFFER" min=0 [(ngModel)]='partMissing.buffer'/>
-    </md-input-container>
+    <mat-input-container > <!-- class='full-width' -->
+        <input matInput id='partBuffer' type='number' placeholder="BUFFER" min=0 [(ngModel)]='partMissing.buffer'/>
+    </mat-input-container>
 
-    <md-input-container > <!-- class='full-width' -->
-        <input mdInput id='partModule' type='number' placeholder="MODULO" min=0 [(ngModel)]='partMissing.module'/>
-    </md-input-container>
+    <mat-input-container > <!-- class='full-width' -->
+        <input matInput id='partModule' type='number' placeholder="MODULO" min=0 [(ngModel)]='partMissing.module'/>
+    </mat-input-container>
 
-</md-dialog-content>
+</mat-dialog-content>
 
-<md-dialog-actions>
+<mat-dialog-actions>
 
     <span class='spacer'></span>
-    <button md-raised-button md-dialog-close color='primary' (click)='requestMissing(true)' > FALTANTE </button>
+    <button mat-raised-button mat-dialog-close color='primary' (click)='requestMissing(true)' > FALTANTE </button>
     <span class='spacer'></span>
-    <button md-raised-button md-dialog-close (click)='requestMissing(false)'> NÃO FALTANTE </button>
+    <button mat-raised-button mat-dialog-close (click)='requestMissing(false)'> NÃO FALTANTE </button>
     <span class='spacer'></span>    
-    <button md-raised-button md-dialog-close color='warn'> CANCELAR </button>
+    <button mat-raised-button mat-dialog-close color='warn'> CANCELAR </button>
     <span class='spacer'></span>    
 
-</md-dialog-actions>
+</mat-dialog-actions>

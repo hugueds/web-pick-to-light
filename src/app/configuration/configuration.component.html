@@ -12,8 +12,8 @@
     <input type="text" placeholder='USUARIO' [value]='deviceUser' [(ngModel)]='selectedDevice.user' id='deviceUser' name='deviceUser'
         #deviceUser='ngModel' required />
 
-    <button md-raised-button color='primary' (click)='saveChanges()'> SALVAR ALTERAÇÕES</button>
-    <button md-raised-button color='warn' (click)='unregisterDevice()'> REMOVER DISPOSITIVO</button>
+    <button mat-raised-button color='primary' (click)='saveChanges()'> SALVAR ALTERAÇÕES</button>
+    <button mat-raised-button color='warn' (click)='unregisterDevice()'> REMOVER DISPOSITIVO</button>
 
 </form>
 
@@ -32,7 +32,7 @@
 <h2> POSTOS DISPONIVEIS PARA ESTE EQUIPAMENTO</h2>
 <div class='stations-container'>
     <div *ngFor='let station of device.stations; let i = index;'>        
-        <button class='station' md-raised-button (click)='changeStation(station, i)'> {{ station }} </button>
+        <button class='station' mat-raised-button (click)='changeStation(station, i)'> {{ station }} </button>
     </div>
     <!-- <button md-raised-button style='background:limegreen; color: white;' >SALVAR</button> -->
 </div>

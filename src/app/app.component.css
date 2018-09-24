@@ -3,13 +3,13 @@
     margin: 0 auto;
 }
 
-md-toolbar{
+mat-toolbar{
     position: relative;
     float: left;
     width: 100%;
 }
 
-md-card{
+mat-card{
     position: relative;
     float: left;
     width: 100%;

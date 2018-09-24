@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { AboutComponent } from './about/about.component';
@@ -12,8 +12,8 @@ import { ShelfDetailComponent } from './shelf-config/shelf-detail.component';
 import { OpkComponent } from './opk/opk.component';
 import { OpkDetailComponent } from './opk/detail/opk-detail.component';
 
-
 const routes: Routes = [
+    { path: '', component: ContentComponent, canActivate: [DeviceGuard], pathMatch: 'full' },
     { path: 'shelf-config', component: ShelfConfigComponent },
     { path: 'shelf-config/create', component: ShelfDetailComponent },
     { path: 'shelf-config/edit/:buttonId', component: ShelfDetailComponent },
@@ -23,8 +23,7 @@ const routes: Routes = [
     { path: 'configuration', component: ConfigurationComponent },
     { path: 'about', component: AboutComponent },
     { path: 'tests', component: TestsComponent },
-    { path: 'home', component: ContentComponent, canActivate: [DeviceGuard] },
-    { path: '', redirectTo: '/home', pathMatch: 'full'}
+    { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

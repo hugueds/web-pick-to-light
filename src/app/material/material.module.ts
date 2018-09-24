@@ -1,54 +1,54 @@
 import { NgModule } from '@angular/core';
 import {
-    MdDialogModule,
-    MdButtonModule,
-    MdCardModule,
-    MdMenuModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdSlideToggleModule,
-    MdSidenavModule,
-    MdProgressBarModule,
-    MdProgressSpinnerModule,    
-    MdInputModule,
-    MdSelectModule,
-    MdRadioModule
-    // MdTableModule
-} from "@angular/material";
+    MatDialogModule,
+    MatButtonModule,
+    MatCardModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatSidenavModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule
+    // MatTableModule
+} from '@angular/material';
 
 
 @NgModule({
     imports: [
-        MdDialogModule,
-        MdButtonModule,
-        MdCardModule,
-        MdMenuModule,
-        MdToolbarModule,
-        MdIconModule,
-        MdSlideToggleModule,
-        MdSidenavModule,
-        MdProgressBarModule,
-        MdProgressSpinnerModule,
-        MdInputModule,
-        MdSelectModule,
-        MdRadioModule
+        MatDialogModule,
+        MatButtonModule,
+        MatCardModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        MatSidenavModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatSelectModule,
+        MatRadioModule
         // MdTableModule
     ],
     exports: [
-        MdDialogModule,
-        MdButtonModule,
-        MdCardModule,
-        MdMenuModule,
-        MdToolbarModule,
-        MdIconModule,
-        MdSlideToggleModule,
-        MdSidenavModule,
-        MdProgressBarModule,
-        MdProgressSpinnerModule,
-        MdInputModule,
-        MdSelectModule,
-        MdRadioModule
-        // MdTableModule
+        MatDialogModule,
+        MatButtonModule,
+        MatCardModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        MatSidenavModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatSelectModule,
+        MatRadioModule
+        // MatTableModule
     ]
 })
 

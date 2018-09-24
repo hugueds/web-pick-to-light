@@ -1,46 +1,46 @@
-<md-toolbar>
+<mat-toolbar>
 
-  <md-menu #appMenu='mdMenu'>
+  <mat-menu #appMenu='matMenu'>
 
-    <button routerLink='/' md-menu-item>
-        <md-icon>shopping_cart</md-icon>
+    <button routerLink='/' mat-menu-item>
+        <mat-icon>shopping_cart</mat-icon>
          Comboio
       </button>
 
-    <button routerLink='/shelf-config' md-menu-item>
-        <md-icon>lightbulb_outline</md-icon>
+    <button routerLink='/shelf-config' mat-menu-item>
+        <mat-icon>lightbulb_outline</mat-icon>
          Cadastro de Lâmpadas
       </button>
 
-    <button routerLink='/opk' md-menu-item>
-        <md-icon>styles</md-icon>
+    <button routerLink='/opk' mat-menu-item>
+        <mat-icon>styles</mat-icon>
          Cadastro de OPKs
       </button>
 
-    <button routerLink='/configuration' md-menu-item>
-        <md-icon>settings</md-icon>
+    <button routerLink='/configuration' mat-menu-item>
+        <mat-icon>settings</mat-icon>
          Configurações 
       </button>
 
-    <button routerLink='/tests' md-menu-item>
-        <md-icon>keyboard</md-icon>        
+    <button routerLink='/tests' mat-menu-item>
+        <mat-icon>keyboard</mat-icon>        
          Testes
        </button>
 
-    <button routerLink='/about' md-menu-item>
-        <md-icon>info</md-icon>        
+    <button routerLink='/about' mat-menu-item>
+        <mat-icon>info</mat-icon>        
          Sobre
        </button>
 
-    <button md-menu-item onclick="window.location = '/';">
-        <md-icon>autorenew</md-icon>        
+    <button mat-menu-item onclick="window.location = '/';">
+        <mat-icon>autorenew</mat-icon>        
          Recarregar
        </button>
 
-  </md-menu>
+  </mat-menu>
 
-  <button md-icon-button [mdMenuTriggerFor]='appMenu'>
-      <md-icon class="md-24">menu</md-icon>
+  <button mat-icon-button [matMenuTriggerFor]='appMenu'>
+      <mat-icon class="mat-24">menu</mat-icon>
     </button>
 
   <span class=''> PICK TO LIGHT </span>
@@ -50,8 +50,8 @@
   <!-- <span> {{ device?.deviceModel }} </span> -->
   <span class='timer'> {{ timer | time }} </span>
 
-  <md-icon *ngIf='timer > 0' class='play'>play_circle_outline</md-icon>
-  <md-icon *ngIf='timer == 0 ' class='pause'>pause_circle_outline</md-icon>
+  <mat-icon *ngIf='timer > 0' class='play'>play_circle_outline</mat-icon>
+  <mat-icon *ngIf='timer == 0 ' class='pause'>pause_circle_outline</mat-icon>
 
   <span class="spacer"></span>
 
@@ -62,4 +62,4 @@
 
   <span class='date-time'>{{ dateTime | date:'dd/MM/yyyy  HH:mm:ss' }}</span>
 
-</md-toolbar>
+</mat-toolbar>

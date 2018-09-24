@@ -15,7 +15,7 @@ h1{
     flex: 1 1 auto;
 }
 
-md-input-container{
+mat-input-container{
     margin-left: 1rem;
     font-size: 2rem;
 }

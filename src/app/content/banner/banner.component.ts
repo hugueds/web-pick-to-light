@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   <div class='banner' >
     <span class='banner-content'>CARREGANDO <br/> PRÓXIMO COMBOIO...</span>
   </div>
-  <md-spinner color='primary'> </md-spinner>
+  <mat-spinner color='primary'> </mat-spinner>
   `,
   styleUrls: ['./banner.component.css']
 })
