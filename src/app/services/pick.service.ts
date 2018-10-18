@@ -59,6 +59,11 @@ export class PickService {
     return this._http.get(url).map(this.extractData).catch(this.handleError);
   }
 
+  getButtonsByPLC(plcName) {
+    const url = `${this._config.server}/buttons/plc/${plcName}`;
+    return this._http.get(url).map(this.extractData).catch(this.handleError);
+  }
+
   saveButton(button) {
     const url = `${this._config.server}/buttons`;
     return this._http.post(url, button).map(this.extractData).catch(this.handleError);
@@ -100,9 +105,7 @@ export class PickService {
   }
 
   private extractData(res: Response) {
-    const body = res.json();
-    console.log('object');
-    return body || {};
+    return res.json() || {};
   }
 
   private handleError(error: Response | any) {

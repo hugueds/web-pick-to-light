@@ -2,24 +2,20 @@ h1 {
     text-align: center;
 }
 
-.container {
-  position: relative;
-  display: flex;
+.container {  
+  /* display: flex; */
   flex-direction: column;
   max-height: 500px;
   min-width: 300px;
-  z-index: 0;
+  /* z-index: 0; */
   overflow: auto;    
 }
   
-  .mat-table {
-    overflow: auto;
-  }
 
   input, label{
     display: block;    
     text-align: center;
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
 
@@ -27,13 +23,12 @@ h1 {
     width: 16%;
   }
 
-  #save-button{
-    margin: 0 auto;
-  }
-
+  
   .button-wrapper{
     width: 100%;
     display: flex;
+    align-content: center;
+    justify-items: center;    
   }
 
   #btn-new{
@@ -44,14 +39,18 @@ h1 {
     margin: auto;
   }
 
-
+/* 
   form{
     background-color: white;
-  }
+  } */
 
   mat-form-field{
     text-align: center;
   }
+
+
+  /* TABLE */
+
 
   tbody tr:nth-child(odd) {
     background-color: white;    
@@ -96,16 +95,10 @@ h1 {
 
   .header-PEÇA{
     width: 25%;    
-  }
-
-  
+  }  
 
   .delete-button{
     color: white;
-  }
-
-  .part-number-collumn{
-    
   }
 
   .search-row{    
@@ -120,8 +113,26 @@ h1 {
     font-size: 1.2em;
   }
 
+  .select-plc {
+    margin: 0 auto;
+    left: 50%;
+    display: flex;
+  }
+
   #search-button{
     background-color: dodgerblue;
     color: white;
     font-weight: bold;
+  }
+
+  .button-save {
+    background-color: limegreen;
+    color: white;
+    flex: 1;
+  }
+
+  .button-back {
+    background-color:  dodgerblue;
+    color: white;
+    flex: 1;
   }

@@ -9,6 +9,7 @@ import { MissingPartService } from '../../services/missing-part.service';
 import { PickService } from '../../services/pick.service';
 import { Wagon } from '../../models/Wagon';
 
+
 @Component({
   selector: 'app-missing-part',
   template: `
@@ -34,17 +35,20 @@ export class MissingPartComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   openDialog() {
+    const popName = this.items[this.currentItem].popName === 'Non-distinct' ? '00' : this.items[this.currentItem].popName;
     this.dialogRef = this._dialog.open(MissingPartDialogComponent, {
       disableClose: true,
       hasBackdrop: true,
       width: '70%',
       data: {
+        stationId: +localStorage.getItem('currentStationId'),
         part: this.items[this.currentItem].obj,
-        item: this.items[this.currentItem]
+        item: this.items[this.currentItem],
+        module: popName.slice(9),
+        buffer: popName.slice(0, 2)
       }
     });
 
@@ -67,12 +71,16 @@ export class MissingPartDialogComponent {
   item: Item;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<MissingPartDialogComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any
+    , public dialogRef: MatDialogRef<MissingPartDialogComponent>
     , private _mpService: MissingPartService
   ) {
-    this.partMissing.part = data.part;
     this.item = data.item;
+    this.partMissing.part = data.part;
+    this.partMissing.stationId = data.stationId;
+    this.partMissing.buffer = data.buffer;
+    this.partMissing.module = data.module;
+
   }
 
   requestMissing(isMissing: boolean) {

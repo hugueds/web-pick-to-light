@@ -5,6 +5,7 @@ import { SockService } from '../services/sock.service';
 import { Device } from '../models/Device';
 import { DeviceService } from '../services/device.service';
 import { TimerService } from '../services/timer.service';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-navbar',
@@ -19,15 +20,18 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
   connection;
   checkConnection;
   dateTime: any;
-  ip: String  = 'Aguardando Conexão...';
+  ip: String = 'Aguardando Conexão...';
   isOnline: Boolean = false;
   timer: any;
   timerSubscriber;
 
-  constructor(private _clockService: ClockService
+  constructor(
+    private _clockService: ClockService
     , private _sock: SockService
     , private _deviceService: DeviceService
-    , private _timerService: TimerService) { }
+    , private _timerService: TimerService
+    , private _http: Http
+  ) { }
 
   ngOnInit() {
     this.getTime();
@@ -55,6 +59,24 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     this.connection.unsubscribe();
     this.checkConnection.unsubscribe();
     this.timerSubscriber.unsubscribe();
+  }
+
+  andonCall() {
+    const { groupName, name, user } = this.device;
+    const message = `
+    ⚠ ANDON ⚠
+  USUARIO: ${user}
+  INSTANCIA: ${groupName.replace(/\//g, '')}
+  ${name}
+    `;
+    // const message = `Usu%C3%A1rio%3A+hugueds+Chamando+Andon+na+Inst%C3%A2ncia%3A+FA1.1%2FCx.+Dire%C3%A7%C3%A3o+no+Tablet%3A+TABLET65`;
+    console.log(message);
+
+    const cUri = encodeURI(message);
+    console.log(cUri);
+
+    const a = this._http.get('http://10.8.66.81/telegram/PRIDE' + cUri).map(r => r.json());
+    a.subscribe(b => console.log(b));
   }
 
   getTime() {

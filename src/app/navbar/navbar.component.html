@@ -3,45 +3,50 @@
   <mat-menu #appMenu='matMenu'>
 
     <button routerLink='/' mat-menu-item>
-        <mat-icon>shopping_cart</mat-icon>
-         Comboio
-      </button>
+      <mat-icon>shopping_cart</mat-icon>
+      Comboio
+    </button>
 
     <button routerLink='/shelf-config' mat-menu-item>
-        <mat-icon>lightbulb_outline</mat-icon>
-         Cadastro de Lâmpadas
-      </button>
+      <mat-icon>lightbulb_outline</mat-icon>
+      Cadastro de Lâmpadas
+    </button>
 
     <button routerLink='/opk' mat-menu-item>
-        <mat-icon>styles</mat-icon>
-         Cadastro de OPKs
-      </button>
+      <mat-icon>styles</mat-icon>
+      Cadastro de OPKs
+    </button>
 
     <button routerLink='/configuration' mat-menu-item>
-        <mat-icon>settings</mat-icon>
-         Configurações 
-      </button>
+      <mat-icon>settings</mat-icon>
+      Configurações
+    </button>
 
     <button routerLink='/tests' mat-menu-item>
-        <mat-icon>keyboard</mat-icon>        
-         Testes
-       </button>
+      <mat-icon>keyboard</mat-icon>
+      Testes
+    </button>
 
     <button routerLink='/about' mat-menu-item>
-        <mat-icon>info</mat-icon>        
-         Sobre
-       </button>
+      <mat-icon>info</mat-icon>
+      Sobre
+    </button>
+
+    <button mat-menu-item (click)="andonCall()">
+      <mat-icon>warning</mat-icon>
+      ANDON
+    </button>
 
     <button mat-menu-item onclick="window.location = '/';">
-        <mat-icon>autorenew</mat-icon>        
-         Recarregar
-       </button>
+      <mat-icon>autorenew</mat-icon>
+      Recarregar
+    </button>
 
   </mat-menu>
 
   <button mat-icon-button [matMenuTriggerFor]='appMenu'>
-      <mat-icon class="mat-24">menu</mat-icon>
-    </button>
+    <mat-icon class="mat-24">menu</mat-icon>
+  </button>
 
   <span class=''> PICK TO LIGHT </span>
 
@@ -60,6 +65,6 @@
 
   <span class="spacer"></span>
 
-  <span class='date-time'>{{ dateTime | date:'dd/MM/yyyy  HH:mm:ss' }}</span>
+  <span class='date-time'>{{ dateTime | date:'dd/MM/yyyy HH:mm:ss' }}</span>
 
 </mat-toolbar>

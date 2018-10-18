@@ -1,32 +1,54 @@
 <div>
+
+    <h5>PLC</h5>
+    <div class="select-plc">
+        <mat-form-field>
+            <mat-select placeholder="SELECIONE O PLC" [(ngModel)]="selected.plc" name="button-plc">
+                <mat-option *ngFor="let c of config.plcs" [value]="c"> {{c}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+
     <h5>Controladora</h5>
     <mat-radio-group style='display: inline;' [(ngModel)]='selected.controller'>
         <mat-radio-button value='-1' name='controller' seleted> TODOS </mat-radio-button>
-        <mat-radio-button *ngFor="let controller of controllers" [value]='controller' name="controller"> {{ controller }} </mat-radio-button>
+        <mat-radio-button *ngFor="let controller of controllers" [value]='controller' name="controller"> {{ controller
+            }} </mat-radio-button>
     </mat-radio-group>
 
     <h5>Nó</h5>
-    <select [(ngModel)]='selected.node'>
-        <option value="-1" selected>TODOS</option>
-        <option *ngFor='let node of nodes' [ngValue]="node" > {{ node }} </option>
+    <select [(ngModel)]='selected.node'>        
+        <option *ngFor='let node of nodes' [ngValue]="node"> {{ node }} </option>
     </select>
 
     <h4>Cor</h4>
     <mat-radio-group style='display: flex;' [(ngModel)]='selected.color'>
-        <mat-radio-button *ngFor="let color of colors" [value]='color' name="color"> {{ color }}</mat-radio-button>
+        <mat-radio-button *ngFor="let color of colors" [value]='color' name="color"> {{ color.name }}</mat-radio-button>
     </mat-radio-group>
 
     <br>
     <br>
 
-    <button mat-raised-button (click)='forceOn()'>ENVIAR</button>
+    <button mat-raised-button color="accent" (click)='forceOn()'>ENVIAR</button>
 
 </div>
 
 <hr>
 
+<label>Controller</label>
 <input [(ngModel)]='selected.controller' type="text">
+<label>Node</label>
 <input [(ngModel)]='selected.node' type="text">
-<input [(ngModel)]='selected.color' type="text">
+<label>Color</label>
+<input [value]="selected.color?.index" type="text">
+
+<hr>
+
+<label>Station</label>
+<input [(ngModel)]='selected.stationId' type="text">
+<label>PartNumber</label>
+<input [(ngModel)]='selected.partNumber' type="text">
+<button mat-raised-button color="accent" >ENVIAR</button>
 
 <br><br>

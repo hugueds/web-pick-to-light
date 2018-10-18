@@ -1,6 +1,15 @@
-<div>
+<div class="wrapper">
 
   <h1>CADASTRO DE BOTÕES</h1>
+
+
+  <div class="select-plc">
+    <mat-form-field>
+      <mat-select placeholder="SELECIONE O PLC" [(ngModel)]="selectedPLC" (change)="getButtonsByPLC(selectedPLC)">
+        <mat-option *ngFor="let plc of config.plcs" [value]="plc"> {{plc}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
   <!-- {{ searchTerm | json }}
 
@@ -24,7 +33,7 @@
 
   <hr>
 
-  <div class='container' #container>
+  <div class='container'>
 
     <table id='button-table'>
 

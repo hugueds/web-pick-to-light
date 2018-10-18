@@ -9,6 +9,7 @@ button {
  margin-left: 0.5%;
  margin-top: 2.75%;
  background-color: rgb(223, 227, 5) !important; 
+ border-radius: 50%;
 }
 
 img {

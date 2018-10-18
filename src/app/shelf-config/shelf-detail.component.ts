@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
-import { PickShelf } from '../models/PickShelf';
-import { PickService } from '../services/pick.service';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import * as SHELF_CONFIG from '../shared/data/shelfconfig';
+import { PickShelf } from '../models/PickShelf';
+import { PickService } from '../services/pick.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,9 +12,11 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './shelf-detail.component.html',
   styleUrls: ['./shelf-config.component.css']
 })
-export class ShelfDetailComponent implements OnInit {
 
-  formButton: PickShelf = new PickShelf();
+export class ShelfDetailComponent implements OnInit, OnChanges {
+
+  config = SHELF_CONFIG.SHELF_CONFIG;
+  formButton = new PickShelf();
   buttons: PickShelf[];
   isEditMode = false;
 
@@ -36,11 +39,25 @@ export class ShelfDetailComponent implements OnInit {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
+  test(a) {
+    console.log(a);
+  }
+
   getButtons() {
     this._pickService.getButtons().subscribe(btns => this.buttons = btns);
   }
 
-  save(button: PickShelf, f: NgForm) {
+  getButtonsByPLC(plc: string) {
+    this._pickService.getButtonsByPLC(plc).subscribe(buttons => {
+      this.buttons = buttons;
+    });
+  }
+
+  save(button: PickShelf) {
 
     if (this.isEditMode) {
       this.edit(button);
@@ -73,8 +90,10 @@ export class ShelfDetailComponent implements OnInit {
       return false;
     }
 
+
     for (let i = 0; i < this.buttons.length; i++) {
       if (this.buttons[i].buttonId === button.buttonId) {
+        alert('ID já cadastrado');
         return false;
       }
     }

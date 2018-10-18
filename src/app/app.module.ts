@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 import { DeviceGuard } from './guard/device.guard';
 
@@ -54,11 +56,18 @@ import { TimePipe } from './shared/time.pipe';
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
     ContentModule
   ],
-  providers: [SockService, DeviceService, PickService, DeviceGuard, Config, { provide: LocationStrategy, useClass: HashLocationStrategy }
+  providers: [
+    SockService,
+    DeviceService,
+    PickService,
+    DeviceGuard,
+    Config,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })

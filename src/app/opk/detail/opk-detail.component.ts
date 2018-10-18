@@ -36,7 +36,7 @@ export class OpkDetailComponent implements OnInit {
     this._pickService.getAllOpks().subscribe(opks => this.opks = opks);
   }
 
-  save(opk, f: NgForm) {
+  save(opk) {
 
     if (this.isEditMode) {
       this.edit(opk);

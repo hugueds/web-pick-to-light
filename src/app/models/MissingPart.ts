@@ -1,5 +1,6 @@
 export class MissingPart {
 
+    stationId: number;
     part: number;
     buffer: number;
     module: number;

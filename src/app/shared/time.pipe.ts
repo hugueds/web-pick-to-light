@@ -6,16 +6,18 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TimePipe implements PipeTransform {
 
   transform(ms: number, args?: any): any {
-    let h, m, s: number = 0;
+    let m, s = 0;
     let timer: string;
 
-    m = (ms / 1000 / 60) << 0;
+    // tslint:disable-next-line:no-bitwise
+    m = ((ms / 1000 / 60) << 0);
     s = (ms / 1000) % 60;
 
-    if (s < 10)
+    if (s < 10) {
       timer = `${m}:0${s}`;
-    else
+    } else {
       timer = `${m}:${s}`;
+    }
 
     return timer;
   }

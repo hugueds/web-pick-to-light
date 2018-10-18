@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { WAGON_EXAMPLE } from './../examples/wagon.example';
+// import { WAGON_EXAMPLE } from './../examples/wagon.example';
 
 import { PickService } from '../services/pick.service';
 import { DeviceService } from '../services/device.service';
@@ -13,9 +13,8 @@ import { Device } from '../models/Device';
 import { Wagon } from '../models/Wagon';
 import { PickShelf } from '../models/PickShelf';
 import { PopidList } from '../models/PopidList';
-import { Observable } from 'rxjs/Observable';
 import { Item } from '../models/Item';
-
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-content',
@@ -67,8 +66,8 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.currentStationId = this.device.stations[this.currentStationSequence];
 
     if (!this.currentStationId) {
-      console.error(`%c Não foi possível carregar o comboio`, 'background: red;');
-      setTimeout(() => window.location.href = '/', 1000);
+      console.error(`Não foi possível carregar o comboio`);
+      // setTimeout(() => window.location.href = '/', 1000);
       return;
     }
 
@@ -82,11 +81,15 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe((button: PickShelf) => {
       const currentPart = this.wagon.items[this.currentItem].obj;
+      const stationId = this.currentStationId;
       console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: cyan');
       if (this.loading) {
         return;
       }
-      if ((currentPart === button.partNumber.toString()) && (currentPart !== this.lastPartNumber)) {
+      console.log(button);
+
+      if ((currentPart === button.partNumber.toString()) && (currentPart !== this.lastPartNumber) ||
+        (button.partNumber.toString() === '--OPK--' && button.stationId === stationId)) {
         console.log(`%c Botao da peça ${button.partNumber} pressionado`, 'background: limegreen');
         this.lastPartNumber = currentPart;
         this.addItem('picking');
@@ -94,7 +97,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     });
 
-    this._mpService.currentMessage$.subscribe( (item: Item) => {
+    this._mpService.currentMessage$.subscribe((item: Item) => {
       this.wagon.items.push(item);
       this.addItem('partNumber');
     });
@@ -113,10 +116,12 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.isMCC = this.verifyMCC(stationId);
       this.wagon = wagon;
       if (!this.wagon.items || this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
-        return setTimeout(this.finishWagon(`Finalizando Comoboio sem peças`), 1000);
+        return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 1000);
       }
       this.popidList = this.rearrange(wagon.items).reverse();
-      localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
+      if (+this.currentStationId !== 5627 && +this.currentStationId !== 6026) {
+        localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
+      }
       localStorage.setItem('currentPartNumber', JSON.stringify(this.wagon.items[this.currentItem].obj));
       this.updateScreen = false;
       this._timerService.start();
@@ -127,7 +132,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   private getPickMethod(stationId) {
-    const popidStations = [3253, 5738, 5804, 565, 5814];
+    const popidStations = [3253, 5738, 5804, 565, 5814]; // 5627 // 6026
     const isPopid = popidStations.includes(stationId);
     return isPopid ? 'popid' : 'partNumber';
     // return stationId === 3253 || stationId === 5738  ? 'popid' : 'partNumber'; // Verficar alterações posteriores
@@ -229,7 +234,9 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.log = new Log(this.wagon.wagonId, this.device.user, message);
     this._pickService.finishWagon(this.log).subscribe(data => {
       this.lastWagon = data.wagon;
-      localStorage.setItem('lastWagon', this.lastWagon);
+      if (+this.currentStationId !== 5627 && +this.currentStationId !== 6026) {
+        localStorage.setItem('lastWagon', this.lastWagon);
+      }
       this.currentItem = 0;
       this.currentPopidSequence = 0;
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
@@ -259,6 +266,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   turnOnButton(toClean = false) {
     this._sockService.sendPickMessage('turn on', {
+      plc: 'Test',
       stationId: this.currentStationId,
       partNumber: this.wagon.items[this.currentItem].obj,
       item: this.currentItem,
@@ -285,7 +293,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   private rearrange(items) {
     if (!items.length) {
-      return new PopidList('0', { obj : 0, sname: '', quantity: '' });
+      return new PopidList('0', { obj: 0, sname: '', quantity: '' });
     }
     return items[0].boxes.map((item, i) => {
       const parts = [];
