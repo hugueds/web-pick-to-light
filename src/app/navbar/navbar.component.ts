@@ -65,9 +65,9 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     const { groupName, name, user } = this.device;
     const message = `
     ⚠ ANDON ⚠
-  USUARIO: ${user}
-  INSTANCIA: ${groupName.replace(/\//g, '')}
-  ${name}
+    USUARIO: ${user.toUpperCase()}
+    INSTANCIA: ${groupName.replace(/\//g, '')}
+    ${name}
     `;
     // const message = `Usu%C3%A1rio%3A+hugueds+Chamando+Andon+na+Inst%C3%A2ncia%3A+FA1.1%2FCx.+Dire%C3%A7%C3%A3o+no+Tablet%3A+TABLET65`;
     console.log(message);
@@ -75,12 +75,12 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     const cUri = encodeURI(message);
     console.log(cUri);
 
-    const a = this._http.get('http://10.8.66.81/telegram/PRIDE' + cUri).map(r => r.json());
+    const a = this._http.get('http://10.8.66.81/telegram/PRIDE/' + cUri).map(r => r.json());
     a.subscribe(b => console.log(b));
   }
 
   getTime() {
-    setInterval(() => this._clockService.getDateTime().subscribe(d => this.dateTime = d), 1000);
+    const interval = setInterval(() => this._clockService.getDateTime().subscribe(d => this.dateTime = d), 1000);
   }
 
 }
