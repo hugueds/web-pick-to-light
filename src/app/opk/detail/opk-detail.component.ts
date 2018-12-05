@@ -33,7 +33,7 @@ export class OpkDetailComponent implements OnInit {
   }
 
   getOpks() {
-    this._pickService.getAllOpks().subscribe(opks => this.opks = opks);
+    this._pickService.getAllOpks().subscribe((opks: any[]) => this.opks = opks);
   }
 
   save(opk) {

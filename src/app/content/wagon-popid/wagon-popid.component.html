@@ -5,7 +5,9 @@
             <div class="popids">{{ popidList[currentPopidSequence]?.popid }}</div>
         </div>
         <div class="row">
-            <div class="sequence">{{ currentPopidSequence + 1 }} / {{ wagonLength }}</div>
+            <!-- <div class="sequence">{{ currentPopidSequence + 1 }} / {{ wagonLength }}</div> -->
+            <div class="sequence">{{invertedSequence}} / {{ wagonLength }}</div>
+            <!-- <div></div> -->
         </div>
     </mat-card>
 </div>

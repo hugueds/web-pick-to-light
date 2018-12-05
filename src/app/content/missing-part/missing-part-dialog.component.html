@@ -2,26 +2,26 @@
 
 <mat-dialog-content>
 
-    <!-- <mat-input-container>        
+    <!-- <mat-form-field>        
         <input matInput id='stationId' type="number" placeholder="PEÇA Nº" min=0 [(ngModel)]='partMissing.stationId'
             [value]="partMissing.stationId" />
-    </mat-input-container> -->
+    </mat-form-field> -->
 
-    <mat-input-container>
+    <mat-form-field>
         <!-- class='full-width' -->
         <input matInput id='partNumber' type="number" placeholder="PEÇA Nº" min=0 [(ngModel)]='partMissing.part'
             [value]="partMissing.part" />
-    </mat-input-container>
+    </mat-form-field>
 
-    <mat-input-container>
+    <mat-form-field>
         <!-- class='full-width' -->
         <input matInput id='partBuffer' type='number' placeholder="BUFFER" min=0 [(ngModel)]='partMissing.buffer' />
-    </mat-input-container>
+    </mat-form-field>
 
-    <mat-input-container>
+    <mat-form-field>
         <!-- class='full-width' -->
         <input matInput id='partModule' type='number' placeholder="MODULO" min=0 [(ngModel)]='partMissing.module' />
-    </mat-input-container>
+    </mat-form-field>
 
 </mat-dialog-content>
 

@@ -32,7 +32,7 @@ export class ShelfDetailComponent implements OnInit, OnChanges {
     this.route.params.subscribe(params => {
       if (params['buttonId']) {
         this.isEditMode = true;
-        this._pickService.getButton(params['buttonId']).subscribe(btn => {
+        this._pickService.getButton(params['buttonId']).subscribe((btn: any) => {
           this.formButton = btn;
         });
       }
@@ -48,11 +48,11 @@ export class ShelfDetailComponent implements OnInit, OnChanges {
   }
 
   getButtons() {
-    this._pickService.getButtons().subscribe(btns => this.buttons = btns);
+    this._pickService.getButtons().subscribe((btns: any[]) => this.buttons = btns);
   }
 
   getButtonsByPLC(plc: string) {
-    this._pickService.getButtonsByPLC(plc).subscribe(buttons => {
+    this._pickService.getButtonsByPLC(plc).subscribe((buttons: PickShelf[]) => {
       this.buttons = buttons;
     });
   }
@@ -89,7 +89,6 @@ export class ShelfDetailComponent implements OnInit, OnChanges {
     if ((typeof button.buttonId) !== 'number') {
       return false;
     }
-
 
     for (let i = 0; i < this.buttons.length; i++) {
       if (this.buttons[i].buttonId === button.buttonId) {

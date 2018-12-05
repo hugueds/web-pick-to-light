@@ -34,10 +34,10 @@ export class DeviceService {
         console.log(`%c Registrando dispositivo ${JSON.stringify(device)}`, 'color: #5500ff');
         DeviceService.device.name = device.name;
         DeviceService.device.user = device.user;
-        this._pickService.getConfiguration(device.name).subscribe(station => {
+        this._pickService.getConfiguration(device.name).subscribe((station: any) => {
             if (station.idGroupStationVp) {
                 const stationId = station.idGroupStationVp.toString();
-                this._pickService.getGroup(stationId).subscribe(group => {
+                this._pickService.getGroup(stationId).subscribe((group: any) => {
                     DeviceService.device.deviceModel = navigator.userAgent.match(/\((\w.+);/)[1].replace(';', '-');
                     DeviceService.device.groupId = group.id;
                     DeviceService.device.groupName = group.name;

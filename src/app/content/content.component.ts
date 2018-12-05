@@ -14,7 +14,6 @@ import { Wagon } from '../models/Wagon';
 import { PickShelf } from '../models/PickShelf';
 import { PopidList } from '../models/PopidList';
 import { Item } from '../models/Item';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-content',
@@ -47,8 +46,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   currentPopidSequence = 0;
   popidList: PopidList[];
 
-  pickSubscriber;
-  sockSubscriber;
+  pickSubscriber = null;
+  sockSubscriber = null;
 
   constructor(private _pickService: PickService
     , private _deviceService: DeviceService
@@ -67,7 +66,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     if (!this.currentStationId) {
       console.error(`Não foi possível carregar o comboio`);
-      // setTimeout(() => window.location.href = '/', 1000);
+      // setTimeout(() => window.location.href = '/', 2000);
       return;
     }
 
@@ -116,7 +115,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       this.isMCC = this.verifyMCC(stationId);
       this.wagon = wagon;
       if (!this.wagon.items || this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
-        return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 1000);
+        return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 2000);
       }
       this.popidList = this.rearrange(wagon.items).reverse();
       if (+this.currentStationId !== 5627 && +this.currentStationId !== 6026) {
@@ -139,7 +138,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   private verifyMCC(stationId) {
-    return stationId === 5705; // Verificar alterações posteriores
+    return stationId === 5705 || stationId === 1345; // Verificar alterações posteriores
   }
 
   addItem(method: string = '') {
@@ -231,12 +230,12 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   finishWagon(message: string = '') {
     this.updateScreen = true;
+    if (!this.wagon.wagonId) {
+      // Exibir botão de recarregar, com mensagem: "Por favor, recarregue o pick to light"
+      return;
+    }
     this.log = new Log(this.wagon.wagonId, this.device.user, message);
-    this._pickService.finishWagon(this.log).subscribe(data => {
-      this.lastWagon = data.wagon;
-      if (+this.currentStationId !== 5627 && +this.currentStationId !== 6026) {
-        localStorage.setItem('lastWagon', this.lastWagon);
-      }
+    this._pickService.finishWagon(this.log).subscribe((data) => {
       this.currentItem = 0;
       this.currentPopidSequence = 0;
       localStorage.setItem('currentItem', JSON.stringify(this.currentItem));
@@ -245,8 +244,12 @@ export class ContentComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.getWagons(this.currentStationId);
         this.returnItem();
-      }, 100);
+      }, 1000);
     });
+  }
+
+  reload() {
+
   }
 
   cleanPendingButtons(stationId: number) {
@@ -266,7 +269,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   turnOnButton(toClean = false) {
     this._sockService.sendPickMessage('turn on', {
-      plc: 'Test',
+      plc: '',
       stationId: this.currentStationId,
       partNumber: this.wagon.items[this.currentItem].obj,
       item: this.currentItem,
@@ -287,7 +290,10 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sockSubscriber.unsubscribe();
+    if (this.sockSubscriber) {
+      this.sockSubscriber.unsubscribe();
+    }
+
     this._timerService.reset();
   }
 

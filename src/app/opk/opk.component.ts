@@ -20,7 +20,7 @@ export class OpkComponent implements OnInit, OnDestroy {
 
   getAll() {
     this.subscriber = this._pickService.getAllOpks()
-    .subscribe(opks => this.opks = opks);
+    .subscribe((opks: any[]) => this.opks = opks);
   }
 
   delete(opk) {

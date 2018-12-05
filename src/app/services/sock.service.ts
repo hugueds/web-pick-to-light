@@ -5,8 +5,6 @@ import { Subject } from 'rxjs/Subject';
 import { Config } from '../app.config';
 import * as io from 'socket.io-client';
 
-
-
 @Injectable()
 
 export class SockService {

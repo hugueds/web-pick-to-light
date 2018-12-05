@@ -13,6 +13,7 @@ export class WagonPopidComponent implements OnInit, OnChanges {
   @Input() currentPopidSequence = 0;
   @Input() wagonLength = 0;
   @Input() mcc: boolean;
+  invertedSequence = 0;
 
   constructor() { }
 
@@ -20,7 +21,7 @@ export class WagonPopidComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-
+    this.invertedSequence = this.wagonLength - this.currentPopidSequence;
   }
 
 }
