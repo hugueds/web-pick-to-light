@@ -44,14 +44,21 @@
   <mat-form-field class='field'>
     <input matInput placeholder='ID DO POSTO' [(ngModel)]='formButton.stationId' name='station-id' class='input-field'
       id='station-id' type="number" min=0 required>
-  </mat-form-field>  
+  </mat-form-field>
 
   <mat-form-field>
     <mat-select id="color" name="color-id" placeholder="COR" [(ngModel)]="formButton.color"  required>
       <mat-option *ngFor="let color of config.colors" [value]="color.value" [style.background-color]="color.rgb" > {{color.name}} </mat-option>
     </mat-select>
   </mat-form-field>
-  
+
+  <mat-form-field>
+    <mat-select id="direction" name="direction" placeholder="DIREÇÃO" [(ngModel)]="formButton.direction"  required>
+      <mat-option value="none">NENHUM</mat-option>
+      <mat-option value="up">CIMA</mat-option>
+      <mat-option value="down">BAIXO</mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <br>
 

@@ -50,6 +50,7 @@ export class TestsComponent implements OnInit, OnDestroy {
   forceOn() {
     console.log('Acendendo lâmpada de teste');
     console.log(this.selected);
+    // TODO: Validar parametros, principalmente PLC
     this._sockService.sendPickMessage('force on', {
       plc: this.selected.plc, controllerId: this.selected.controller, buttonNode: this.selected.node, color: this.selected.color.index
     });

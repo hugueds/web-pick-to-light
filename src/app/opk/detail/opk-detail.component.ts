@@ -65,6 +65,7 @@ export class OpkDetailComponent implements OnInit {
   }
 
   checkData(opk) {
+    opk.partNumber = opk.partNumber.trim();
     for (let i = 0; i < this.opks.length; i++) {
       if (this.opks[i].partNumber === opk.partNumber) {
         return false;

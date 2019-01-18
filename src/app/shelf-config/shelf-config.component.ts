@@ -21,7 +21,7 @@ export class ShelfConfigComponent implements OnInit, OnDestroy {
   searchTerm: any = {};
   formButton: PickShelf = new PickShelf();
   headers: string[] = [
-    'PLC', 'ID UNICO', 'CONTROLADORA', 'NUMERO', 'PEÇA', 'ID DO POSTO', 'COR', 'EDITAR', 'APAGAR'
+    'PLC', 'ID UNICO', 'CONTROLADORA', 'NUMERO', 'PEÇA', 'ID DO POSTO', 'COR', 'DIREÇÃO', 'EDITAR', 'APAGAR'
   ];
 
   constructor(private _pickService: PickService) { }

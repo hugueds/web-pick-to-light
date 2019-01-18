@@ -90,10 +90,11 @@ export class ShelfDetailComponent implements OnInit, OnChanges {
       return false;
     }
 
+    // TODO: Testar implementação de multiplos botões
     for (let i = 0; i < this.buttons.length; i++) {
       if (this.buttons[i].buttonId === button.buttonId) {
-        alert('ID já cadastrado');
-        return false;
+        const ans = confirm('ID já cadastrado, deseja cadastrar outro botão com mesmo ID?');
+        return ans;
       }
     }
     return true;
