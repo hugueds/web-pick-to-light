@@ -9,8 +9,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { DeviceGuard } from './guard/device.guard';
 
-import { MaterialModule } from './modules/material/material.module';
-import { ContentModule } from './content/content.module';
+import { MaterialModule } from './modules/material.module';
+import { MainModule } from './modules/main.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { Config } from './app.config';
@@ -32,8 +32,8 @@ import { AppComponent } from './app.component';
 import { ButtonConfigComponent } from './containers/buttonConfig/button-config.component';
 import { TestsComponent } from './containers/tests/tests.component';
 import { ButtonDetailComponent } from './containers/buttonConfig/button-detail/button-detail.component';
-import { OpkComponent } from './opk/opk.component';
-import { OpkDetailComponent } from './opk/detail/opk-detail.component';
+import { OpkComponent } from './containers/opk/opk.component';
+import { OpkDetailComponent } from './containers/opk/detail/opk-detail.component';
 import { SearchPipe } from './shared/search.pipe';
 import { TimePipe } from './shared/time.pipe';
 
@@ -64,7 +64,7 @@ import { TimePipe } from './shared/time.pipe';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ContentModule
+    MainModule
   ],
   providers: [
     SockService,
