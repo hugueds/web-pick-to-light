@@ -1,0 +1,38 @@
+<h1 mat-dialog-title> SOLICITAR EMPILHADEIRA </h1>
+
+<mat-dialog-content>
+
+    <!-- <mat-form-field>        
+        <input matInput id='stationId' type="number" placeholder="PEÇA Nº" min=0 [(ngModel)]='partMissing.stationId'
+            [value]="partMissing.stationId" />
+    </mat-form-field> -->
+
+    <mat-form-field>
+        <!-- class='full-width' -->
+        <input matInput id='partNumber' type="number" placeholder="PEÇA Nº" min=0 [(ngModel)]='partMissing.part'
+            [value]="partMissing.part" />
+    </mat-form-field>
+
+    <mat-form-field>
+        <!-- class='full-width' -->
+        <input matInput id='partBuffer' type='number' placeholder="BUFFER" min=0 [(ngModel)]='partMissing.buffer' />
+    </mat-form-field>
+
+    <mat-form-field>
+        <!-- class='full-width' -->
+        <input matInput id='partModule' type='number' placeholder="MODULO" min=0 [(ngModel)]='partMissing.module' />
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <span class='spacer'></span>
+    <button mat-raised-button mat-dialog-close color='primary' (click)='requestMissing(true)'> FALTANTE </button>
+    <span class='spacer'></span>
+    <button mat-raised-button mat-dialog-close (click)='requestMissing(false)'> NÃO FALTANTE </button>
+    <span class='spacer'></span>
+    <button mat-raised-button mat-dialog-close color='warn'> CANCELAR </button>
+    <span class='spacer'></span>
+
+</mat-dialog-actions>

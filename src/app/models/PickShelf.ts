@@ -1,4 +1,5 @@
 export class PickShelf {
+    _id: string;
     plc: string;
     buttonId: number;
     controllerId: number;
@@ -7,9 +8,11 @@ export class PickShelf {
     stationId: number;
     color: number;
     direction: string;
+    nodeIndex: number;
 }
 
 export class Opk {
+  _id: string;
   plc: string;
   buttonId: number;
   controllerId: number;

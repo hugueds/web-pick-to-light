@@ -59,7 +59,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.currentStationSequence = Number(localStorage.getItem('currentStationSequence')) || 0;
+    this.currentStationSequence = +localStorage.getItem('currentStationSequence') || 0;
 
     localStorage.setItem('currentStationSequence', JSON.stringify(this.currentStationSequence));
     this.currentStationId = this.device.stations[this.currentStationSequence];
@@ -268,11 +268,13 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   turnOnButton(toClean = false) {
+    const display = this.wagon.items[this.currentItem].boxes.map(a => a.quantity).reduce((b, c) => b + c).toString();
     this._sockService.sendPickMessage('turn on', {
-      plc: '',
+      plc: '', // Cadastrar o PLC em algum lugar
       stationId: this.currentStationId,
       partNumber: this.wagon.items[this.currentItem].obj,
       item: this.currentItem,
+      display,
       clearLast: toClean
     });
   }

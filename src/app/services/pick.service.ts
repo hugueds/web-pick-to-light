@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { Wagon } from '../models/Wagon';
-import { WAGON_EXAMPLE } from '../examples/wagon.example';
+
 import { Log } from '../models/Log';
 import { Item } from '../models/Item';
 
@@ -64,6 +64,11 @@ export class PickService {
     return this._http.get(url);
   }
 
+  getButtonByPartNumber(buttonId, partNumber) {
+    const url = `${this._config.server}/buttons/${buttonId}/${partNumber}`;
+    return this._http.get(url);
+  }
+
   getButtonsByPLC(plcName) {
     const url = `${this._config.server}/buttons/plc/${plcName}`;
     return this._http.get(url);
@@ -75,7 +80,7 @@ export class PickService {
   }
 
   updateButton(button) {
-    const url = `${this._config.server}/buttons/${button.buttonId}`;
+    const url = `${this._config.server}/buttons/${button._id}`;
     return this._http.put(url, button);
   }
 

@@ -1,0 +1,181 @@
+[
+  {
+    "id": 0,
+    "type": "tablet",
+    "name": "TABLET60",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 1,
+    "type": "tablet",
+    "name": "TABLET61",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 2,
+    "type": "tablet",
+    "name": "TABLET62",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 3,
+    "type": "tablet",
+    "name": "TABLET63",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 4,
+    "type": "tablet",
+    "name": "TABLET64",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 5,
+    "type": "tablet",
+    "name": "TABLET65",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 6,
+    "type": "tablet",
+    "name": "TABLET66",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 7,
+    "type": "tablet",
+    "name": "TABLET67",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 8,
+    "type": "tablet",
+    "name": "TABLET68",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 9,
+    "type": "tablet",
+    "name": "TABLET69",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 10,
+    "type": "tablet",
+    "name": "TABLET70",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 11,
+    "type": "tablet",
+    "name": "TABLET963",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 12,
+    "type": "tablet",
+    "name": "TABLET964",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 13,
+    "type": "tablet",
+    "name": "TABLET965",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 14,
+    "type": "tablet",
+    "name": "TABLET966",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 15,
+    "type": "tablet",
+    "name": "TABLET967",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 16,
+    "type": "tablet",
+    "name": "TABLET1110",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 17,
+    "type": "tablet",
+    "name": "TABLET1111",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 18,
+    "type": "tablet",
+    "name": "TABLET1112",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 19,
+    "type": "tablet",
+    "name": "TABLET1132",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 20,
+    "type": "tablet",
+    "name": "TABLET1131",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 21,
+    "type": "tablet",
+    "name": "TABLET1134",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 22,
+    "type": "tablet",
+    "name": "TABLET1152",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 23,
+    "type": "tablet",
+    "name": "TABLET1153",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 24,
+    "type": "pc",
+    "name": "SPARE_BOX",
+    "user": "Default",
+    "station": 0
+  }
+
+]
+
+
+

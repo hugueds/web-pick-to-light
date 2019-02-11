@@ -1,0 +1,45 @@
+<div class='content-wrapper' *ngIf='!updateScreen'>
+
+    <app-part [mcc]=isMCC *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part>
+
+    <app-wagon-popid  *ngIf="pickingMethod === 'popid'" [popidList]="popidList" [currentPopidSequence]="currentPopidSequence" [wagonLength]="popidList.length"></app-wagon-popid>
+
+    <app-wagon-description [mcc]=isMCC [wagonId]="wagon?.wagonId" [stationName]="wagon?.stationName"></app-wagon-description>
+
+    <app-missing-part  [items]='wagon?.items' [currentItem]="currentItem"></app-missing-part>
+
+    <!-- Aparecer apenas se a peça atual for faltante -->
+    <app-pending-part *ngIf="wagon?.items[currentItem].isMissing" [items]='wagon?.items' [currentItem]="currentItem"></app-pending-part>
+
+    <app-wagon-container *ngIf="pickingMethod === 'partNumber'" [orientation]="orientation" [items]='wagon?.items' [currentItem]="currentItem" (boxChanged)='checkWagon()'></app-wagon-container>
+
+    <app-wagon-container-popid *ngIf="pickingMethod === 'popid'" [popidList]="popidList" [currentPopidSequence]="currentPopidSequence"></app-wagon-container-popid>
+
+    <app-part-amount *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part-amount>
+
+    <button mat-raised-button class='part-control return-part' (click)='returnItem()' [disabled]='!buttonControl'>VOLTAR</button>
+    <button mat-raised-button class='part-control confirm-part' (click)='buttonAddItem()' [disabled]='!buttonControl'>CONFIRMAR
+    <!-- <mat-icon>done</mat-icon> -->
+  </button>
+
+    <!-- <mat-card style='display: block'> -->
+
+    <!-- <mat-card-header>
+      <mat-card-title> BOTÕES PARA TESTE </mat-card-title>
+    </mat-card-header> -->
+
+    <!-- <button mat-raised-button (click)='changeOrientationTest()'> MUDAR ORIENTAÇÃO </button> -->
+    <!-- 
+    <button mat-raised-button color='warn' (click)='addItem()'> PROXIMO </button>
+    <button mat-raised-button color='accent' (click)='resetWagon()'> RESET </button>
+    <button mat-raised-button color='primary' (click)='finishWagon()'> FINALIZADO </button> -->
+
+    <!-- </mat-card> -->
+
+</div>
+
+<div *ngIf='errorMessage'>
+    {{ errorMessage }}
+</div>
+
+<app-banner *ngIf='updateScreen'></app-banner>

@@ -9,7 +9,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { DeviceGuard } from './guard/device.guard';
 
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './modules/material/material.module';
 import { ContentModule } from './content/content.module';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -18,20 +18,20 @@ import { DeviceService } from './services/device.service';
 import { SockService } from './services/sock.service';
 import { PickService } from './services/pick.service';
 
-import { ContentComponent } from './content/content.component';
-import { NavbarComponent } from './navbar/navbar.component';
+// import { ContentComponent } from './content/content.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
-import { FooterComponent } from './footer/footer.component';
-import { ConfigurationComponent } from './configuration/configuration.component';
-import { AboutComponent } from './about/about.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { TabletConfigComponent } from './containers/tabletConfig/tablet-config.component';
+import { AboutComponent } from './containers/about/about.component';
 
 import { BoxColorDirective } from './shared/box-color.directive';
 import { WagonColorDirective } from './shared/wagon-color.directive';
 
 import { AppComponent } from './app.component';
-import { ShelfConfigComponent } from './shelf-config/shelf-config.component';
-import { TestsComponent } from './tests/tests.component';
-import { ShelfDetailComponent } from './shelf-config/shelf-detail.component';
+import { ButtonConfigComponent } from './containers/buttonConfig/button-config.component';
+import { TestsComponent } from './containers/tests/tests.component';
+import { ButtonDetailComponent } from './containers/buttonConfig/button-detail/button-detail.component';
 import { OpkComponent } from './opk/opk.component';
 import { OpkDetailComponent } from './opk/detail/opk-detail.component';
 import { SearchPipe } from './shared/search.pipe';
@@ -42,14 +42,19 @@ import { TimePipe } from './shared/time.pipe';
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    ConfigurationComponent,
+    TabletConfigComponent,
     AboutComponent,
     TestsComponent,
-    ShelfConfigComponent,
-    ShelfDetailComponent,
+    ButtonConfigComponent,
+    ButtonDetailComponent,
     OpkComponent,
     OpkDetailComponent,
-    BoxColorDirective, WagonColorDirective, ShelfConfigComponent, TestsComponent, SearchPipe, TimePipe,
+    BoxColorDirective,
+    WagonColorDirective,
+    ButtonConfigComponent,
+    TestsComponent,
+    SearchPipe,
+    TimePipe
   ],
   imports: [
     AppRoutingModule,

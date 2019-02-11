@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
-import { ConfigurationComponent } from './configuration/configuration.component';
-import { AboutComponent } from './about/about.component';
+import { TabletConfigComponent } from './containers/tabletConfig/tablet-config.component';
+import { AboutComponent } from './containers/about/about.component';
 
 import { ContentComponent } from './content/content.component';
 import { DeviceGuard } from './guard/device.guard';
-import { ShelfConfigComponent } from './shelf-config/shelf-config.component';
-import { TestsComponent } from './tests/tests.component';
-import { ShelfDetailComponent } from './shelf-config/shelf-detail.component';
+import { ButtonConfigComponent } from './containers/buttonConfig/button-config.component';
+import { TestsComponent } from './containers/tests/tests.component';
+import { ButtonDetailComponent } from './containers/buttonConfig/button-detail/button-detail.component';
 import { OpkComponent } from './opk/opk.component';
 import { OpkDetailComponent } from './opk/detail/opk-detail.component';
 
 const routes: Routes = [
     { path: '', component: ContentComponent, canActivate: [DeviceGuard], pathMatch: 'full' },
-    { path: 'shelf-config', component: ShelfConfigComponent },
-    { path: 'shelf-config/create', component: ShelfDetailComponent },
-    { path: 'shelf-config/edit/:buttonId', component: ShelfDetailComponent },
+    { path: 'button-config', component: ButtonConfigComponent },
+    { path: 'button-config/create', component: ButtonDetailComponent },
+    { path: 'button-config/edit/:id', component: ButtonDetailComponent },
     { path: 'opk', component: OpkComponent },
     { path: 'opk/create', component: OpkDetailComponent },
     { path: 'opk/edit/:partNumber', component: OpkDetailComponent },
-    { path: 'configuration', component: ConfigurationComponent },
+    { path: 'configuration', component: TabletConfigComponent },
     { path: 'about', component: AboutComponent },
     { path: 'tests', component: TestsComponent },
     { path: '**', redirectTo: '' }
