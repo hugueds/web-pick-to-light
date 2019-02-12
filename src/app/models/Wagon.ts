@@ -33,6 +33,7 @@ export class Wagon {
   stackWagonInverseSeq: boolean;
   stackWagonShowPopup: boolean;
   transitionPart: any;
+  error: any;
 
   constructor() { }
 

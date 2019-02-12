@@ -19,6 +19,7 @@
 
     <button mat-raised-button class='part-control return-part' (click)='returnItem()' [disabled]='!buttonControl'>VOLTAR</button>
     <button mat-raised-button class='part-control confirm-part' (click)='buttonAddItem()' [disabled]='!buttonControl'>CONFIRMAR
+
     <!-- <mat-icon>done</mat-icon> -->
   </button>
 
@@ -29,7 +30,7 @@
     </mat-card-header> -->
 
     <!-- <button mat-raised-button (click)='changeOrientationTest()'> MUDAR ORIENTAÇÃO </button> -->
-    <!-- 
+    <!--
     <button mat-raised-button color='warn' (click)='addItem()'> PROXIMO </button>
     <button mat-raised-button color='accent' (click)='resetWagon()'> RESET </button>
     <button mat-raised-button color='primary' (click)='finishWagon()'> FINALIZADO </button> -->
@@ -42,4 +43,4 @@
     {{ errorMessage }}
 </div>
 
-<app-banner *ngIf='updateScreen'></app-banner>
+<app-banner *ngIf='updateScreen' [noWagons]='noWagons'></app-banner>

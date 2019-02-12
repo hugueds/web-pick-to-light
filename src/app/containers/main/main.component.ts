@@ -23,6 +23,18 @@ import { Item } from '../../models/Item';
 export class MainComponent implements OnInit, OnDestroy {
 
   static buttonPressed: boolean;
+
+  lastPartNumber = null;
+  pickSubscriber = null;
+  sockSubscriber = null;
+
+  locked = false;
+  loading = false;
+  noWagons = false;
+  buttonControl = true;
+  updateScreen = true;
+  requestBlocked = false;
+
   device: Device;
   wagon: Wagon = new Wagon();
   log: Log;
@@ -30,36 +42,28 @@ export class MainComponent implements OnInit, OnDestroy {
   currentStationId = 0;
   currentStationSequence: number;
   errorMessage: any;
-  buttonControl = true;
-  updateScreen = true;
-  requestBlocked = false;
   lastWagon: any = 'Nenhum';
-  lastPartNumber;
+
   orientation: String = 'horizontal';
   pickingMethod = 'partNumber';
   isMCC: boolean;
 
-  loading = false;
-
   currentPopidSequence = 0;
   popidList: PopidList[];
-
-  pickSubscriber = null;
-  sockSubscriber = null;
 
   constructor(private _pickService: PickService
     , private _deviceService: DeviceService
     , private _sockService: SockService
     , private _mpService: MissingPartService
     , private _timerService: TimerService) {
-    this.device = _deviceService.getDeviceInfo();
+    this.device = this._deviceService.getDeviceInfo();
   }
 
   ngOnInit() {
 
     this.currentStationSequence = +localStorage.getItem('currentStationSequence') || 0;
-
     localStorage.setItem('currentStationSequence', JSON.stringify(this.currentStationSequence));
+
     this.currentStationId = this.device.stations[this.currentStationSequence];
 
     if (!this.currentStationId) {
@@ -102,10 +106,22 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   getWagons(stationId) {
+    if (this.locked) {
+      console.log('Operação em andamento, aguarde');
+      return;
+    }
+    this.locked = true;
     this.loading = true;
     localStorage.setItem('currentStationId', JSON.stringify(stationId));
     this.cleanPendingButtons(stationId);
-    this._pickService.getWagon(stationId).subscribe((wagon: Wagon) => {
+    this._pickService.getWagon(stationId).subscribe((wagon: Wagon) => { // TODO: Implementar tratativa de erro
+      this.noWagons = false;
+      if (wagon.error) {
+        this.noWagons = true;
+        return;
+      }
+      this.locked = false;
+      // TODO: Verificar quando não há comboio, exibir mensagem
       console.log(`Carregando comboio %c ${wagon.wagonId} do posto de ID: ${stationId}`, 'color: blue;');
       MainComponent.buttonPressed = false;
       this.lastPartNumber = null;
@@ -113,7 +129,7 @@ export class MainComponent implements OnInit, OnDestroy {
       this.isMCC = this.verifyMCC(stationId);
       this.wagon = wagon;
       if (!this.wagon.items || this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
-        return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 2000);
+        return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 5000);
       }
       this.popidList = this.rearrange(wagon.items).reverse();
       if (+this.currentStationId !== 5627 && +this.currentStationId !== 6026) {

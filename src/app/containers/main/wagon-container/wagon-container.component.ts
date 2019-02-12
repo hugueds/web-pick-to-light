@@ -31,8 +31,8 @@ export class WagonContainerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.boxes ) {
-      this.items = this.items[this.currentItem].boxes;
+    if (this.items ) {
+      this.boxes = this.items[this.currentItem].boxes;
     }
     this.remainingParts = this.boxes.map(box => box.quantity).reduce((a, b) => a + b);
   }

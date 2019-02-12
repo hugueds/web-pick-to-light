@@ -1,26 +1,33 @@
 <div class="wrapper">
 
-  <h1>CADASTRO DE BOTÕES</h1>
-
-
-  <div class="select-plc">
-    <mat-form-field>
-      <mat-select placeholder="SELECIONE O PLC" [(ngModel)]="selectedPLC" (change)="getButtonsByPLC(selectedPLC)">
-        <mat-option *ngFor="let plc of config.plcs" [value]="plc"> {{plc}} </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <div>
+    <h1>CADASTRO DE BOTÕES</h1>
   </div>
 
+  <div class="filters">
 
-  <!-- Descomentar no futuro     -->
-  <!-- <div class="select-controller"> -->
-    <!-- <mat-form-field> -->
-      <!-- Seleciona botoes baseado na controladora + PLC -->
-      <!-- <mat-select placeholder="SELECIONE A CONTROLADORA" [(ngModel)]="selectedController" (change)="getButtonsByController(selectedController)">         -->
-        <!-- <mat-option *ngFor="let plc of config.plcs" [value]="plc"> {{plc}} </mat-option> -->
-      <!-- </mat-select> -->
-    <!-- </mat-form-field> -->
-  <!-- </div> -->
+    <div class="select-plc">
+      <mat-form-field>
+        <mat-select placeholder="SELECIONE O PLC" [(ngModel)]="selectedPLC" (change)="getButtonsByPLC(selectedPLC)">
+          <mat-option *ngFor="let plc of config.plcs" [value]="plc"> {{plc}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Descomentar no futuro     -->
+    <!-- Seleciona botoes baseado na controladora + PLC -->
+
+    <!-- SEARCH PLC / CONTROLLER / DIRECTION / COLOR -->
+    <div class="select-controller">
+      <mat-form-field>
+        <mat-select placeholder="SELECIONE A CONTROLADORA" [(ngModel)]="selectedController"
+          (change)="getButtonsByController(selectedController)">
+          <mat-option *ngFor="let plc of config.plcs" [value]="plc"> {{plc}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
 
   <!-- {{ searchTerm | json }}
 
