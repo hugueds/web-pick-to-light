@@ -9,6 +9,7 @@ export class PickShelf {
     color: number;
     direction: string;
     nodeIndex: number;
+    messageId: number;
 }
 
 export class Opk {

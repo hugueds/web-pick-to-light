@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.form-wrapper {
+    display: flex;
+    margin: auto;
+    width: 80%;
+    margin-top: 2%;
+    justify-content: space-around;
+}
+
+.form-row {
+    display: flex;
+}
+
+.form-row mat-form-field{
+
+}
+
+.button-wrapper {
+    display: flex;
+    margin: auto;
+    width: 50%;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.button-save {
+    background-color: limegreen;
+    color: white;
+    flex: 1;
+}
+
+.button-back {
+    background-color: dodgerblue;
+    color: white;
+    flex: 1;
+}

@@ -1,6 +1,6 @@
 <div class="wrapper">
 
-  <div>
+  <div class="title">
     <h1>CADASTRO DE BOTÕES</h1>
   </div>
 
@@ -8,37 +8,24 @@
 
     <div class="select-plc">
       <mat-form-field>
-        <mat-select placeholder="SELECIONE O PLC" [(ngModel)]="selectedPLC" (change)="getButtonsByPLC(selectedPLC)">
+        <mat-select placeholder="SELECIONE O PLC" [(ngModel)]="searchTerm.plc"
+          (selectionChange)="getButtonsByPLC(searchTerm.plc)">
           <mat-option *ngFor="let plc of config.plcs" [value]="plc"> {{plc}} </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
-    <!-- Descomentar no futuro     -->
-    <!-- Seleciona botoes baseado na controladora + PLC -->
-
-    <!-- SEARCH PLC / CONTROLLER / DIRECTION / COLOR -->
     <div class="select-controller">
       <mat-form-field>
-        <mat-select placeholder="SELECIONE A CONTROLADORA" [(ngModel)]="selectedController"
-          (change)="getButtonsByController(selectedController)">
-          <mat-option *ngFor="let plc of config.plcs" [value]="plc"> {{plc}} </mat-option>
+        <mat-select placeholder="SELECIONE A CONTROLADORA" [(ngModel)]="searchTerm.controller"
+          (selectionChange)="getButtonsByController(searchTerm.controller)">
+          <mat-option *ngFor="let c of controllers" [value]="c"> {{c}} </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
   </div>
 
-  <!-- {{ searchTerm | json }}
-
-  <div class='search-row'>
-    <input class='search-field' [(ngModel)]='searchTerm.buttonId' type="text" placeholder="ID UNICO">
-    <input class='search-field' [(ngModel)]='searchTerm.controllerId' type="text" placeholder="CONTROLADORA">
-    <input class='search-field' [(ngModel)]='searchTerm.buttonNode' type="text" placeholder="NUMERO">
-    <input class='search-field' [(ngModel)]='searchTerm.partNumber' type="text" placeholder="PEÇA">
-    <input class='search-field' [(ngModel)]='searchTerm.idStation' type="text" placeholder="ID DO POSTO">
-    <button mat-raised-button id='search-button' (click)='find()'> PESQUISAR</button>
-  </div> -->
 
   <div class='button-wrapper'>
     <a routerLink='./create' id='btn-new' mat-raised-button color='primary'>
@@ -51,7 +38,7 @@
 
   <hr>
 
-  <div class='container'>
+  <div class='table-container'>
 
     <table id='button-table'>
 
@@ -59,7 +46,8 @@
         {{ header }}
       </th>
 
-      <tr *ngFor='let button of buttons; let i = index  '>
+      <tr *ngFor='let button of filteredButtons; let i = index  '>
+
         <td> {{ button.plc }} </td>
         <td> {{ button.buttonId }}</td>
         <td class='controller-collumn'> {{ button.controllerId }} </td>
@@ -74,11 +62,13 @@
             <mat-icon>edit</mat-icon>
           </a>
         </td>
+
         <td>
           <button mat-raised-button color='warn' (click)='delete(button)'>
             <mat-icon class='delete-icon'>delete</mat-icon>
           </button>
         </td>
+
       </tr>
 
 

@@ -17,8 +17,13 @@ export class ButtonConfigComponent implements OnInit, OnDestroy {
   config = SHELF_CONFIG.SHELF_CONFIG;
   selectedPLC = 'P27';
   plcs = [];
+  controllers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   buttons: PickShelf[] = [];
-  searchTerm: any = {};
+  filteredButtons: PickShelf[] = [];
+  searchTerm = {
+    plc: 'P27',
+    controller: 0
+  };
   formButton: PickShelf = new PickShelf();
   headers: string[] = [
     'PLC', 'ID', 'CONTROLADORA', 'NUMERO', 'PEÇA', 'ID DO POSTO', 'COR', 'DIREÇÃO', 'EDITAR', 'APAGAR'
@@ -28,9 +33,9 @@ export class ButtonConfigComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.getButtonsByPLC(this.selectedPLC);
+    this.getButtonsByPLC(this.searchTerm.plc);
     setTimeout(() => {
-      const table = document.getElementsByClassName('container')[0];
+      const table = document.getElementsByClassName('table-container')[0];
       const scroll = localStorage.getItem('scrollPosition');
       table.scrollTop = parseInt(scroll, 10);
     }, 200);
@@ -38,7 +43,7 @@ export class ButtonConfigComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    const table = document.getElementsByClassName('container')[0];
+    const table = document.getElementsByClassName('table-container')[0];
     const scroll = table.scrollTop.toString();
     localStorage.setItem('scrollPosition', scroll);
   }
@@ -59,10 +64,19 @@ export class ButtonConfigComponent implements OnInit, OnDestroy {
 
   getButtonsByPLC(plc: string) {
     this._pickService.getButtonsByPLC(plc).subscribe((btns: PickShelf[]) => {
-      this.buttons = btns.sort((a, b) => a.buttonId - b.buttonId);
+      const sortedButtons = btns.sort((a, b) => a.buttonId - b.buttonId);
+      // sortedButtons = sortedButtons.sort((a, b) => a.controllerId - b.controllerId);
+      // sortedButtons = sortedButtons.sort((a, b) => a.buttonNode - b.buttonNode);
+      this.buttons = [...sortedButtons];
+      this.filteredButtons = [...sortedButtons];
     });
   }
 
+  getButtonsByController(controller: number) {
+    console.log(controller);
+    const filteredButtons = this.buttons.filter((b) => b.controllerId === controller);
+    this.filteredButtons = [...filteredButtons];
+  }
 
   refresh() {
     this.getButtonsByPLC(this.selectedPLC);

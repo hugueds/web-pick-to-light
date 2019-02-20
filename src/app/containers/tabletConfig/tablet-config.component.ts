@@ -42,8 +42,12 @@ export class TabletConfigComponent implements OnInit {
     }
 
     this._deviceService.registerDevice(this.selectedDevice, (err, status) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
       if (status) {
-        localStorage.setItem('currentStationSequence', '0');
+        // localStorage.setItem('currentStationSequence', '0');
         this._router.navigate(['']);
       } else {
         this.deviceNotFound = true;

@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-
 import { DeviceGuard } from './guard/device.guard';
 
 import { MaterialModule } from './modules/material.module';
@@ -18,7 +17,6 @@ import { DeviceService } from './services/device.service';
 import { SockService } from './services/sock.service';
 import { PickService } from './services/pick.service';
 
-// import { ContentComponent } from './content/content.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { FooterComponent } from './components/footer/footer.component';

@@ -81,6 +81,7 @@ export class MainComponent implements OnInit, OnDestroy {
     });
 
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe((button: PickShelf) => {
+      this._sockService.sendPickMessage('message received', button.messageId); // TODO: REVIEW
       const currentPart = this.wagon.items[this.currentItem].obj;
       const stationId = this.currentStationId;
       console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: cyan');
@@ -121,16 +122,17 @@ export class MainComponent implements OnInit, OnDestroy {
         return;
       }
       this.locked = false;
-      // TODO: Verificar quando não há comboio, exibir mensagem
       console.log(`Carregando comboio %c ${wagon.wagonId} do posto de ID: ${stationId}`, 'color: blue;');
       MainComponent.buttonPressed = false;
       this.lastPartNumber = null;
       this.pickingMethod = this.getPickMethod(stationId);
       this.isMCC = this.verifyMCC(stationId);
-      this.wagon = wagon;
-      if (!this.wagon.items || this.wagon.items[0].idPart === 0 || !this.wagon.items[0].idPart) {
+      if (!wagon.items || wagon.items[0].idPart === 0 || !wagon.items[0].idPart) {
         return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 5000);
       }
+      const items = wagon.items.sort((a, b) => a.pos - b.pos);
+      wagon.items = items;
+      this.wagon = wagon;
       this.popidList = this.rearrange(wagon.items).reverse();
       if (+this.currentStationId !== 5627 && +this.currentStationId !== 6026) {
         localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
@@ -302,6 +304,10 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnChange() {
+
+  }
+
+  _initializeLocalStorage() {
 
   }
 

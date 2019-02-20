@@ -10,7 +10,7 @@ import { PickService } from '../../../services/pick.service';
   // tslint:disable-next-line:component-selector
   selector: 'shelf-detail',
   templateUrl: './button-detail.component.html',
-  styleUrls: ['../button-config.component.css']
+  styleUrls: ['./button-detail.component.css']
 })
 
 export class ButtonDetailComponent implements OnInit, OnChanges {
@@ -33,7 +33,7 @@ export class ButtonDetailComponent implements OnInit, OnChanges {
       if (params['id']) {
         this.isEditMode = true;
         this._pickService.getButton(params['id']).subscribe((btn: any) => {
-           this.formButton = btn;
+          this.formButton = btn;
         });
       }
     });
@@ -43,9 +43,6 @@ export class ButtonDetailComponent implements OnInit, OnChanges {
     console.log(changes);
   }
 
-  test(a) {
-    console.log(a);
-  }
 
   getButtons() {
     this._pickService.getButtons().subscribe((btns: any[]) => this.buttons = btns);
@@ -59,24 +56,39 @@ export class ButtonDetailComponent implements OnInit, OnChanges {
 
   save(button: PickShelf) {
 
+    let offset = 0;
+
     if (this.isEditMode) {
       this.edit(button);
       return;
     }
 
-    if (!this.checkData(button)) {
-      return console.log('Invalid Data');
+    switch (button.plc) {
+      case 'P27':
+        offset = 0;
+        break;
+      case 'P30':
+        offset = 3000;
+        break;
+      case 'SPARE_BOX':
+        offset = 2000;
+        break;
     }
 
+    // Calcular o numero do id
+    const id = (120 * button.controllerId) + button.buttonNode - 1 + offset;
+    button.buttonId = id;
+
+
     this._pickService.saveButton(button).subscribe(data => {
-      this._router.navigate(['shelf-config']);
+      this._router.navigate(['button-config']);
     });
 
   }
 
   edit(button) {
     this._pickService.updateButton(button).subscribe(data => {
-      this._router.navigate(['shelf-config']);
+      this._router.navigate(['button-config']);
     });
   }
 
@@ -90,7 +102,6 @@ export class ButtonDetailComponent implements OnInit, OnChanges {
       return false;
     }
 
-    // TODO: Testar implementação de multiplos botões
     for (let i = 0; i < this.buttons.length; i++) {
       if (this.buttons[i].buttonId === button.buttonId) {
         const ans = confirm('ID já cadastrado, deseja cadastrar outro botão com mesmo ID?');
