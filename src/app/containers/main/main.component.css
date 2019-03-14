@@ -38,3 +38,10 @@ mat-card {
 .mcc {
     background-color: yellow;
 }
+
+.no-parts {
+  display: flex;
+  margin-top: 2%;
+  width: 100%;
+  justify-content: center;
+}

@@ -24,12 +24,14 @@ export class MainComponent implements OnInit, OnDestroy {
 
   static buttonPressed: boolean;
 
-  lastPartNumber = null;
+  lastPartNumber = '';
   pickSubscriber = null;
   sockSubscriber = null;
+  startDate: string;
 
   locked = false;
   loading = false;
+  noParts = false;
   noWagons = false;
   buttonControl = true;
   updateScreen = true;
@@ -61,14 +63,19 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.currentStationSequence = +localStorage.getItem('currentStationSequence') || 0;
-    localStorage.setItem('currentStationSequence', JSON.stringify(this.currentStationSequence));
+    this.startDate = new Date().toLocaleString();
 
+    this.currentStationSequence = +localStorage.getItem('currentStationSequence') || 0;
+
+    if (this.currentStationSequence > this.device.stations.length - 1) {
+      this.currentStationSequence = 0;
+    }
+
+    localStorage.setItem('currentStationSequence', JSON.stringify(this.currentStationSequence));
     this.currentStationId = this.device.stations[this.currentStationSequence];
 
     if (!this.currentStationId) {
       console.error(`Não foi possível carregar o comboio`);
-      // setTimeout(() => window.location.href = '/', 2000);
       return;
     }
 
@@ -81,18 +88,21 @@ export class MainComponent implements OnInit, OnDestroy {
     });
 
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe((button: PickShelf) => {
-      this._sockService.sendPickMessage('message received', button.messageId); // TODO: REVIEW
+
       const currentPart = this.wagon.items[this.currentItem].obj;
       const stationId = this.currentStationId;
+
       console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: cyan');
+      console.log(button);
+
       if (this.loading) {
         return;
       }
-      console.log(button);
 
       if ((currentPart === button.partNumber.toString()) && (currentPart !== this.lastPartNumber) ||
         (button.partNumber.toString() === '--OPK--' && button.stationId === stationId)) {
         console.log(`%c Botao da peça ${button.partNumber} pressionado`, 'background: limegreen');
+        this._sockService.sendPickMessage('message received', button.messageId);
         this.lastPartNumber = currentPart;
         this.addItem('picking');
       }
@@ -100,7 +110,8 @@ export class MainComponent implements OnInit, OnDestroy {
     });
 
     this._mpService.currentMessage$.subscribe((item: Item) => {
-      this.wagon.items.push(item);
+      const newItem = [...this.wagon.items, item];
+      this.wagon.items = newItem;
       this.addItem('partNumber');
     });
 
@@ -115,24 +126,28 @@ export class MainComponent implements OnInit, OnDestroy {
     this.loading = true;
     localStorage.setItem('currentStationId', JSON.stringify(stationId));
     this.cleanPendingButtons(stationId);
-    this._pickService.getWagon(stationId).subscribe((wagon: Wagon) => { // TODO: Implementar tratativa de erro
+    this._pickService.getWagon(stationId).subscribe((wagon: Wagon) => {
       this.noWagons = false;
+      this.noParts = false;
       if (wagon.error) {
         this.noWagons = true;
         return;
       }
-      this.locked = false;
       console.log(`Carregando comboio %c ${wagon.wagonId} do posto de ID: ${stationId}`, 'color: blue;');
+      this.locked = false;
       MainComponent.buttonPressed = false;
       this.lastPartNumber = null;
       this.pickingMethod = this.getPickMethod(stationId);
       this.isMCC = this.verifyMCC(stationId);
+      this.wagon = { ...wagon };
       if (!wagon.items || wagon.items[0].idPart === 0 || !wagon.items[0].idPart) {
-        return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 5000);
+        this.noParts = true;
+        localStorage.setItem('currentPartNumber', '');
+        return;
+        // return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 5000);
       }
       const items = wagon.items.sort((a, b) => a.pos - b.pos);
-      wagon.items = items;
-      this.wagon = wagon;
+      wagon.items = [...items];
       this.popidList = this.rearrange(wagon.items).reverse();
       if (+this.currentStationId !== 5627 && +this.currentStationId !== 6026) {
         localStorage.setItem('currentWagon', JSON.stringify(this.wagon));
@@ -147,7 +162,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private getPickMethod(stationId) {
-    const popidStations = [3253, 5738, 5804, 565, 5814]; // 5627 // 6026
+    const popidStations = [3253, 5738, 5804, 565, 5814, 9288, 8183, 9340, 9338]; // 5627 // 6026
     const isPopid = popidStations.includes(stationId);
     return isPopid ? 'popid' : 'partNumber';
     // return stationId === 3253 || stationId === 5738  ? 'popid' : 'partNumber'; // Verficar alterações posteriores
@@ -181,7 +196,12 @@ export class MainComponent implements OnInit, OnDestroy {
         this.buttonControl = true;
         MainComponent.buttonPressed = false;
       }, 1000);
-      this.finishWagon(`Comboio finalizado via Pick to Light, tempo de Operação: ${this._timerService.getTimeString()}`);
+      this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light,
+      Início: ${this.startDate}
+      Final: ${new Date().toLocaleString()}
+      Usuário: ${this.device.user}
+      Dispositivo: ${this.device.name}
+      Tempo de Operação: ${this._timerService.getTimeString()}`);
     } else if (this.currentItem < this.wagon.items.length - 1) {
       setTimeout(() => this.buttonControl = true, 500);
       this.currentItem++;
@@ -195,7 +215,11 @@ export class MainComponent implements OnInit, OnDestroy {
   private addPopid() {
     this.buttonControl = true;
     if (this.currentPopidSequence >= this.popidList.length - 1) {
-      this.finishWagon(`Comboio finalizado via Pick to Light, tempo de Operação: ${this._timerService.getTimeString()}`);
+      this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light,
+      Início: ${this.startDate} Final: ${new Date().toLocaleString()}
+      Usuário: ${this.device.user}
+      Dispositivo: ${this.device.name}
+      Tempo de Operação: ${this._timerService.getTimeString()}`);
     }
     this.currentPopidSequence++;
   }
@@ -248,9 +272,10 @@ export class MainComponent implements OnInit, OnDestroy {
     this.updateScreen = true;
     if (!this.wagon.wagonId) {
       // Exibir botão de recarregar, com mensagem: "Por favor, recarregue o pick to light"
-      return;
+      console.log('RECARREGUE O PICK BY LIGHT');
     }
     this.log = new Log(this.wagon.wagonId, this.device.user, message);
+    console.log(this.log)
     this._pickService.finishWagon(this.log).subscribe((data) => {
       this.currentItem = 0;
       this.currentPopidSequence = 0;
@@ -260,7 +285,7 @@ export class MainComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.getWagons(this.currentStationId);
         this.returnItem();
-      }, 1000);
+      }, 2000);
     });
   }
 
@@ -293,6 +318,15 @@ export class MainComponent implements OnInit, OnDestroy {
       display,
       clearLast: toClean
     });
+  }
+
+  nextWagon() {
+    this.finishWagon(`[SYSTEM] Finalizando comboio sem peças
+    Início: ${this.startDate} \n
+    Final: ${new Date().toLocaleString()} \n
+    Usuário: ${this.device.user}
+    Dispositivo: ${this.device.name}
+    Tempo de Operação: ${this._timerService.getTimeString()}`);
   }
 
   checkPendingItems() {

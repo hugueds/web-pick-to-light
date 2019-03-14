@@ -35,10 +35,11 @@
 </div>
 
 <hr>
-<h2> Postos disponíveis para este equipamento </h2>
 <div class='stations-container'>
+<h2> Postos disponíveis para este equipamento </h2>
+
     <div *ngFor='let station of device.stations; let i = index;'>
-        <button class='station' mat-raised-button (click)='changeStation(station, i)'> {{ station }} </button>
+        <button class='station' [class.selected-station]="station == selectedStation"  mat-raised-button (click)='changeStation(station, i)'>{{ i + 1 }} - {{ station }} </button>
     </div>
     <!-- <button md-raised-button style='background:limegreen; color: white;' >SALVAR</button> -->
 </div>

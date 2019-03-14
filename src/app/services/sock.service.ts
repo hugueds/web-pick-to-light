@@ -36,7 +36,7 @@ export class SockService {
 
   getMessageFromPick(message) {
     const observable = new Observable(observer => {
-      SockService.pickToLightSocket.on(message, data => {
+      SockService.pickToLightSocket.on(message, (data) => {
         observer.next(data);
       });
     });

@@ -1,42 +1,54 @@
-input{
+input {
     flex: 1 1 auto;
     font-size: 2rem;
 }
 
-select{
+select {
     font-size: 2rem;
 }
 
-.ng-invalid:not(form){
+.ng-invalid:not(form) {
     border: red solid 1px;
 }
 
-.invalid-form{        
+.invalid-form {
     font-weight: bold;
     font-size: 1rem;
     padding: 10px;
 }
 
-.invalid-form-container{
+.invalid-form-container {
     margin-top: 0.5%;
     margin-bottom: 0.5%;
     margin-left: 0 auto;
     width: 50%;
     text-align: center;
     background-color: red;
-    color: white;    
+    color: white;
 }
 
-.stations-container{        
-    display: flex;    
-    width: 50%;
+.stations-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    flex-wrap: wrap;
 }
 
-.station{        
-    display: inline-block;
+.stations-container h2 {
+  width: 100%;
+}
+
+.station {
+    display: flex;
     flex: 1 1 auto;
     font-size: 1.5rem;
     padding: 10px;
-    margin-left: 10px;    
-    margin-right: 30px;    
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 7%;
+}
+
+.selected-station {
+  background: midnightblue;
+  color: white;
 }

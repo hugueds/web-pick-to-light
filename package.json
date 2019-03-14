@@ -1,6 +1,6 @@
 {
-  "name": "web-p2l",
-  "version": "0.0.0",
+  "name": "web-pbl",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

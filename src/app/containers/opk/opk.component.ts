@@ -6,6 +6,7 @@ import { PickService } from '../../services/pick.service';
   templateUrl: './opk.component.html',
   styleUrls: ['./opk.component.css']
 })
+
 export class OpkComponent implements OnInit, OnDestroy {
 
   headers = ['PEÇA', 'ID DO POSTO', 'EDITAR', 'APAGAR'];

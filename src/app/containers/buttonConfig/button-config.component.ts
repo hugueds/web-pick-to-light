@@ -29,6 +29,15 @@ export class ButtonConfigComponent implements OnInit, OnDestroy {
     'PLC', 'ID', 'CONTROLADORA', 'NUMERO', 'PEÇA', 'ID DO POSTO', 'COR', 'DIREÇÃO', 'EDITAR', 'APAGAR'
   ];
 
+  colors = {
+    '0': 'Vermelho',
+    '1': 'Verde',
+    '2': 'Amarelo',
+    '3': 'Cyan',
+    '4': 'Rosa',
+    '5': 'Azul'
+  };
+
   constructor(private _pickService: PickService) { }
 
 

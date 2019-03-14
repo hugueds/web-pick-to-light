@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="buttonConfig-container">
 
   <div class="title">
     <h1>CADASTRO DE BOTÕES</h1>
@@ -54,7 +54,7 @@
         <td> {{ button.buttonNode }} </td>
         <td class='part-number-collumn'> {{ button.partNumber }} </td>
         <td> {{ button.stationId }} </td>
-        <td> {{ button.color }}</td>
+        <td class="cor-{{ colors[button.color]}}"> {{ colors[button.color] }}</td>
         <td> {{ button.direction }}</td>
 
         <td>

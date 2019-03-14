@@ -1,7 +1,8 @@
 <div>
 
-  <h5>PLC</h5>
+
   <div class="select-plc">
+    <h5>PLC</h5>
     <mat-form-field>
       <mat-select placeholder="SELECIONE O PLC" [(ngModel)]="selected.plc" name="button-plc">
         <mat-option *ngFor="let c of config.plcs" [value]="c"> {{c}} </mat-option>
@@ -9,13 +10,14 @@
     </mat-form-field>
   </div>
 
-
-  <h5>Controladora</h5>
-  <mat-radio-group style='display: inline;' [(ngModel)]='selected.controller'>
-    <mat-radio-button value='-1' name='controller' seleted> TODOS </mat-radio-button>
-    <mat-radio-button *ngFor="let controller of controllers" [value]='controller' name="controller"> {{ controller
+  <div class="select-controller">
+    <h5>Controladora</h5>
+    <mat-radio-group style='display: inline;' [(ngModel)]='selected.controller'>
+      <mat-radio-button value='-1' name='controller' seleted> TODOS </mat-radio-button>
+      <mat-radio-button *ngFor="let controller of controllers" [value]='controller' name="controller"> {{ controller
       }} </mat-radio-button>
-  </mat-radio-group>
+    </mat-radio-group>
+  </div>
 
   <h5>Nó</h5>
   <select [(ngModel)]='selected.node'>
@@ -24,19 +26,19 @@
 
   <h4>Cor</h4>
   <mat-radio-group style='display: flex;' [(ngModel)]='selected.color'>
-    <mat-radio-button *ngFor="let color of colors" [value]='color' name="color"> {{ color.name }}</mat-radio-button>
+    <mat-radio-button *ngFor="let color of colors" [value]='color' name="color">{{color.index}} {{ color.name }}</mat-radio-button>
   </mat-radio-group>
 
   <h4>SETA</h4>
-   <select name="" id="" [(ngModel)]='selected.arrowDirection'>
+  <select name="" id="" [(ngModel)]='selected.arrowDirection'>
     <option value="0">NENHUMA</option>
     <option value="1">CIMA</option>
     <option value="2">BAIXO</option>
-   </select>
+  </select>
 
   <h4>QUANTIDADE</h4>
   <!-- <mat-form-field> -->
-    <input type="number" min="0" max="999" [(ngModel)]='selected.display'>
+  <input type="number" min="0" max="999" [(ngModel)]='selected.display'>
   <!-- </mat-form-field> -->
 
   <br>

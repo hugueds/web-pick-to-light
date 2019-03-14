@@ -18,10 +18,9 @@
     <app-part-amount *ngIf="pickingMethod === 'partNumber'" [items]='wagon?.items' [currentItem]="currentItem"></app-part-amount>
 
     <button mat-raised-button class='part-control return-part' (click)='returnItem()' [disabled]='!buttonControl'>VOLTAR</button>
-    <button mat-raised-button class='part-control confirm-part' (click)='buttonAddItem()' [disabled]='!buttonControl'>CONFIRMAR
+    <button mat-raised-button class='part-control confirm-part' (click)='buttonAddItem()' [disabled]='!buttonControl'>CONFIRMAR</button>
 
-    <!-- <mat-icon>done</mat-icon> -->
-  </button>
+
 
     <!-- <mat-card style='display: block'> -->
 
@@ -37,6 +36,10 @@
 
     <!-- </mat-card> -->
 
+</div>
+
+<div *ngIf="noParts" class="no-parts" >
+  <button mat-raised-button (click)="nextWagon()" color="primary" > PRÓXIMO KIT </button>
 </div>
 
 <div *ngIf='errorMessage'>

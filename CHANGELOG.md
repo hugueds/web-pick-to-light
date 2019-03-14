@@ -1,17 +1,26 @@
 # CHANGE LOG
 
-## 2019-02-20
+## March
+
+### 2019-03-08
+
+- Adicionado arquivo contendo as configurações dos postos
+- Adicionado novo manifest e icones 
+
+## Februay
+
+### 2019-02-20
 
 - Fixado ID para criação
 - Mudança de Layout de cadastro de botões
 
-## 2019-02-12
+### 2019-02-12
 
 - Mensagem inicial caso acabem os comboios do picking
 - Filtro para controladora
 - Alteração do layout da tabela
 
-## 2019-02-05
+### 2019-02-05
 
 - Criação da coluna que permite escolher a direção da seta da botoeira
 - Alteração de layout para que tela fique compativel com resolução do tablet

@@ -1,4 +1,4 @@
-.wrapper {
+.buttonConfig-container {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -140,4 +140,33 @@ tr:hover {
     background-color: dodgerblue;
     color: white;
     flex: 1;
+}
+
+.cor-Vermelho {
+  background: crimson;
+  color: white;
+}
+
+.cor-Verde {
+  background: limegreen;
+  color: white;
+}
+
+.cor-Amarelo {
+  background: yellow;
+
+}
+
+.cor-Rosa {
+  background: pink;
+}
+
+.cor-Cyan {
+  background: cyan;
+  color: white;
+}
+
+.cor-Azul {
+  background: blue;
+  color: white;
 }

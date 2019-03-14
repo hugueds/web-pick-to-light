@@ -34,6 +34,7 @@ import { OpkComponent } from './containers/opk/opk.component';
 import { OpkDetailComponent } from './containers/opk/detail/opk-detail.component';
 import { SearchPipe } from './shared/search.pipe';
 import { TimePipe } from './shared/time.pipe';
+import { ResultsComponent } from './containers/results/results.components';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { TimePipe } from './shared/time.pipe';
     WagonColorDirective,
     ButtonConfigComponent,
     TestsComponent,
+    ResultsComponent,
     SearchPipe,
     TimePipe
   ],

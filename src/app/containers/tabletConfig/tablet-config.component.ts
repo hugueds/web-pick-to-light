@@ -17,6 +17,7 @@ export class TabletConfigComponent implements OnInit {
   device: Device;
   stations: any[];
   deviceNotFound = false;
+  selectedStation: number;
 
 
   constructor(private _deviceService: DeviceService, private _router: Router) {
@@ -27,6 +28,7 @@ export class TabletConfigComponent implements OnInit {
     this.device = this._deviceService.getDeviceInfo() || new Device();
     this.selectedDevice.name = this.device.name || this.devices[0];
     this.selectedDevice.user = this.device.user || '';
+    this.selectedStation = +localStorage.getItem('currentStationId');
   }
 
   saveChanges() {
@@ -75,6 +77,7 @@ export class TabletConfigComponent implements OnInit {
   changeStation(station, index) {
     localStorage.setItem('currentStationId', JSON.stringify(station));
     localStorage.setItem('currentStationSequence', JSON.stringify(index));
+    this.selectedStation = station;
     return true;
   }
 

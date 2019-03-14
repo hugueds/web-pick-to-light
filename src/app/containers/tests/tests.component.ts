@@ -27,11 +27,18 @@ export class TestsComponent implements OnInit, OnDestroy {
     { index: 5, name: 'Azul' }
   ];
   subscriber;
-  selected: any = {};
+  selected: any = {
+    plc: 'P27',
+    controller: 0,
+    node: 1,
+    arrowDirection: 1,
+    display: '000',
+    color: {
+      index: 1
+    }
+  };
 
-  constructor(private _sockService: SockService) {
-
-  }
+  constructor(private _sockService: SockService) { }
 
   ngOnInit() {
     this.subscriber = this._sockService.getMessageFromPick('button pressed').subscribe(button => {

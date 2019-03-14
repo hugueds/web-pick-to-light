@@ -46,8 +46,7 @@ export class PickService {
 
   finishWagon(log: Log): Observable<any> {
     const url = `${this._config.server}/finishWagon`;
-    const headers = { 'Content-Type': 'application/json' };
-    const options = { headers: headers };
+    const options = { headers: { 'Content-Type': 'application/json' } };
     if (!log.idWagon) {
 
     }
