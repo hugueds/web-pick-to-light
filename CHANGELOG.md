@@ -1,5 +1,14 @@
 # CHANGE LOG
 
+## April
+
+### 2019-04-22
+- Update styles to prevent selection
+
+### 2019-04-17
+
+- Adicionado lista de popids quando não há pelas no comboio, para que o operador possa validar seu mix
+
 ## March
 
 ### 2019-03-08

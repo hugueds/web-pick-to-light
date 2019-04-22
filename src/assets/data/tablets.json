@@ -217,13 +217,61 @@
     "station": 0
   },
   {
+    "id": 31,
+    "type": "tablet",
+    "name": "TABLET1148",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 32,
+    "type": "tablet",
+    "name": "TABLET1149",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 33,
+    "type": "tablet",
+    "name": "TABLET1150",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 34,
+    "type": "tablet",
+    "name": "TABLET1115",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 35,
+    "type": "tablet",
+    "name": "TABLET1118",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 36,
+    "type": "tablet",
+    "name": "TABLET1119",
+    "user": "Default",
+    "station": 0
+  },
+  {
+    "id": 37,
+    "type": "tablet",
+    "name": "TABLET1120",
+    "user": "Default",
+    "station": 0
+  },
+  {
     "id": 99,
     "type": "pc",
     "name": "SPARE_BOX",
     "user": "Default",
     "station": 0
   }
-
 ]
 
 

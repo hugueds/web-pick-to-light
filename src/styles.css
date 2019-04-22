@@ -8,5 +8,8 @@ body {
     background:  #B7B8B6;
     min-height: 100%;
     max-width: 100%;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 

@@ -15,7 +15,7 @@ export class TestsComponent implements OnInit, OnDestroy {
   config = SHELF_CONFIG.SHELF_CONFIG;
   stationId: any = 547;
   partNumber: any = '000000';
-  controllers: number[] = Array.from(Array(10).keys());
+  controllers: number[] = Array.from(Array(13).keys());
   nodes: number[] = Array.from(Array(121).keys());
   colors: any = [
     { index: -1, name: 'Desligar' },

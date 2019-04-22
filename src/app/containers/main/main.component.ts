@@ -143,6 +143,7 @@ export class MainComponent implements OnInit, OnDestroy {
       if (!wagon.items || wagon.items[0].idPart === 0 || !wagon.items[0].idPart) {
         this.noParts = true;
         localStorage.setItem('currentPartNumber', '');
+        this.loading = false;
         return;
         // return setTimeout(() => this.finishWagon(`Finalizando Comboio sem peças`), 5000);
       }
@@ -162,7 +163,10 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private getPickMethod(stationId) {
-    const popidStations = [3253, 5738, 5804, 565, 5814, 9288, 8183, 9340, 9338]; // 5627 // 6026
+    const popidStations = [3253, 5738, 5804, 565, 5814, 9288, 8183, 9340, 9338, 8296, 9341, 8441, 9450, 9451]; // LER DE UM SERVIÇO
+    // fetch('assets/data/tablets.json').then(res => {
+    //   const popidList = res.json();
+    // });
     const isPopid = popidStations.includes(stationId);
     return isPopid ? 'popid' : 'partNumber';
     // return stationId === 3253 || stationId === 5738  ? 'popid' : 'partNumber'; // Verficar alterações posteriores
@@ -273,9 +277,9 @@ export class MainComponent implements OnInit, OnDestroy {
     if (!this.wagon.wagonId) {
       // Exibir botão de recarregar, com mensagem: "Por favor, recarregue o pick to light"
       console.log('RECARREGUE O PICK BY LIGHT');
+      return;
     }
     this.log = new Log(this.wagon.wagonId, this.device.user, message);
-    console.log(this.log)
     this._pickService.finishWagon(this.log).subscribe((data) => {
       this.currentItem = 0;
       this.currentPopidSequence = 0;
@@ -311,7 +315,6 @@ export class MainComponent implements OnInit, OnDestroy {
   turnOnButton(toClean = false) {
     const display = this.wagon.items[this.currentItem].boxes.map(a => a.quantity).reduce((b, c) => b + c).toString();
     this._sockService.sendPickMessage('turn on', {
-      plc: '', // Cadastrar o PLC em algum lugar
       stationId: this.currentStationId,
       partNumber: this.wagon.items[this.currentItem].obj,
       item: this.currentItem,
@@ -321,6 +324,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   nextWagon() {
+    this.noParts = false;
     this.finishWagon(`[SYSTEM] Finalizando comboio sem peças
     Início: ${this.startDate} \n
     Final: ${new Date().toLocaleString()} \n

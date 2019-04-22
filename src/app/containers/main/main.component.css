@@ -41,7 +41,25 @@ mat-card {
 
 .no-parts {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 2%;
-  width: 100%;
+  width: 90%;
   justify-content: center;
+  font-size: 3vh;
+}
+
+.no-parts-wagon {
+  display: flex;
+  width: 90%;
+}
+
+.no-parts-message {
+  display: flex;
+  width: 90%;
+}
+
+.no-parts-wagon span {
+  color: red;
+  font-weight: bold;
+  font-size: 4vh;
 }

@@ -38,7 +38,12 @@ export class MissingPartComponent implements OnInit {
   }
 
   openDialog() {
-    const popName = this.items[this.currentItem].popName === 'Non-distinct' ? '00' : this.items[this.currentItem].popName;
+    let popName;
+    if (!this.items[this.currentItem].popName || this.items[this.currentItem].popName === '') {
+      popName = '000000000';
+    } else {
+      popName = this.items[this.currentItem].popName === 'Non-distinct' ? '00' : this.items[this.currentItem].popName;
+    }
     this.dialogRef = this._dialog.open(MissingPartDialogComponent, {
       disableClose: true,
       hasBackdrop: true,
