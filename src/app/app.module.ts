@@ -35,6 +35,7 @@ import { OpkDetailComponent } from './containers/opk/detail/opk-detail.component
 import { SearchPipe } from './shared/search.pipe';
 import { TimePipe } from './shared/time.pipe';
 import { ResultsComponent } from './containers/results/results.components';
+import { FollowUpComponent } from './containers/followup/followup.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ResultsComponent } from './containers/results/results.components';
     TestsComponent,
     ResultsComponent,
     SearchPipe,
-    TimePipe
+    TimePipe,
+    FollowUpComponent
   ],
   imports: [
     AppRoutingModule,

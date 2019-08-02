@@ -1,0 +1,39 @@
+.followup-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.followup-table-header {
+  margin-top: 2%;
+  text-align: center;
+  color: white;
+  background: #000;
+  font-size: 1.1rem;
+  width: 11%;
+}
+
+.followup-table-row {
+  background-color: white;
+  display: flex;
+  width: 99%;
+  margin-top: 0.2%;
+  margin-bottom: 0.25%;
+}
+
+.followup-table-row:nth-child(odd) {
+  background-color: lightsteelblue;
+}
+
+.followup-table-column {
+  text-align: center;
+  display: flex;
+  align-content: center;
+  align-self: center;
+  justify-content: center;
+  width: 11%;
+  padding: 0.7%;
+  font-size: 1.1rem;
+}

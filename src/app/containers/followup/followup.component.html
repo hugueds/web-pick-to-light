@@ -1,0 +1,27 @@
+<div class="followup-container">
+
+  <div class="followup-table-header">PLC</div>
+  <div class="followup-table-header">ID BOTAO</div>
+  <div class="followup-table-header">CONTROLADORA</div>
+  <div class="followup-table-header">BOTAO</div>
+  <div class="followup-table-header">PEÇA</div>
+  <div class="followup-table-header">ID DO POSTO</div>
+  <div class="followup-table-header">COR</div>
+  <div class="followup-table-header">SENTIDO</div>
+  <div class="followup-table-header">MESSAGE ID</div>
+
+
+  <div class="followup-table-row" *ngFor="let b of lastButtons">
+    <div class="followup-table-column">{{ b.plc}}</div>
+    <div class="followup-table-column">{{ b.buttonId}}</div>
+    <div class="followup-table-column">{{ b.controllerId}}</div>
+    <div class="followup-table-column">{{ b.buttonNode}}</div>
+    <div class="followup-table-column">{{ b.partNumber}}</div>
+    <div class="followup-table-column">{{ b.stationId}}</div>
+    <div class="followup-table-column">{{ b.color}}</div>
+    <div class="followup-table-column">{{ b.direction}}</div>
+    <div class="followup-table-column">{{ b.messageId}}</div>
+  </div>
+
+</div>
+

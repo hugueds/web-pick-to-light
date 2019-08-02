@@ -89,6 +89,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe((button: PickShelf) => {
 
+      if (!this.wagon.items) {
+        return;
+      }
+
       const currentPart = this.wagon.items[this.currentItem].obj;
       const stationId = this.currentStationId;
 
@@ -163,7 +167,11 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private getPickMethod(stationId) {
-    const popidStations = [3253, 5738, 5804, 565, 5814, 9288, 8183, 9340, 9338, 8296, 9341, 8441, 9450, 9451]; // LER DE UM SERVIÇO
+    const popidStations = [
+      3253, 5738, 5804, 565, 5814, 9288,
+      8183, 9340, 9338, 9341, 8441,
+      9450, 9451];
+    // LER DE UM SERVIÇO
     // fetch('assets/data/tablets.json').then(res => {
     //   const popidList = res.json();
     // });
@@ -200,11 +208,11 @@ export class MainComponent implements OnInit, OnDestroy {
         this.buttonControl = true;
         MainComponent.buttonPressed = false;
       }, 1000);
-      this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light,
-      Início: ${this.startDate}
-      Final: ${new Date().toLocaleString()}
-      Usuário: ${this.device.user}
-      Dispositivo: ${this.device.name}
+      this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light, \
+      Início: ${this.startDate} \
+      Final: ${new Date().toLocaleString()} \
+      Usuário: ${this.device.user} \
+      Dispositivo: ${this.device.name} \
       Tempo de Operação: ${this._timerService.getTimeString()}`);
     } else if (this.currentItem < this.wagon.items.length - 1) {
       setTimeout(() => this.buttonControl = true, 500);
@@ -219,10 +227,10 @@ export class MainComponent implements OnInit, OnDestroy {
   private addPopid() {
     this.buttonControl = true;
     if (this.currentPopidSequence >= this.popidList.length - 1) {
-      this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light,
-      Início: ${this.startDate} Final: ${new Date().toLocaleString()}
-      Usuário: ${this.device.user}
-      Dispositivo: ${this.device.name}
+      this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light, \
+      Início: ${this.startDate} Final: ${new Date().toLocaleString()} \
+      Usuário: ${this.device.user} \
+      Dispositivo: ${this.device.name} \
       Tempo de Operação: ${this._timerService.getTimeString()}`);
     }
     this.currentPopidSequence++;
@@ -325,11 +333,11 @@ export class MainComponent implements OnInit, OnDestroy {
 
   nextWagon() {
     this.noParts = false;
-    this.finishWagon(`[SYSTEM] Finalizando comboio sem peças
-    Início: ${this.startDate} \n
-    Final: ${new Date().toLocaleString()} \n
-    Usuário: ${this.device.user}
-    Dispositivo: ${this.device.name}
+    this.finishWagon(`[SYSTEM] Finalizando comboio sem peças \
+    Início: ${this.startDate} \
+    Final: ${new Date().toLocaleString()} \
+    Usuário: ${this.device.user} \
+    Dispositivo: ${this.device.name} \
     Tempo de Operação: ${this._timerService.getTimeString()}`);
   }
 

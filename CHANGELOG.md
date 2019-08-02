@@ -2,7 +2,12 @@
 
 ## April
 
+### 2019-04-23
+
+- Corrigindo desvio caso o comboio não esteja completamente carregado (SPARE_BOX)
+
 ### 2019-04-22
+
 - Update styles to prevent selection
 
 ### 2019-04-17

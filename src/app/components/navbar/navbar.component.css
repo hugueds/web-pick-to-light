@@ -8,27 +8,27 @@ mat-toolbar{
     flex: 1 1 auto;
 }
 
+.date-time{
+  font-weight: bold;
+}
+
+
 .status {
     float: left;
-    display: block;    
+    display: block;
     margin: 10px;
     border-radius: 50%;
     background: black;
     height: 2rem;
-    width: 2rem;    
+    width: 2rem;
 }
 
-.date-time{
-    font-weight: bold;
+.online {
+    background: radial-gradient(circle at 10px 10px, #55DD44, #000);
 }
 
-
-.online {             
-    background: radial-gradient(circle at 10px 10px, #55DD44, #000);              
-}
-
-.offline {                   
-    background: radial-gradient(circle at 10px 10px, #f44242, #000);          
+.offline {
+    background: radial-gradient(circle at 10px 10px, #f44242, #000);
 }
 
 .timer{

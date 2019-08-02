@@ -11,6 +11,7 @@ import { TestsComponent } from './containers/tests/tests.component';
 import { ButtonDetailComponent } from './containers/buttonConfig/button-detail/button-detail.component';
 import { OpkComponent } from './containers/opk/opk.component';
 import { OpkDetailComponent } from './containers/opk/detail/opk-detail.component';
+import { FollowUpComponent } from './containers/followup/followup.component';
 
 const routes: Routes = [
     { path: '', component: MainComponent, canActivate: [DeviceGuard], pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: 'configuration', component: TabletConfigComponent },
     { path: 'about', component: AboutComponent },
     { path: 'tests', component: TestsComponent },
+    { path: 'followup', component: FollowUpComponent },
     { path: '**', redirectTo: '' }
 ];
 
