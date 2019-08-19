@@ -87,6 +87,10 @@ export class MainComponent implements OnInit, OnDestroy {
       MainComponent.buttonPressed = false;
     });
 
+    this._sockService.getMessageFromPick('reconnect').subscribe(() => {
+      this.getWagons(this.currentStationId);
+    });
+
     this.sockSubscriber = this._sockService.getMessageFromPick('button pressed').subscribe((button: PickShelf) => {
 
       if (!this.wagon.items) {
@@ -96,8 +100,7 @@ export class MainComponent implements OnInit, OnDestroy {
       const currentPart = this.wagon.items[this.currentItem].obj;
       const stationId = this.currentStationId;
 
-      console.log(`%c Botao foi pressionado ${JSON.stringify(button)} `, 'background: cyan');
-      console.log(button);
+      console.log(`%c[BUTTON PRESSED] ${JSON.stringify(button)} `, 'background: cyan');
 
       if (this.loading) {
         return;
@@ -122,10 +125,12 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   getWagons(stationId) {
+
     if (this.locked) {
       console.log('Operação em andamento, aguarde');
       return;
     }
+
     this.locked = true;
     this.loading = true;
     localStorage.setItem('currentStationId', JSON.stringify(stationId));
@@ -170,7 +175,7 @@ export class MainComponent implements OnInit, OnDestroy {
     const popidStations = [
       3253, 5738, 5804, 565, 5814, 9288,
       8183, 9340, 9338, 9341, 8441,
-      9450, 9451];
+      9450, 9451, 9340, 9338, 9341];
     // LER DE UM SERVIÇO
     // fetch('assets/data/tablets.json').then(res => {
     //   const popidList = res.json();
@@ -208,12 +213,12 @@ export class MainComponent implements OnInit, OnDestroy {
         this.buttonControl = true;
         MainComponent.buttonPressed = false;
       }, 1000);
-      this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light, \
-      Início: ${this.startDate} \
-      Final: ${new Date().toLocaleString()} \
-      Usuário: ${this.device.user} \
-      Dispositivo: ${this.device.name} \
-      Tempo de Operação: ${this._timerService.getTimeString()}`);
+      this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light,\
+      [START]: ${this.startDate}\
+      [END]: ${new Date().toLocaleString()}\
+      [USER]: ${this.device.user}\
+      [DEVICE]: ${this.device.name}\
+      [TIME]: ${this._timerService.getTimeString()}`);
     } else if (this.currentItem < this.wagon.items.length - 1) {
       setTimeout(() => this.buttonControl = true, 500);
       this.currentItem++;
@@ -228,10 +233,11 @@ export class MainComponent implements OnInit, OnDestroy {
     this.buttonControl = true;
     if (this.currentPopidSequence >= this.popidList.length - 1) {
       this.finishWagon(`[SYSTEM] Comboio finalizado via Pick By Light, \
-      Início: ${this.startDate} Final: ${new Date().toLocaleString()} \
-      Usuário: ${this.device.user} \
-      Dispositivo: ${this.device.name} \
-      Tempo de Operação: ${this._timerService.getTimeString()}`);
+      [START]: ${this.startDate}\
+      [END]: ${new Date().toLocaleString()}\
+      [USER]: ${this.device.user}\
+      [DEVICE]: ${this.device.name}\
+      [TIME]: ${this._timerService.getTimeString()}`);
     }
     this.currentPopidSequence++;
   }
@@ -333,12 +339,12 @@ export class MainComponent implements OnInit, OnDestroy {
 
   nextWagon() {
     this.noParts = false;
-    this.finishWagon(`[SYSTEM] Finalizando comboio sem peças \
-    Início: ${this.startDate} \
-    Final: ${new Date().toLocaleString()} \
-    Usuário: ${this.device.user} \
-    Dispositivo: ${this.device.name} \
-    Tempo de Operação: ${this._timerService.getTimeString()}`);
+    this.finishWagon(`[SYSTEM] Finalizando comboio sem peças\
+    [START]: ${this.startDate}\
+    [END]: ${new Date().toLocaleString()}\
+    [USER]: ${this.device.user}\
+    [DEVICE]: ${this.device.name}\
+    [TIME]: ${this._timerService.getTimeString()}`);
   }
 
   checkPendingItems() {

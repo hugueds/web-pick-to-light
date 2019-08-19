@@ -147,6 +147,13 @@
     "station": 0
   },
   {
+    "id": 50,
+    "type": "tablet",
+    "name": "TABLET1137",
+    "user": "Radar",
+    "station": 0
+  },
+  {
     "id": 21,
     "type": "tablet",
     "name": "TABLET1134",
